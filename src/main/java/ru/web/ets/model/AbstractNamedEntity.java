@@ -1,4 +1,4 @@
-package ru.ets.model;
+package ru.web.ets.model;
 
 public abstract class AbstractNamedEntity extends AbstractBaseEntity {
 

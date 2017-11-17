@@ -1,4 +1,4 @@
-package ru.ets.model;
+package ru.web.ets.model;
 
 import java.util.Date;
 import java.util.EnumSet;
