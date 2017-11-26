@@ -4,8 +4,8 @@ import java.awt.image.BufferedImage;
 
 public class Answer extends AbstractBaseEntity {
 
-    private final String text;
-    private final BufferedImage image;
+    private String text;
+    private BufferedImage image;
 
     public Answer(Integer id, String text, BufferedImage image) {
         super(id);
@@ -19,6 +19,14 @@ public class Answer extends AbstractBaseEntity {
 
     public BufferedImage getImage() {
         return image;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setImage(BufferedImage image) {
+        this.image = image;
     }
 
     @Override

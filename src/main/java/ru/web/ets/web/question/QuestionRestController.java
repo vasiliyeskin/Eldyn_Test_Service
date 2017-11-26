@@ -44,4 +44,9 @@ public class QuestionRestController {
         log.info("update {} with id={}", question, id);
         service.update(question);
     }
+
+    public void deleteAnswer(int id, int idAns) {
+        log.info("delete answer {} from question {}", idAns, id);
+        service.deleteAnswer(id, idAns);
+    }
 }

@@ -13,4 +13,6 @@ public interface QuestionRepository {
     Collection<Question> getAll();
 
     Question save(Question question);
+
+    void deleteAnswer(int id, int idAns);
 }

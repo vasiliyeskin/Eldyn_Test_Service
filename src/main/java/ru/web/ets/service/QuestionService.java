@@ -17,4 +17,5 @@ public interface QuestionService {
 
     Collection<Question> getAll();
 
+    void deleteAnswer(int id, int idAns);
 }

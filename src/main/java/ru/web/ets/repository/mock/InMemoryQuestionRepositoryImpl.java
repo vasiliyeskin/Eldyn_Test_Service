@@ -23,11 +23,31 @@ public class InMemoryQuestionRepositoryImpl implements QuestionRepository {
                 new Answer(countAns.incrementAndGet(), "3", null),
                 new Answer(countAns.incrementAndGet(), "4", null)
         );
-        final List<Answer> ans2 = new ArrayList<Answer>(ans1);
-        final List<Answer> ans3 = new ArrayList<Answer>(ans1);
-        final List<Answer> ans4 = new ArrayList<Answer>(ans1);
-        final List<Answer> ans5 = new ArrayList<Answer>(ans1);
-        final List<Answer> ans6 = new ArrayList<Answer>(ans1);
+        final List<Answer> ans2 = Arrays.asList(
+                new Answer(countAns.incrementAndGet(), "2", null),
+                new Answer(countAns.incrementAndGet(), "3", null),
+                new Answer(countAns.incrementAndGet(), "4", null)
+        );
+        final List<Answer> ans3 = Arrays.asList(
+                new Answer(countAns.incrementAndGet(), "2", null),
+                new Answer(countAns.incrementAndGet(), "3", null),
+                new Answer(countAns.incrementAndGet(), "4", null)
+        );
+        final List<Answer> ans4 = Arrays.asList(
+                new Answer(countAns.incrementAndGet(), "2", null),
+                new Answer(countAns.incrementAndGet(), "3", null),
+                new Answer(countAns.incrementAndGet(), "4", null)
+        );
+        final List<Answer> ans5 = Arrays.asList(
+                new Answer(countAns.incrementAndGet(), "2", null),
+                new Answer(countAns.incrementAndGet(), "3", null),
+                new Answer(countAns.incrementAndGet(), "4", null)
+        );
+        final List<Answer> ans6 = Arrays.asList(
+                new Answer(countAns.incrementAndGet(), "2", null),
+                new Answer(countAns.incrementAndGet(), "3", null),
+                new Answer(countAns.incrementAndGet(), "4", null)
+        );
 
 
         final List<Question> Questions = Arrays.asList(
@@ -67,6 +87,18 @@ public class InMemoryQuestionRepositoryImpl implements QuestionRepository {
     public Question get(int id) {
         Question q = repository.get(id);
         return q;
+    }
+
+    @Override
+    public void deleteAnswer(int id, int idAns) {
+        /*for (Answer a :repository.get(id).getAnswerList()
+             ) {
+            if(a.getId() == idAns)
+            {
+                repository.get(id).getAnswerList().remove(a);
+                return;
+            }
+        };*/
     }
 }
 

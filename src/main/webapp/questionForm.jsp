@@ -41,15 +41,18 @@
                 <tr>
                     <th>Answer Text</th>
                     <th></th>
-                    <th></th>
                 </tr>
                 </thead>
                 <c:forEach items="${question.answerList}" var="answer">
                     <jsp:useBean id="answer" scope="page" type="ru.web.ets.model.Answer"/>
                     <tr class="normal">
-                        <td>${answer.text}</td>
-                        <td><a href="questions?action=update&id=${answer.id}">Update</a></td>
-                        <td><a href="questions?action=delete&id=${answer.id}">Delete</a></td>
+                        <td><input type="hidden" name="id${answer.id}" value="${answer.id}">
+                            <dl>
+                                <dt>Text:</dt>
+                                <dd><input type="text" value="${answer.text}" name="text${answer.id}"></dd>
+                            </dl>
+                        </td>
+                        <td><a href="questions?action=deleteAns&id=${question.id}&idAns=${answer.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </table>

@@ -42,4 +42,9 @@ public class QuestionServiceImpl implements QuestionService {
     public void update(Question question) {
         repository.save(question);
     }
+
+    @Override
+    public void deleteAnswer(int id, int idAns) {
+        repository.deleteAnswer(id, idAns);
+    }
 }
