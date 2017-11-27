@@ -47,4 +47,9 @@ public class QuestionServiceImpl implements QuestionService {
     public void deleteAnswer(int id, int idAns) {
         repository.deleteAnswer(id, idAns);
     }
+
+    @Override
+    public void createAnswer(int id, String text) {
+        repository.createAnswer(id, text);
+    }
 }

@@ -4,6 +4,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.web.ets.model.Answer;
 import ru.web.ets.model.Question;
+import ru.web.ets.repository.mock.InMemoryQuestionRepositoryImpl;
 import ru.web.ets.web.question.QuestionRestController;
 
 import javax.servlet.ServletConfig;
@@ -38,29 +39,40 @@ public class QuestionServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String id = request.getParameter("id");
+        String textAnswer = request.getParameter("addAnswerText");
 
         Question question;
-        if(id.isEmpty() || "0".equals(id)) {
+        if (id.isEmpty() || "0".equals(id)) {
             question = new Question(null,
                     request.getParameter("text"),
-                    null, null, -1);
+                    null, new ArrayList<Answer>());
             questionRestController.create(question);
-        }
-        else
-        {
+        } else {
+            // updating of answer list
             List<Answer> listAnswer = new ArrayList<>();
             questionRestController.get(Integer.valueOf(id)).getAnswerList().
-                    forEach(x->{x.setText(request.getParameter("text"+x.getId()));listAnswer.add(x);});
+                    forEach(x -> {
+                        x.setText(request.getParameter("text" + x.getId()));
+                        x.setCorrect(request.getParameterValues("chbox" + x.getId())!=null && request.getParameterValues("chbox" + x.getId()).length != 0);
+                        listAnswer.add(x);
+                    });
 
+            // add answer
+            if (textAnswer != null && textAnswer.length() > 0)
+                listAnswer.add(new Answer(InMemoryQuestionRepositoryImpl.countAns.incrementAndGet(), textAnswer, null));
 
+            // updating of question
             question = new Question(Integer.valueOf(id),
-                request.getParameter("text"),
-                    null, listAnswer,
-                    -1);
+                    request.getParameter("text"),
+                    null, listAnswer);
             questionRestController.update(question, question.getId());
         }
 
-        response.sendRedirect("questions");
+        if (!"0".equals(id) && (textAnswer != null && textAnswer.length() != 0)) {
+            request.setAttribute("question", questionRestController.get(getId(request)));
+            request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
+        } else
+            response.sendRedirect("questions");
     }
 
     @Override
@@ -75,15 +87,16 @@ public class QuestionServlet extends HttpServlet {
                 break;
             case "create":
             case "update":
-                final Question meal = "create".equals(action) ?
-                        new Question(0, "", null, null, -1) :
+                final Question question = "create".equals(action) ?
+                        new Question(0, "", null, new ArrayList<Answer>()) :
                         questionRestController.get(getId(request));
-                request.setAttribute("question", meal);
+                request.setAttribute("question", question);
                 request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
                 break;
             case "deleteAns":
                 questionRestController.deleteAnswer(getId(request), getIdAns(request));
-                response.sendRedirect("questions");
+                request.setAttribute("question", questionRestController.get(getId(request)));
+                request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
                 break;
             case "all":
             default:

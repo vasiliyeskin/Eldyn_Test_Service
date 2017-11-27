@@ -6,11 +6,20 @@ public class Answer extends AbstractBaseEntity {
 
     private String text;
     private BufferedImage image;
+    private boolean isCorrect;
 
     public Answer(Integer id, String text, BufferedImage image) {
         super(id);
         this.text = text;
         this.image = image;
+        this.isCorrect = false;
+    }
+
+    public Answer(Integer id, String text, BufferedImage image, boolean isCorrect) {
+        super(id);
+        this.text = text;
+        this.image = image;
+        this.isCorrect = isCorrect;
     }
 
     public String getText() {
@@ -29,11 +38,20 @@ public class Answer extends AbstractBaseEntity {
         this.image = image;
     }
 
+    public boolean isCorrect() {
+        return isCorrect;
+    }
+
+    public void setCorrect(boolean correct) {
+        isCorrect = correct;
+    }
+
     @Override
     public String toString() {
         return "Answer{" +
                 "text='" + text + '\'' +
                 ", image=" + image +
+                ", isCorrect=" + isCorrect +
                 ", id=" + id +
                 '}';
     }

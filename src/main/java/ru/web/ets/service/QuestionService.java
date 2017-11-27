@@ -18,4 +18,6 @@ public interface QuestionService {
     Collection<Question> getAll();
 
     void deleteAnswer(int id, int idAns);
+
+    void createAnswer(int id, String text);
 }

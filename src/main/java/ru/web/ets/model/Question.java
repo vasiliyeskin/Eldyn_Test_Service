@@ -8,14 +8,19 @@ public class Question extends AbstractBaseEntity {
     private final String text;
     private final BufferedImage image;
     private final List<Answer> answerList;
-    private final int correctAnswer;
 
-    public Question(Integer id, String text, BufferedImage image, List<Answer> answerList, int correctAnswer) {
+    public Question(Integer id, String text, BufferedImage image, List<Answer> answerList) {
         super(id);
         this.text = text;
         this.image = image;
         this.answerList = answerList;
-        this.correctAnswer = correctAnswer;
+    }
+
+    public Question(Question question, List<Answer> answerList) {
+        super(question.getId());
+        this.text = question.text;
+        this.image = question.image;
+        this.answerList = answerList;
     }
 
     public String getText() {
@@ -30,9 +35,6 @@ public class Question extends AbstractBaseEntity {
         return answerList;
     }
 
-    public int getCorrectAnswer() {
-        return correctAnswer;
-    }
 
     @Override
     public String toString() {
@@ -40,7 +42,6 @@ public class Question extends AbstractBaseEntity {
                 "text='" + text + '\'' +
                 ", image=" + image +
                 ", answerList=" + answerList +
-                ", correctAnswer=" + correctAnswer +
                 ", id=" + id +
                 '}';
     }

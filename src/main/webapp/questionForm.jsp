@@ -36,6 +36,7 @@
             <dd><input type="text" value="${question.text}" name="text"></dd>
         </dl>
         <dl>
+            <c:if test="${question.text.length() > 0}">
             <table>
                 <thead>
                 <tr>
@@ -50,12 +51,19 @@
                             <dl>
                                 <dt>Text:</dt>
                                 <dd><input type="text" value="${answer.text}" name="text${answer.id}"></dd>
+                                <dt>is correct answer:</dt>
+                                <dd><input type="checkbox" value="${answer.correct}" name="chbox${answer.id}"  <%=answer.isCorrect() ? "checked='checked'" : "" %>></dd>
                             </dl>
                         </td>
                         <td><a href="questions?action=deleteAns&id=${question.id}&idAns=${answer.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </table>
+                <dl>
+                    <dt>Add answer:</dt>
+                    <dd><input type="text" name="addAnswerText"><button type="submit">Add</button></dd>
+                </dl>
+            </c:if>
         </dl>
         <button type="submit">Save</button>
         <button onclick="window.history.back()" type="button">Cancel</button>

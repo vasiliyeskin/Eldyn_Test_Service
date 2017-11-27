@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class InMemoryQuestionRepositoryImpl implements QuestionRepository {
     private Map<Integer, Question> repository = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
-    private AtomicInteger countAns = new AtomicInteger(0);
+    public static AtomicInteger countAns = new AtomicInteger(0);
 
     {
         final List<Answer> ans1 = Arrays.asList(
@@ -49,14 +49,16 @@ public class InMemoryQuestionRepositoryImpl implements QuestionRepository {
                 new Answer(countAns.incrementAndGet(), "4", null)
         );
 
+        List<Integer> listCorrect = new ArrayList<Integer>();
+        listCorrect.add(0);
 
         final List<Question> Questions = Arrays.asList(
-                new Question(counter.incrementAndGet(), "1+1", null, ans1, 0),
-                new Question(counter.incrementAndGet(), "1+2", null, ans2, 0),
-                new Question(counter.incrementAndGet(), "1+3", null, ans3, 0),
-                new Question(counter.incrementAndGet(), "1+4", null, ans4, 0),
-                new Question(counter.incrementAndGet(), "1+5", null, ans5, 0),
-                new Question(counter.incrementAndGet(), "1+6", null, ans6, 0)
+                new Question(counter.incrementAndGet(), "1+1", null, ans1),
+                new Question(counter.incrementAndGet(), "1+2", null, ans2),
+                new Question(counter.incrementAndGet(), "1+3", null, ans3),
+                new Question(counter.incrementAndGet(), "1+4", null, ans4),
+                new Question(counter.incrementAndGet(), "1+5", null, ans5),
+                new Question(counter.incrementAndGet(), "1+6", null, ans6)
         );
 
         Questions.forEach(this::save);
@@ -79,7 +81,6 @@ public class InMemoryQuestionRepositoryImpl implements QuestionRepository {
 
     @Override
     public void delete(int id) {
-        Question m = repository.get(id);
             repository.remove(id);
     }
 
@@ -90,15 +91,29 @@ public class InMemoryQuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public void deleteAnswer(int id, int idAns) {
-        /*for (Answer a :repository.get(id).getAnswerList()
-             ) {
-            if(a.getId() == idAns)
-            {
-                repository.get(id).getAnswerList().remove(a);
-                return;
+    public void deleteAnswer(int idQuesiton, int idAns) {
+        this.save(new Question(repository.get(idQuesiton), deleteAnswerFromList(idQuesiton, idAns)));
+    }
+
+    @Override
+    public void createAnswer(int id, String text) {
+        Question question = repository.get(id);
+        List<Answer> answerList = question.getAnswerList();
+        answerList.add(new Answer(countAns.incrementAndGet(), text, null));
+        this.save(new Question(question, answerList));
+    }
+
+    private List<Answer> deleteAnswerFromList(int idQuesiton, int idAns)
+    {
+        List<Answer> answerList = new ArrayList<Answer>(repository.get(idQuesiton).getAnswerList());
+        for (Iterator<Answer> iter = answerList.listIterator(); iter.hasNext(); ) {
+            Answer a = iter.next();
+            if (a.getId() == idAns) {
+                iter.remove();
+                break;
             }
-        };*/
+        }
+        return answerList;
     }
 }
 
