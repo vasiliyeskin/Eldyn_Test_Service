@@ -19,12 +19,12 @@ public class InMemoryQuestionRepositoryImpl implements QuestionRepository {
 
     {
         final List<Answer> ans1 = Arrays.asList(
-                new Answer(countAns.incrementAndGet(), "2", null),
+                new Answer(countAns.incrementAndGet(), "2", null, true),
                 new Answer(countAns.incrementAndGet(), "3", null),
                 new Answer(countAns.incrementAndGet(), "4", null)
         );
         final List<Answer> ans2 = Arrays.asList(
-                new Answer(countAns.incrementAndGet(), "2", null),
+                new Answer(countAns.incrementAndGet(), "2", null, true),
                 new Answer(countAns.incrementAndGet(), "3", null),
                 new Answer(countAns.incrementAndGet(), "4", null)
         );
@@ -34,17 +34,17 @@ public class InMemoryQuestionRepositoryImpl implements QuestionRepository {
                 new Answer(countAns.incrementAndGet(), "4", null)
         );
         final List<Answer> ans4 = Arrays.asList(
-                new Answer(countAns.incrementAndGet(), "2", null),
+                new Answer(countAns.incrementAndGet(), "2", null, true),
                 new Answer(countAns.incrementAndGet(), "3", null),
                 new Answer(countAns.incrementAndGet(), "4", null)
         );
         final List<Answer> ans5 = Arrays.asList(
-                new Answer(countAns.incrementAndGet(), "2", null),
+                new Answer(countAns.incrementAndGet(), "2", null, true),
                 new Answer(countAns.incrementAndGet(), "3", null),
                 new Answer(countAns.incrementAndGet(), "4", null)
         );
         final List<Answer> ans6 = Arrays.asList(
-                new Answer(countAns.incrementAndGet(), "2", null),
+                new Answer(countAns.incrementAndGet(), "2", null, true),
                 new Answer(countAns.incrementAndGet(), "3", null),
                 new Answer(countAns.incrementAndGet(), "4", null)
         );

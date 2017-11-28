@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Question extends AbstractBaseEntity {
 
-    private final String text;
-    private final BufferedImage image;
-    private final List<Answer> answerList;
+    private String text;
+    private BufferedImage image;
+    private List<Answer> answerList;
 
     public Question(Integer id, String text, BufferedImage image, List<Answer> answerList) {
         super(id);
@@ -23,6 +23,13 @@ public class Question extends AbstractBaseEntity {
         this.answerList = answerList;
     }
 
+    public Question(Question question) {
+        super(question.getId());
+        this.text = question.text;
+        this.image = question.image;
+        this.answerList = question.answerList;
+    }
+
     public String getText() {
         return text;
     }
@@ -35,6 +42,9 @@ public class Question extends AbstractBaseEntity {
         return answerList;
     }
 
+    public void setAnswerList(List<Answer> answerList) {
+        this.answerList = answerList;
+    }
 
     @Override
     public String toString() {

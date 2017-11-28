@@ -22,6 +22,13 @@ public class Answer extends AbstractBaseEntity {
         this.isCorrect = isCorrect;
     }
 
+    public Answer(Answer answer) {
+        super(answer.getId());
+        this.text = answer.getText();
+        this.image = answer.getImage();
+        this.isCorrect = answer.isCorrect();
+    }
+
     public String getText() {
         return text;
     }
