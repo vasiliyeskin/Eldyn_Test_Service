@@ -1,6 +1,7 @@
 package ru.web.ets.model;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question extends AbstractBaseEntity {
@@ -40,6 +41,12 @@ public class Question extends AbstractBaseEntity {
 
     public List<Answer> getAnswerList() {
         return answerList;
+    }
+
+    public List<Answer> getCopyAnswerList() {
+        List<Answer> copy = new ArrayList<>();
+        answerList.forEach(x-> copy.add(new Answer(x)));
+        return copy;
     }
 
     public void setAnswerList(List<Answer> answerList) {

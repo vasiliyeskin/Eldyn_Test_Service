@@ -44,11 +44,9 @@ public class TestServlet extends HttpServlet {
 
 
         // copy of questions
-        Collection<Question> yourAnswers = new ArrayList<Question>(testRestController.get(1).getQuestionList());
+        Collection<Question> yourAnswers = new ArrayList<Question>(testRestController.get(1).getCopyQuestionList());
         // copy of answers
-        yourAnswers.forEach(x ->{x = new Question(x, new ArrayList<Answer>(x.getAnswerList()));});
-        yourAnswers.forEach(x -> x.getAnswerList().forEach(y -> {
-            y=new Answer(y);}));
+        yourAnswers.forEach(x ->x.setAnswerList(x.getCopyAnswerList()));
 
         yourAnswers.forEach(x -> x.getAnswerList().
                 forEach(y -> {
