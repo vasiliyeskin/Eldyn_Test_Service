@@ -2,6 +2,8 @@ package ru.web.ets.web;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.web.ets.dto.UserAnswer;
+import ru.web.ets.dto.UserQuestion;
 import ru.web.ets.model.Answer;
 import ru.web.ets.model.Question;
 import ru.web.ets.model.Test;
@@ -44,17 +46,20 @@ public class TestServlet extends HttpServlet {
 
 
         // copy of questions
-        Collection<Question> yourAnswers = new ArrayList<Question>(testRestController.get(1).getCopyQuestionList());
+        Collection<UserQuestion> userQuestions = new ArrayList<UserQuestion>();
+        testRestController.get(1).getCopyQuestionList().forEach(x->userQuestions.add(new UserQuestion(x)));
         // copy of answers
-        yourAnswers.forEach(x ->x.setAnswerList(x.getCopyAnswerList()));
+        userQuestions.forEach(x -> x.setAnswerList(x.getCopyAnswerList()));
+        userQuestions.forEach(x -> x.getAnswerList().
+                forEach(y->{y = new UserAnswer(y);}));
 
-        yourAnswers.forEach(x -> x.getAnswerList().
+        userQuestions.forEach(x -> x.getAnswerList().
                 forEach(y -> {
-                    y.setCorrect(request.getParameterValues("chbox" + y.getId()) != null && request.getParameterValues("chbox" + y.getId()).length != 0);
+                    y.setUserChoose(request.getParameterValues("chbox" + y.getId()) != null && request.getParameterValues("chbox" + y.getId()).length != 0);
                 }));
 
-        request.setAttribute("questions", testRestController.get(1).getQuestionList());
-        request.setAttribute("yourAnswers", yourAnswers);
+   //     request.setAttribute("questions", testRestController.get(1).getQuestionList());
+        request.setAttribute("userQuestions", userQuestions);
         request.getRequestDispatcher("/testCorrectAnswer.jsp").forward(request, response);
 
 

@@ -15,16 +15,17 @@
             <tr>
                 <th>Text of question</th>
                 <th>Right answers</th>
+                <th>Your answers</th>
             </tr>
             </thead>
-            <c:forEach items="${questions}" var="question">
-                <jsp:useBean id="question" scope="page" type="ru.web.ets.model.Question"/>
+            <c:forEach items="${userQuestions}" var="question">
+                <jsp:useBean id="question" scope="page" type="ru.web.ets.dto.UserQuestion"/>
                 <tr class="normal">
                     <td>${question.text}</td>
                     <td>
                         <table>
                             <c:forEach items="${question.answerList}" var="answer">
-                                <jsp:useBean id="answer" scope="page" type="ru.web.ets.model.Answer"/>
+                                <jsp:useBean id="answer" scope="page" type="ru.web.ets.dto.UserAnswer"/>
                                 <tr class="normal">
                                     <td>${answer.text}</td>
                                     <td><input type="checkbox" value="${answer.correct}" disabled="disabled" <%=answer.isCorrect() ? "checked='checked'" : "" %> name="chbox${answer.id}"></td>
@@ -32,35 +33,20 @@
                             </c:forEach>
                         </table>
                     </td>
+                    <td>
+                        <table>
+                            <c:forEach items="${question.answerList}" var="yanswer">
+                                <jsp:useBean id="yanswer" scope="page" type="ru.web.ets.dto.UserAnswer"/>
+                                <tr class="normal">
+                                    <td>${yanswer.text}</td>
+                                    <td><input type="checkbox" value="${yanswer.correct}" disabled="disabled" <%=yanswer.isUserChoose() ? "checked='checked'" : "" %> name="yourchbox${yanswer.id}"></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
-
-    <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-        <tr>
-            <th>Text of question</th>
-            <th>Your answers</th>
-        </tr>
-        </thead>
-        <c:forEach items="${yourAnswers}" var="yourquestion">
-            <jsp:useBean id="yourquestion" scope="page" type="ru.web.ets.model.Question"/>
-            <tr class="normal">
-                <td>${yourquestion.text}</td>
-                <td>
-                    <table>
-                        <c:forEach items="${yourquestion.answerList}" var="yanswer">
-                            <jsp:useBean id="yanswer" scope="page" type="ru.web.ets.model.Answer"/>
-                            <tr class="normal">
-                                <td>${yanswer.text}</td>
-                                <td><input type="checkbox" value="${yanswer.correct}" disabled="disabled" <%=yanswer.isCorrect() ? "checked='checked'" : "" %> name="yourchbox${yanswer.id}"></td>
-                            </tr>
-                        </c:forEach>
-                    </table>
-                </td>
-            </tr>
-        </c:forEach>
-    </table>
 </section>
 </body>
 </html>
