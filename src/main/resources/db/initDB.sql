@@ -7,8 +7,18 @@ DROP TABLE IF EXISTS question;
 DROP TABLE IF EXISTS answer;
 DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS global_seq;
+DROP SEQUENCE IF EXISTS global_seqTest;
+DROP SEQUENCE IF EXISTS global_seqQuestion;
+DROP SEQUENCE IF EXISTS global_seqAnswer;
+DROP SEQUENCE IF EXISTS global_seqTQ;
+DROP SEQUENCE IF EXISTS global_seqATQ;
 
-CREATE SEQUENCE global_seq START 100000;
+CREATE SEQUENCE global_seq          START 100000;
+CREATE SEQUENCE global_seqTest      START 1;
+CREATE SEQUENCE global_seqQuestion  START 1;
+CREATE SEQUENCE global_seqAnswer    START 1;
+CREATE SEQUENCE global_seqTQ        START 1;
+CREATE SEQUENCE global_seqATQ       START 1;
 
 
 CREATE TABLE users
@@ -33,7 +43,7 @@ CREATE TABLE user_roles
 
 CREATE TABLE answer
 (
-  id               INTEGER PRIMARY KEY,
+  id               INTEGER PRIMARY KEY DEFAULT nextval('global_seqAnswer'),
   text             VARCHAR,
   image            OID,
   creationdatetime TIMESTAMP DEFAULT now() not NULL,
@@ -43,7 +53,7 @@ CREATE TABLE answer
 
 CREATE TABLE question
 (
-  id               INTEGER PRIMARY KEY,
+  id               INTEGER PRIMARY KEY DEFAULT nextval('global_seqQuestion'),
   text             VARCHAR,
   image            OID,
   creationdatetime TIMESTAMP DEFAULT now() not NULL,
@@ -53,7 +63,7 @@ CREATE TABLE question
 
 CREATE TABLE test
 (
-  id               INTEGER PRIMARY KEY,
+  id               INTEGER PRIMARY KEY DEFAULT nextval('global_seqTest'),
   text             VARCHAR,
   image            OID,
   creationdatetime TIMESTAMP DEFAULT now() not NULL,
@@ -63,7 +73,7 @@ CREATE TABLE test
 
 CREATE TABLE testAndQuestions
 (
-  id               INTEGER PRIMARY KEY,
+  id               INTEGER PRIMARY KEY DEFAULT nextval('global_seqTQ'),
   testId           INTEGER,
   questionID       INTEGER,
   creationdatetime TIMESTAMP DEFAULT now() not NULL,
@@ -76,7 +86,7 @@ CREATE UNIQUE INDEX testAndQuestions_unique_idx ON testAndQuestions (testId, que
 
 CREATE TABLE answerOfTestAndQuestions
 (
-  id                 INTEGER PRIMARY KEY,
+  id                 INTEGER PRIMARY KEY DEFAULT nextval('global_seqATQ'),
   testAndQuestionID  INTEGER,
   answerID           INTEGER,
   isRight            BOOLEAN,

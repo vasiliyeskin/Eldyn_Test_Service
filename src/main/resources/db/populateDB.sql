@@ -6,8 +6,14 @@ DELETE FROM test;
 DELETE FROM question;
 DELETE FROM answer;
 DELETE FROM users;
-ALTER SEQUENCE global_seq
-RESTART WITH 100000;
+ALTER SEQUENCE global_seq         RESTART WITH 100000;
+ALTER SEQUENCE global_seqTest     RESTART WITH 1;
+ALTER SEQUENCE global_seqQuestion RESTART WITH 1;
+ALTER SEQUENCE global_seqAnswer   RESTART WITH 1;
+ALTER SEQUENCE global_seqTQ       RESTART WITH 1;
+ALTER SEQUENCE global_seqATQ      RESTART WITH 1;
+
+
 
 
 INSERT INTO users (firstname, lastname, email, password)
@@ -53,5 +59,42 @@ INSERT INTO user_roles (role, user_id) VALUES
   ('ROLE_USER', (SELECT id
                  FROM USERS
                  WHERE email = 'user4@yandex.ru'));
+
+INSERT INTO test (text, image, creationdatetime, creatorId) VALUES
+('algebra', NULL, now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+('geometry', NULL, now(), (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
+
+
+INSERT INTO question (text, image, creationdatetime, creatorId) VALUES
+  ('1+2', NULL, now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ('1+3', NULL, now(), (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ('Where is triangular?', NULL, now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ('Where is circle?', NULL, now(), (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
+
+
+INSERT INTO answer (text, image, creationdatetime, creatorId) VALUES
+  ('1', NULL, now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ('2', NULL, now(), (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ('3', NULL, now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ('4', NULL, now(), (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ('here', NULL, now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ('there', NULL, now(), (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
+
+INSERT INTO testandquestions (testId, questionID, creationdatetime, creatorId) VALUES
+  ((SELECT id FROM test WHERE text = 'algebra'), (SELECT id FROM question WHERE text = '1+2'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ((SELECT id FROM test WHERE text = 'algebra'), (SELECT id FROM question WHERE text = '1+3'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ((SELECT id FROM test WHERE text = 'geometry'), (SELECT id FROM question WHERE text = 'Where is triangular?'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ((SELECT id FROM test WHERE text = 'geometry'), (SELECT id FROM question WHERE text = 'Where is circle?'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
+
+INSERT INTO answeroftestandquestions (testAndQuestionID, answerID, isRight, testAnswer, creationdatetime, creatorId) VALUES
+  (1, 1, TRUE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  (1, 2, FALSE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  (2, 1, TRUE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  (3, 3, FALSE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  (2, 2, TRUE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  (3, 4, FALSE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  (4, 3, TRUE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  (4, 4, FALSE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
+
 
 
