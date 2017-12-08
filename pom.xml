@@ -152,17 +152,17 @@
             <version>1.2</version>
         </dependency>
 
-        <!--TestAndQuestions-->
+        <!--Test-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <scope>testAndQuestions</scope>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-testAndQuestions</artifactId>
-            <scope>testAndQuestions</scope>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>

@@ -6,6 +6,8 @@ import ru.web.ets.model.Test;
 import ru.web.ets.repository.TestRepository;
 import ru.web.ets.util.exception.NotFoundException;
 
+import java.util.List;
+
 @Service
 public class TestServiceImpl implements TestService{
 
@@ -28,6 +30,10 @@ public class TestServiceImpl implements TestService{
 
     @Override
     public void update(Test test) {
+    }
 
+    @Override
+    public List<Test> getAll() {
+        return testRepository.getAll();
     }
 }

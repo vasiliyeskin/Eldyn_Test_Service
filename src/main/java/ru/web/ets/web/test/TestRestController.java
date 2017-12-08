@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import ru.web.ets.model.Test;
 import ru.web.ets.service.TestService;
 
+import java.util.List;
+
 @Controller
 public class TestRestController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -21,5 +23,10 @@ public class TestRestController {
     public Test get(int id) {
         log.info("get test {}", id);
         return testService.get(id);
+    }
+
+
+    public List<Test> getAll() {
+        return testService.getAll();
     }
 }

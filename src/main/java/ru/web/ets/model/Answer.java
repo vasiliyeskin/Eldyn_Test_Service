@@ -1,39 +1,70 @@
 package ru.web.ets.model;
 
-import java.awt.image.BufferedImage;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
-public class Answer extends AbstractBaseEntity {
+@Access(AccessType.FIELD)
+@Entity
+@Table(name="answer")
+public class Answer implements BaseEntity {
 
-    private String text;
-    private BufferedImage image;
-    private boolean isCorrect;
+    public static final int global_seqAnswer = 1;
 
-    public Answer(Integer id, String text, BufferedImage image) {
-        super(id);
-        this.text = text;
-        this.image = image;
-        this.isCorrect = false;
+    @Id
+    @SequenceGenerator(name = "global_seqAnswer", sequenceName = "global_seqAnswer", allocationSize = 1, initialValue = global_seqAnswer)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seqAnswer")
+    @Access(value = AccessType.PROPERTY)
+    private Integer id;
+
+    @Override
+    public boolean isNew() {
+        return this.id == null;
     }
 
-    public Answer(Integer id, String text, BufferedImage image, boolean isCorrect) {
-        super(id);
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public Integer getId() {
+        return this.id;
+    }
+
+    @Column(name = "text")
+    private String text;
+
+    @Lob
+    @Column(name = "image", columnDefinition = "oid")
+    private byte[] image;
+
+    @Column(name = "creationdatetime", columnDefinition = "timestamp default now()")
+    @NotNull
+    private Date creationdatetime = new Date();
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "creatorId")
+    private User creator;
+
+
+    public Answer(Integer id, String text, byte[] image) {
+        this.id = id;
         this.text = text;
         this.image = image;
-        this.isCorrect = isCorrect;
     }
 
     public Answer(Answer answer) {
-        super(answer.getId());
+        this.id = answer.getId();
         this.text = answer.getText();
         this.image = answer.getImage();
-        this.isCorrect = answer.isCorrect();
     }
 
     public String getText() {
         return text;
     }
 
-    public BufferedImage getImage() {
+    public byte[] getImage() {
         return image;
     }
 
@@ -41,16 +72,8 @@ public class Answer extends AbstractBaseEntity {
         this.text = text;
     }
 
-    public void setImage(BufferedImage image) {
+    public void setImage(byte[] image) {
         this.image = image;
-    }
-
-    public boolean isCorrect() {
-        return isCorrect;
-    }
-
-    public void setCorrect(boolean correct) {
-        isCorrect = correct;
     }
 
     @Override
@@ -58,7 +81,6 @@ public class Answer extends AbstractBaseEntity {
         return "Answer{" +
                 "text='" + text + '\'' +
                 ", image=" + image +
-                ", isCorrect=" + isCorrect +
                 ", id=" + this.getId() +
                 '}';
     }

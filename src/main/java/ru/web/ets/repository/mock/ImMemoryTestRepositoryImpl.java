@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import ru.web.ets.model.Test;
 import ru.web.ets.repository.TestRepository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -33,4 +34,18 @@ public class ImMemoryTestRepositoryImpl implements TestRepository {
         return repository.get(id);
     }
 
+    @Override
+    public boolean delete(int id) {
+        return false;
+    }
+
+    @Override
+    public Test get(int id) {
+        return null;
+    }
+
+    @Override
+    public List<Test> getAll() {
+        return null;
+    }
 }

@@ -14,7 +14,7 @@
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>
-            <th>Text of question</th>
+            <th>Text</th>
             <th>Variants of answers</th>
         </tr>
         </thead>

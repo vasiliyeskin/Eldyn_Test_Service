@@ -39,6 +39,7 @@ public class TestServlet extends HttpServlet {
         String id = request.getParameter("id");
         String textAnswer = request.getParameter("addAnswerText");
 
+/*
 
         // copy of questions
         Collection<UserQuestion> userQuestions = new ArrayList<UserQuestion>();
@@ -56,6 +57,7 @@ public class TestServlet extends HttpServlet {
    //     request.setAttribute("questions", testRestController.get(1).getQuestionList());
         request.setAttribute("userQuestions", userQuestions);
         request.getRequestDispatcher("/testCorrectAnswer.jsp").forward(request, response);
+*/
 
 
     }
@@ -64,11 +66,21 @@ public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
-        switch (action == null ? "all" : action) {
+/*        switch (action == null ? "all" : action) {
             default:
                 request.setAttribute("questions",
                         testRestController.get(1).getQuestionList());
                 request.getRequestDispatcher("/test.jsp").forward(request, response);
+                break;
+        }*/
+
+
+        switch (action == null ? "all" : action) {
+            case "all":
+            default:
+                request.setAttribute("tests",
+                        testRestController.getAll());
+                request.getRequestDispatcher("/tests.jsp").forward(request, response);
                 break;
         }
     }

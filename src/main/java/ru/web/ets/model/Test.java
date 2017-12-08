@@ -1,8 +1,5 @@
 package ru.web.ets.model;
 
-
-import javassist.bytecode.ByteArray;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -23,15 +20,20 @@ public class Test implements BaseEntity {
     @Column(name = "text")
     private String text;
 
-    @Column(name = "image")
-    private ByteArray image;
+    @Lob
+    @Column(name = "image", columnDefinition = "oid")
+    private byte[] image;
 
     @Column(name = "creationdatetime", columnDefinition = "timestamp default now()")
     @NotNull
     private Date creationdatetime = new Date();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "creatorId")
     private User creator;
+
+//    @Column(name = "creatorId")
+//    private Integer creatorId;
 
     public Test() {
     }
@@ -41,6 +43,7 @@ public class Test implements BaseEntity {
         this.creationdatetime = test.getCreationdatetime();
         this.image = test.getImage();
         this.creator = test.getCreator();
+        this.creator = test.creator;
     }
 
     public String getText() {
@@ -51,11 +54,11 @@ public class Test implements BaseEntity {
         this.text = text;
     }
 
-    public ByteArray getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(ByteArray image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
@@ -74,6 +77,15 @@ public class Test implements BaseEntity {
     public void setCreator(User creator) {
         this.creator = creator;
     }
+
+
+//    public Integer getCreatorId() {
+//        return creatorId;
+//    }
+//
+//    public void setCreatorId(Integer creatorId) {
+//        this.creatorId = creatorId;
+//    }
 
     @Override
     public boolean isNew() {
@@ -97,7 +109,6 @@ public class Test implements BaseEntity {
         Test test = (Test) o;
         return Objects.equals(id, test.id) &&
                 Objects.equals(text, test.text) &&
-                Objects.equals(image, test.image) &&
                 Objects.equals(creationdatetime, test.creationdatetime) &&
                 Objects.equals(creator, test.creator);
     }
@@ -115,7 +126,7 @@ public class Test implements BaseEntity {
                 ", text='" + text + '\'' +
                 ", image=" + image +
                 ", creationdatetime=" + creationdatetime +
-                ", creator=" + creator +
+                ", creator=" + creator.getId() +
                 '}';
     }
 }
