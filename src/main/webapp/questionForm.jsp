@@ -36,7 +36,7 @@
             <dd><input type="text" value="${question.text}" name="text"></dd>
         </dl>
         <dl>
-            <c:if test="${question.text.length() > 0}">
+            <c:if testAndQuestions="${question.text.length() > 0}">
             <table>
                 <thead>
                 <tr>

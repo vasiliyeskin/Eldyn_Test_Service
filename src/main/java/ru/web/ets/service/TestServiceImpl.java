@@ -2,7 +2,7 @@ package ru.web.ets.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.web.ets.model.Test;
+import ru.web.ets.model.TestAndQuestions;
 import ru.web.ets.repository.TestRepository;
 import ru.web.ets.util.exception.NotFoundException;
 
@@ -17,17 +17,17 @@ public class TestServiceImpl implements TestService{
     }
 
     @Override
-    public Test create(Test test) {
+    public TestAndQuestions create(TestAndQuestions testAndQuestions) {
         return null;
     }
 
     @Override
-    public Test get(int id) throws NotFoundException {
+    public TestAndQuestions get(int id) throws NotFoundException {
         return testRepository.getTest(id);
     }
 
     @Override
-    public void update(Test test) {
+    public void update(TestAndQuestions testAndQuestions) {
 
     }
 }

@@ -4,10 +4,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.web.ets.dto.UserAnswer;
 import ru.web.ets.dto.UserQuestion;
-import ru.web.ets.model.Answer;
-import ru.web.ets.model.Question;
-import ru.web.ets.model.Test;
-import ru.web.ets.web.question.QuestionRestController;
 import ru.web.ets.web.test.TestRestController;
 
 import javax.servlet.ServletConfig;
@@ -18,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
 public class TestServlet extends HttpServlet {
@@ -28,7 +23,7 @@ public class TestServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml");
+        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
         testRestController = springContext.getBean(TestRestController.class);
     }
 

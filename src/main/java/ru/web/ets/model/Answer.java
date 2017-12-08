@@ -59,7 +59,7 @@ public class Answer extends AbstractBaseEntity {
                 "text='" + text + '\'' +
                 ", image=" + image +
                 ", isCorrect=" + isCorrect +
-                ", id=" + id +
+                ", id=" + this.getId() +
                 '}';
     }
 }

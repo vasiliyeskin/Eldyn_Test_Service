@@ -1,14 +1,14 @@
 package ru.web.ets.service;
 
-import ru.web.ets.model.Test;
+import ru.web.ets.model.TestAndQuestions;
 import ru.web.ets.util.exception.NotFoundException;
 
 public interface TestService {
 
 
-    Test create(Test test);
+    TestAndQuestions create(TestAndQuestions testAndQuestions);
 
-    Test get(int id) throws NotFoundException;
+    TestAndQuestions get(int id) throws NotFoundException;
 
-    void update(Test test);
+    void update(TestAndQuestions testAndQuestions);
 }

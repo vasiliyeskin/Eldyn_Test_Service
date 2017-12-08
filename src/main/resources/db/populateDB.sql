@@ -2,7 +2,7 @@ DELETE FROM user_roles;
 DELETE FROM UserAnswer;
 DELETE FROM answerOfTestAndQuestions;
 DELETE FROM testAndQuestions;
-DELETE FROM test;
+DELETE FROM testAndQuestions;
 DELETE FROM question;
 DELETE FROM answer;
 DELETE FROM users;
@@ -60,7 +60,7 @@ INSERT INTO user_roles (role, user_id) VALUES
                  FROM USERS
                  WHERE email = 'user4@yandex.ru'));
 
-INSERT INTO test (text, image, creationdatetime, creatorId) VALUES
+INSERT INTO testAndQuestions (text, image, creationdatetime, creatorId) VALUES
 ('algebra', NULL, now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
 ('geometry', NULL, now(), (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
 
@@ -81,10 +81,10 @@ INSERT INTO answer (text, image, creationdatetime, creatorId) VALUES
   ('there', NULL, now(), (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
 
 INSERT INTO testandquestions (testId, questionID, creationdatetime, creatorId) VALUES
-  ((SELECT id FROM test WHERE text = 'algebra'), (SELECT id FROM question WHERE text = '1+2'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
-  ((SELECT id FROM test WHERE text = 'algebra'), (SELECT id FROM question WHERE text = '1+3'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
-  ((SELECT id FROM test WHERE text = 'geometry'), (SELECT id FROM question WHERE text = 'Where is triangular?'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
-  ((SELECT id FROM test WHERE text = 'geometry'), (SELECT id FROM question WHERE text = 'Where is circle?'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
+  ((SELECT id FROM testAndQuestions WHERE text = 'algebra'), (SELECT id FROM question WHERE text = '1+2'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ((SELECT id FROM testAndQuestions WHERE text = 'algebra'), (SELECT id FROM question WHERE text = '1+3'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ((SELECT id FROM testAndQuestions WHERE text = 'geometry'), (SELECT id FROM question WHERE text = 'Where is triangular?'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ((SELECT id FROM testAndQuestions WHERE text = 'geometry'), (SELECT id FROM question WHERE text = 'Where is circle?'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
 
 INSERT INTO answeroftestandquestions (testAndQuestionID, answerID, isRight, testAnswer, creationdatetime, creatorId) VALUES
   (1, 1, TRUE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),

@@ -10,7 +10,7 @@
     <h3><a href="index.html">Home</a></h3>
     <h2>Test</h2>
 
-    <form method="post" action="test">
+    <form method="post" action="testAndQuestions">
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
         <tr>

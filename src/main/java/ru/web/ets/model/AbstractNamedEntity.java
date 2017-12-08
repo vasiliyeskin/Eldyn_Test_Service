@@ -1,8 +1,20 @@
 package ru.web.ets.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
+
+@MappedSuperclass
 public abstract class AbstractNamedEntity extends AbstractBaseEntity {
 
+    @NotBlank
+    @Column(name = "name", nullable = false)
     protected String name;
+
+    public AbstractNamedEntity() {
+    }
 
     protected AbstractNamedEntity(Integer id, String name) {
         super(id);
@@ -19,6 +31,6 @@ public abstract class AbstractNamedEntity extends AbstractBaseEntity {
 
     @Override
     public String toString() {
-        return String.format("Entity %s (%s, '%s')", getClass().getName(), id, name);
+        return String.format("Entity %s (%s, '%s')", getClass().getName(), getId(), name);
     }
 }
