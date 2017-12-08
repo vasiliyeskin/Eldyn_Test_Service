@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import ru.web.ets.model.TestAndQuestions;
+import ru.web.ets.model.Test;
 import ru.web.ets.service.TestService;
 
 @Controller
@@ -18,7 +18,7 @@ public class TestRestController {
         this.testService = testService;
     }
 
-    public TestAndQuestions get(int id) {
+    public Test get(int id) {
         log.info("get test {}", id);
         return testService.get(id);
     }

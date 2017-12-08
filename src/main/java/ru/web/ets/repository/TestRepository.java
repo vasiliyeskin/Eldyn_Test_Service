@@ -1,10 +1,10 @@
 package ru.web.ets.repository;
 
-import ru.web.ets.model.TestAndQuestions;
+import ru.web.ets.model.Test;
 
 public interface TestRepository {
 
-    TestAndQuestions getTest(int id);
+    Test getTest(int id);
 
-    TestAndQuestions save(TestAndQuestions testAndQuestions);
+    Test save(Test test);
 }

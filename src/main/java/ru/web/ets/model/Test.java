@@ -33,6 +33,16 @@ public class Test implements BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private User creator;
 
+    public Test() {
+    }
+
+    public Test(Test test) {
+        this.text = test.getText();
+        this.creationdatetime = test.getCreationdatetime();
+        this.image = test.getImage();
+        this.creator = test.getCreator();
+    }
+
     public String getText() {
         return text;
     }
