@@ -16,10 +16,6 @@ public class TestRestController {
     @Autowired
     private TestService testService;
 
-    public void setTestService(TestService testService) {
-        this.testService = testService;
-    }
-
     public Test get(int id) {
         log.info("get test {}", id);
         return testService.get(id);

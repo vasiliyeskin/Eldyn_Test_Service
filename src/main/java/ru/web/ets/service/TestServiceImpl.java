@@ -14,7 +14,7 @@ public class TestServiceImpl implements TestService{
     @Autowired
     private TestRepository testRepository;
 
-    public void setTestRepository(TestRepository testRepository) {
+    public void setRepository(TestRepository testRepository) {
         this.testRepository = testRepository;
     }
 

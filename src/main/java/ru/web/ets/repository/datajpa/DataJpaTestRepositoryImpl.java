@@ -13,7 +13,7 @@ public class DataJpaTestRepositoryImpl implements TestRepository {
     private static final Sort SORT_NAME = new Sort("text");
 
     @Autowired
-    private CrudTestRepository crudTestRepository;
+    CrudTestRepository crudTestRepository;
 
     @Override
     public Test getTest(int id) {

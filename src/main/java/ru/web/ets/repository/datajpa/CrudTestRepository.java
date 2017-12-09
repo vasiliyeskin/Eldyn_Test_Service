@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @Transactional(readOnly = true)
 public interface CrudTestRepository extends JpaRepository<Test, Integer>{
-
     @Transactional
     @Modifying
 //    @Query(name = User.DELETE)
@@ -27,5 +26,6 @@ public interface CrudTestRepository extends JpaRepository<Test, Integer>{
     @Override
     Optional<Test> findById(Integer id);
 
+    @Override
     List<Test> findAll(Sort sort);
 }
