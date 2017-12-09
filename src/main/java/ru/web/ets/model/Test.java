@@ -20,17 +20,17 @@ public class Test implements BaseEntity {
     @Column(name = "text")
     private String text;
 
-/*    @Lob
+    @Lob
     @Column(name = "image", columnDefinition = "oid")
-    private byte[] image;*/
+    private byte[] image;
 
     @Column(name = "creationdatetime", columnDefinition = "timestamp default now()")
     @NotNull
     private Date creationdatetime = new Date();
 
-/*    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "creatorId")
-    private User creator;*/
+    private User creator;
 
 //    @Column(name = "creatorId")
 //    private Integer creatorId;
@@ -41,8 +41,8 @@ public class Test implements BaseEntity {
     public Test(Test test) {
         this.text = test.getText();
         this.creationdatetime = test.getCreationdatetime();
-//        this.image = test.getImage();
-//        this.creator = test.getCreator();
+        this.image = test.getImage();
+        this.creator = test.getCreator();
     }
 
     public String getText() {
@@ -53,13 +53,13 @@ public class Test implements BaseEntity {
         this.text = text;
     }
 
-/*    public byte[] getImage() {
+    public byte[] getImage() {
         return image;
     }
 
     public void setImage(byte[] image) {
         this.image = image;
-    }*/
+    }
 
     public Date getCreationdatetime() {
         return creationdatetime;
@@ -69,13 +69,13 @@ public class Test implements BaseEntity {
         this.creationdatetime = creationdatetime;
     }
 
-//    public User getCreator() {
-//        return creator;
-//    }
-//
-//    public void setCreator(User creator) {
-//        this.creator = creator;
-//    }
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
 
 
 //    public Integer getCreatorId() {
@@ -123,9 +123,9 @@ public class Test implements BaseEntity {
         return "Test{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
-//                ", image=" + image +
+                ", image=" + image +
                 ", creationdatetime=" + creationdatetime +
-//                ", creator=" + creator.getId() +
+                ", creator=" + creator.getId() +
                 '}';
     }
 }

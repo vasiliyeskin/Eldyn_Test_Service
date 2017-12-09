@@ -16,7 +16,7 @@
         <tr>
             <th>Test ID</th>
             <th>Text</th>
-            <%--<th>Creator's Email</th>--%>
+            <th>Creator's Email</th>
         </tr>
         </thead>
         <c:forEach items="${tests}" var="test">
@@ -24,7 +24,7 @@
             <tr class="normal">
                 <td>${test.id}</td>
                 <td>${test.text}</td>
-                <%--<td>${test.creator.email}</td>--%>
+                <td>${test.creator.email}</td>
                     <%--                <td>
                                         <table>
                                             <c:forEach items="${question.answerList}" var="answer">

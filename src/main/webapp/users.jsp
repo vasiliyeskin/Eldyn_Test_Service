@@ -17,7 +17,7 @@
             <th>Last Name</th>
         </tr>
         </thead>
-        <c:forEach items="${user}" var="user">
+        <c:forEach items="${users}" var="user">
             <jsp:useBean id="user" scope="page" type="ru.web.ets.model.User"/>
             <tr class="normal">
                 <td>${user.id}</td>
