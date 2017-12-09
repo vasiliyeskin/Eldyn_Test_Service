@@ -47,8 +47,15 @@ public class Answer implements BaseEntity {
     @JoinColumn(name = "creatorId")
     private User creator;
 
+    public Answer() { }
 
     public Answer(Integer id, String text, byte[] image) {
+        this.id = id;
+        this.text = text;
+        this.image = image;
+    }
+
+    public Answer(Integer id, String text, byte[] image, boolean b) {
         this.id = id;
         this.text = text;
         this.image = image;

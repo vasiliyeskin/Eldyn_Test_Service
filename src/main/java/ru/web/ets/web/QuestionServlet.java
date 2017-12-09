@@ -4,7 +4,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.web.ets.model.Answer;
 import ru.web.ets.model.Question;
-import ru.web.ets.repository.mock.InMemoryQuestionRepositoryImpl;
+import ru.web.ets.repository.datajpa.InMemoryQuestionRepositoryImpl;
 import ru.web.ets.web.question.QuestionRestController;
 
 import javax.servlet.ServletConfig;
@@ -41,7 +41,7 @@ public class QuestionServlet extends HttpServlet {
         String id = request.getParameter("id");
         String textAnswer = request.getParameter("addAnswerText");
 
-        Question question;
+        /*Question question;
         if (id.isEmpty() || "0".equals(id)) {
             question = new Question(null,
                     request.getParameter("text"),
@@ -72,7 +72,7 @@ public class QuestionServlet extends HttpServlet {
             request.setAttribute("question", questionRestController.get(getId(request)));
             request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
         } else
-            response.sendRedirect("questions");
+            response.sendRedirect("questions");*/
     }
 
     @Override
@@ -87,8 +87,8 @@ public class QuestionServlet extends HttpServlet {
                 break;
             case "create":
             case "update":
-                final Question question = "create".equals(action) ?
-                        new Question(0, "", null, new ArrayList<Answer>()) :
+                final Question question =
+//                        "create".equals(action) ? new Question(0, "", null, new ArrayList<Answer>()) :
                         questionRestController.get(getId(request));
                 request.setAttribute("question", question);
                 request.getRequestDispatcher("/questionForm.jsp").forward(request, response);

@@ -14,7 +14,7 @@ public class TestRestController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    TestService testService;
+    private TestService testService;
 
     public void setTestService(TestService testService) {
         this.testService = testService;

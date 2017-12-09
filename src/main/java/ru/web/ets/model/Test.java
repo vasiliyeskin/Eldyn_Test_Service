@@ -43,7 +43,6 @@ public class Test implements BaseEntity {
         this.creationdatetime = test.getCreationdatetime();
         this.image = test.getImage();
         this.creator = test.getCreator();
-        this.creator = test.creator;
     }
 
     public String getText() {

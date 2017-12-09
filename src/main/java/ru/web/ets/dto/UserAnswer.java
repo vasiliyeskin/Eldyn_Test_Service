@@ -4,9 +4,13 @@ import ru.web.ets.model.Answer;
 
 import java.awt.image.BufferedImage;
 
-public class UserAnswer extends Answer {
+public class UserAnswer extends Answer
+{
+    public UserAnswer(Answer answer) {
+        super(answer);
+    }
 
-    private boolean userChoose;
+    /*   private boolean userChoose;
 
     public UserAnswer(Integer id, String text, BufferedImage image) {
         super(id, text, image);
@@ -36,5 +40,5 @@ public class UserAnswer extends Answer {
 
     public boolean isUserChoose() {
         return userChoose;
-    }
+    }*/
 }

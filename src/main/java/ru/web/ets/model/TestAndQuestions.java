@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class TestAndQuestions extends Test {
+public class TestAndQuestions{
 
-    @OneToMany
+/*    @OneToMany
     //@JoinTable(name="testAndQuestions")
     @JoinTable(name="testAndQuestions",
             joinColumns = @JoinColumn(name = "questionID",
                     referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "id",
                     referencedColumnName = "questionID"))
-    List<Question> questionList;
+    List<Question> questionList;*/
 
 //    public TestAndQuestions(Integer id, Collection<Question> questionList) {
 //        super(id);

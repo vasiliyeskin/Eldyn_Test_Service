@@ -12,10 +12,10 @@ import java.util.List;
 public class UserQuestion extends AbstractBaseEntity {
 
     private String text;
-    private BufferedImage image;
+    private byte[] image;
     private List<UserAnswer> answerList;
 
-    public UserQuestion(Integer id, String text, BufferedImage image, List<UserAnswer> answerList) {
+    public UserQuestion(Integer id, String text, byte[] image, List<UserAnswer> answerList) {
         super(id);
         this.text = text;
         this.image = image;
@@ -27,7 +27,7 @@ public class UserQuestion extends AbstractBaseEntity {
         this.text = question.getText();
         this.image = question.getImage();
         this.answerList = new ArrayList<>();
-        question.getAnswerList().forEach(x->this.answerList.add(new UserAnswer(x)));
+     //   question.getAnswerList().forEach(x->this.answerList.add(new UserAnswer(x)));
     }
 
     public String getText() {
@@ -38,11 +38,11 @@ public class UserQuestion extends AbstractBaseEntity {
         this.text = text;
     }
 
-    public BufferedImage getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(BufferedImage image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
