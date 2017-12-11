@@ -1,6 +1,6 @@
 DELETE FROM user_roles;
 DELETE FROM UserAnswer;
-DELETE FROM answerOfTestAndQuestions;
+DELETE FROM answerAndQuestions;
 DELETE FROM testAndQuestions;
 DELETE FROM test;
 DELETE FROM question;
@@ -86,7 +86,7 @@ INSERT INTO testandquestions (testId, questionID, creationdatetime, creatorId) V
   ((SELECT id FROM test WHERE text = 'geometry'), (SELECT id FROM question WHERE text = 'Where is triangular?'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
   ((SELECT id FROM test WHERE text = 'geometry'), (SELECT id FROM question WHERE text = 'Where is circle?'), now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
 
-INSERT INTO answeroftestandquestions (testAndQuestionID, answerID, isRight, testAnswer, creationdatetime, creatorId) VALUES
+INSERT INTO answerAndQuestions (questionid, answerID, isRight, testAnswer, creationdatetime, creatorId) VALUES
   (1, 1, TRUE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
   (1, 2, FALSE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
   (2, 1, TRUE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),

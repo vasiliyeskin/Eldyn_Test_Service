@@ -1,8 +1,11 @@
 package ru.web.ets.model;
 
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Access(AccessType.FIELD)
@@ -30,7 +33,16 @@ public class Test implements BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "creatorId")
+    @BatchSize(size = 200)
     private User creator;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="testAndQuestions",
+            joinColumns = @JoinColumn(name = "testId",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "questionID",
+                    referencedColumnName = "id"))
+    private List<Question> questionsList;
 
 //    @Column(name = "creatorId")
 //    private Integer creatorId;
@@ -43,6 +55,7 @@ public class Test implements BaseEntity {
         this.creationdatetime = test.getCreationdatetime();
         this.image = test.getImage();
         this.creator = test.getCreator();
+        this.questionsList = test.questionsList;
     }
 
     public String getText() {
@@ -77,8 +90,15 @@ public class Test implements BaseEntity {
         this.creator = creator;
     }
 
+    public List<Question> getQuestionsList() {
+        return questionsList;
+    }
 
-//    public Integer getCreatorId() {
+    public void setQuestionsList(List<Question> questionsList) {
+        this.questionsList = questionsList;
+    }
+
+    //    public Integer getCreatorId() {
 //        return creatorId;
 //    }
 //

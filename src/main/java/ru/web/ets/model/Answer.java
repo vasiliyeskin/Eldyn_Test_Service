@@ -1,5 +1,7 @@
 package ru.web.ets.model;
 
+import org.hibernate.annotations.BatchSize;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -45,6 +47,7 @@ public class Answer implements BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "creatorId")
+    @BatchSize(size = 200)
     private User creator;
 
     public Answer() { }

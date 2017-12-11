@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS UserAnswer;
-DROP TABLE IF EXISTS answerOfTestAndQuestions;
+DROP TABLE IF EXISTS answerAndQuestions;
 DROP TABLE IF EXISTS testAndQuestions;
 DROP TABLE IF EXISTS test;
 DROP TABLE IF EXISTS question;
@@ -84,20 +84,20 @@ CREATE TABLE testAndQuestions
 );
 CREATE UNIQUE INDEX testAndQuestions_unique_idx ON testAndQuestions (testId, questionID);
 
-CREATE TABLE answerOfTestAndQuestions
+CREATE TABLE answerAndQuestions
 (
   id                 INTEGER PRIMARY KEY DEFAULT nextval('global_seqATQ'),
-  testAndQuestionID  INTEGER,
+  questionID  INTEGER,
   answerID           INTEGER,
   isRight            BOOLEAN,
   testAnswer         VARCHAR,
   creationdatetime   TIMESTAMP DEFAULT now() not NULL,
   creatorId          INTEGER,
   FOREIGN KEY (creatorId) REFERENCES USERS (id) ON DELETE CASCADE,
-  FOREIGN KEY (testAndQuestionID) REFERENCES testAndQuestions (id) ON DELETE CASCADE,
+  FOREIGN KEY (questionID) REFERENCES question (id) ON DELETE CASCADE,
   FOREIGN KEY (answerID) REFERENCES answer (id) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX answerOfTestAndQuestions_unique_idx ON answerOfTestAndQuestions (testAndQuestionID, answerID);
+CREATE UNIQUE INDEX answerAndQuestions_unique_idx ON answerAndQuestions (questionID, answerID);
 
 CREATE TABLE UserAnswer
 (
