@@ -24,11 +24,11 @@
                 <td>${question.text}</td>
                 <td>
                     <table>
-                        <c:forEach items="${question.answerList}" var="answer">
-                            <jsp:useBean id="answer" scope="page" type="ru.web.ets.model.Answer"/>
+                        <c:forEach items="${question.answersList}" var="tanswer">
+                            <jsp:useBean id="tanswer" scope="page" type="ru.web.ets.model.TeacherAnswer"/>
                             <tr class="normal">
-                                <td>${answer.text}</td>
-                                <td><input type="checkbox" value="${answer.correct}" name="chbox${answer.id}"></td>
+                                <td>${tanswer.answer.text}</td>
+                                <td><input type="checkbox" value="${tanswer.right}" name="chbox${tanswer.id}"></td>
                             </tr>
                         </c:forEach>
                     </table>

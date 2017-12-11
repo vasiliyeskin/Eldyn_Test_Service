@@ -23,7 +23,7 @@
             <jsp:useBean id="test" scope="page" type="ru.web.ets.model.Test"/>
             <tr class="normal">
                 <td>${test.id}</td>
-                <td>${test.text}</td>
+                <td><a href="test?id=${test.id}">${test.text}</a> </td>
                 <td>${test.creator.email}</td>
                     <%--                <td>
                                         <table>

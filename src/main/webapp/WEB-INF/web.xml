@@ -37,4 +37,14 @@
         <url-pattern>/tests</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>testUserServlet</servlet-name>
+        <servlet-class>ru.web.ets.web.TestUserServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>testUserServlet</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+
 </web-app>
