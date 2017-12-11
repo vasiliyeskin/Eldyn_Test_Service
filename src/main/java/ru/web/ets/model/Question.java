@@ -36,13 +36,18 @@ public class Question implements BaseEntity {
     @BatchSize(size = 200)
     private User creator;
 
-    @OneToMany(fetch = FetchType.EAGER)
+/*    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name="answerAndQuestions",
             joinColumns = @JoinColumn(name = "questionID",
                     referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "answerID",
                     referencedColumnName = "id"))
-    private List<Answer> answersList;
+    private List<Answer> answersList;*/
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "questionID")
+    private List<TeacherAnswer> answersList;
+
 
     public Question(){}
 
@@ -101,11 +106,11 @@ public class Question implements BaseEntity {
         return this.id;
     }
 
-    public List<Answer> getAnswersList() {
+    public List<TeacherAnswer> getAnswersList() {
         return answersList;
     }
 
-    public void setAnswersList(List<Answer> answersList) {
+    public void setAnswersList(List<TeacherAnswer> answersList) {
         this.answersList = answersList;
     }
 

@@ -87,7 +87,7 @@ CREATE UNIQUE INDEX testAndQuestions_unique_idx ON testAndQuestions (testId, que
 CREATE TABLE answerAndQuestions
 (
   id                 INTEGER PRIMARY KEY DEFAULT nextval('global_seqATQ'),
-  questionID  INTEGER,
+  questionID         INTEGER,
   answerID           INTEGER,
   isRight            BOOLEAN,
   testAnswer         VARCHAR,

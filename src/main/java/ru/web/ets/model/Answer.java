@@ -47,7 +47,6 @@ public class Answer implements BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "creatorId")
-    @BatchSize(size = 200)
     private User creator;
 
     public Answer() { }
