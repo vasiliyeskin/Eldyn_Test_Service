@@ -1,10 +1,8 @@
 package ru.web.ets.model;
-
 import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +10,7 @@ import java.util.Objects;
 @Access(AccessType.FIELD)
 @Entity
 @Table(name="test")
-public class Test implements BaseEntity {
+public class UserTest implements BaseEntity {
     public static final int global_seqTest = 1;
 
     @Id
@@ -29,6 +27,7 @@ public class Test implements BaseEntity {
     private byte[] image;
 
     @Column(name = "creationdatetime", columnDefinition = "timestamp default now()")
+    @NotNull
     private Date creationdatetime = new Date();
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -42,15 +41,12 @@ public class Test implements BaseEntity {
                     referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "questionID",
                     referencedColumnName = "id"))
-    private List<Question> questionsList;
+    private List<UserQuestion> questionsList;
 
-//    @Column(name = "creatorId")
-//    private Integer creatorId;
-
-    public Test() {
+    public UserTest() {
     }
 
-    public Test(Test test) {
+    public UserTest(UserTest test) {
         this.text = test.getText();
         this.creationdatetime = test.getCreationdatetime();
         this.image = test.getImage();
@@ -58,11 +54,12 @@ public class Test implements BaseEntity {
         this.questionsList = test.questionsList;
     }
 
-    public Test(Integer id, String text, byte[] image) {
-        this.id = id;
-        this.text = text;
-        this.image = image;
-        this.questionsList = new ArrayList<>();
+    public UserTest(Test test) {
+        this.id = 0;
+        this.text = test.getText();
+        this.creationdatetime = test.getCreationdatetime();
+        this.image = test.getImage();
+        this.creator = test.getCreator();
     }
 
     public String getText() {
@@ -97,21 +94,13 @@ public class Test implements BaseEntity {
         this.creator = creator;
     }
 
-    public List<Question> getQuestionsList() {
+    public List<UserQuestion> getQuestionsList() {
         return questionsList;
     }
 
-    public void setQuestionsList(List<Question> questionsList) {
+    public void setQuestionsList(List<UserQuestion> questionsList) {
         this.questionsList = questionsList;
     }
-
-    //    public Integer getCreatorId() {
-//        return creatorId;
-//    }
-//
-//    public void setCreatorId(Integer creatorId) {
-//        this.creatorId = creatorId;
-//    }
 
     @Override
     public boolean isNew() {
@@ -132,7 +121,7 @@ public class Test implements BaseEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Test test = (Test) o;
+        UserTest test = (UserTest) o;
         return Objects.equals(id, test.id) &&
                 Objects.equals(text, test.text) &&
                 Objects.equals(creationdatetime, test.creationdatetime)/* &&
@@ -147,7 +136,7 @@ public class Test implements BaseEntity {
 
     @Override
     public String toString() {
-        return "Test{" +
+        return "UserTest{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
                 ", creationdatetime=" + creationdatetime +
@@ -156,3 +145,4 @@ public class Test implements BaseEntity {
                 '}';
     }
 }
+

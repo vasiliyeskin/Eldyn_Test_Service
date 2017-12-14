@@ -3,6 +3,7 @@ package ru.web.ets.repository.datajpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.web.ets.model.Test;
 import ru.web.ets.repository.TestRepository;
 
@@ -15,13 +16,21 @@ public class DataJpaTestRepositoryImpl implements TestRepository {
     @Autowired
     CrudTestRepository crudTestRepository;
 
+    @Autowired
+    private CrudUserRepository crudUserRepository;
+
     @Override
     public Test getTest(int id) {
         return crudTestRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Test save(Test test) {
+    @Transactional
+    public Test save(Test test, int userId) {
+        if (!test.isNew() && get(test.getId(), userId) == null) {
+            return null;
+        }
+        test.setCreator(crudUserRepository.getOne(userId));
         return crudTestRepository.save(test);
     }
 
@@ -31,8 +40,8 @@ public class DataJpaTestRepositoryImpl implements TestRepository {
     }
 
     @Override
-    public Test get(int id) {
-        return crudTestRepository.findById(id).orElse(null);
+    public Test get(int id, int userId) {
+        return crudTestRepository.findById(id).filter(test -> test.getCreator().getId() == userId).orElse(null);
     }
 
     @Override

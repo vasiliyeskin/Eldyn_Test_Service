@@ -8,11 +8,11 @@ import java.util.List;
 public interface TestService {
 
 
-    Test create(Test testAndQuestions);
+    Test create(Test test, int userId);
 
     Test get(int id) throws NotFoundException;
 
-    void update(Test test);
+    Test update(Test test, int userId);
 
     List<Test> getAll();
 }

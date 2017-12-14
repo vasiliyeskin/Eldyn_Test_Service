@@ -19,8 +19,8 @@ public class TestServiceImpl implements TestService{
     }
 
     @Override
-    public Test create(Test test) {
-        return null;
+    public Test create(Test test, int userId) {
+        return testRepository.save(test, userId);
     }
 
     @Override
@@ -29,7 +29,8 @@ public class TestServiceImpl implements TestService{
     }
 
     @Override
-    public void update(Test test) {
+    public Test update(Test test, int userId) {
+        return testRepository.save(test, userId);
     }
 
     @Override

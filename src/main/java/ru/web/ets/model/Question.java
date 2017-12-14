@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Access(AccessType.FIELD)
 @Entity
-@Table(name="question")
+@Table(name = "question")
 public class Question implements BaseEntity {
     public static final int global_seqQuestion = 1;
 
@@ -141,5 +141,4 @@ public class Question implements BaseEntity {
                 ", creator=" + creator.getId() +
                 '}';
     }
-
 }

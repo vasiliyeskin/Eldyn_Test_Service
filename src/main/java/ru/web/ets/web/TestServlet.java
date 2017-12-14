@@ -4,6 +4,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.web.ets.dto.UserAnswer;
 import ru.web.ets.dto.UserQuestion;
+import ru.web.ets.model.Test;
 import ru.web.ets.web.test.TestRestController;
 
 import javax.servlet.ServletConfig;
@@ -36,8 +37,22 @@ public class TestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String id = request.getParameter("id");
+        String testid = request.getParameter("testid");
         String textAnswer = request.getParameter("addAnswerText");
+
+        Test test;
+        if (testid.isEmpty() || "0".equals(testid)) {
+            test = new Test(null, request.getParameter("testtext"),null);
+            test = testRestController.create(test);
+        } else {
+            test = testRestController.get(Integer.parseInt(testid));
+            test.setText(request.getParameter("testtext"));
+            test = testRestController.save(test, test.getId());
+        }
+
+        request.setAttribute("test", test);
+        request.getRequestDispatcher("/testandquestions.jsp").forward(request, response);
+
 
 /*
 
@@ -76,6 +91,14 @@ public class TestServlet extends HttpServlet {
 
 
         switch (action == null ? "all" : action) {
+            case "create":
+            case "update":
+                final Test test =
+                       "create".equals(action) ? new Test(0, "", null) :
+                        testRestController.get(getId(request));
+                request.setAttribute("test", test);
+                request.getRequestDispatcher("/testandquestions.jsp").forward(request, response);
+                break;
             case "all":
             default:
                 request.setAttribute("tests",

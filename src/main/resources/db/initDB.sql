@@ -12,13 +12,15 @@ DROP SEQUENCE IF EXISTS global_seqQuestion;
 DROP SEQUENCE IF EXISTS global_seqAnswer;
 DROP SEQUENCE IF EXISTS global_seqTQ;
 DROP SEQUENCE IF EXISTS global_seqATQ;
+DROP SEQUENCE IF EXISTS global_seqUserAnswer;
 
-CREATE SEQUENCE global_seq          START 100000;
-CREATE SEQUENCE global_seqTest      START 1;
-CREATE SEQUENCE global_seqQuestion  START 1;
-CREATE SEQUENCE global_seqAnswer    START 1;
-CREATE SEQUENCE global_seqTQ        START 1;
-CREATE SEQUENCE global_seqATQ       START 1;
+CREATE SEQUENCE global_seq           START 100000;
+CREATE SEQUENCE global_seqTest       START 1;
+CREATE SEQUENCE global_seqQuestion   START 1;
+CREATE SEQUENCE global_seqAnswer     START 1;
+CREATE SEQUENCE global_seqTQ         START 1;
+CREATE SEQUENCE global_seqATQ        START 1;
+CREATE SEQUENCE global_seqUserAnswer START 1;
 
 
 CREATE TABLE users
@@ -101,14 +103,15 @@ CREATE UNIQUE INDEX answerAndQuestions_unique_idx ON answerAndQuestions (questio
 
 CREATE TABLE UserAnswer
 (
-  id                 INTEGER PRIMARY KEY,
-  testAndQuestionID  INTEGER,
+  id                 INTEGER PRIMARY KEY DEFAULT nextval('global_seqUserAnswer'),
+  questionID         INTEGER,
   answerID           INTEGER,
   isRight            BOOLEAN,
   testAnswer         VARCHAR,
   creationdatetime   TIMESTAMP DEFAULT now() not NULL,
   userID          INTEGER,
   FOREIGN KEY (userID) REFERENCES USERS (id) ON DELETE CASCADE,
-  FOREIGN KEY (testAndQuestionID) REFERENCES testAndQuestions (id) ON DELETE CASCADE,
+  FOREIGN KEY (questionID) REFERENCES testAndQuestions (id) ON DELETE CASCADE,
   FOREIGN KEY (answerID) REFERENCES answer (id) ON DELETE CASCADE
 );
+CREATE UNIQUE INDEX UserAnswer_unique_idx ON UserAnswer (questionID, answerID, creationdatetime);

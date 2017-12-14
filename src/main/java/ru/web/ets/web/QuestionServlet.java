@@ -102,7 +102,7 @@ public class QuestionServlet extends HttpServlet {
             default:
                 request.setAttribute("questions",
                         questionRestController.getAll());
-                request.getRequestDispatcher("/questions.jsp").forward(request, response);
+                request.getRequestDispatcher("/testandquestions.jsp").forward(request, response);
                 break;
         }
     }

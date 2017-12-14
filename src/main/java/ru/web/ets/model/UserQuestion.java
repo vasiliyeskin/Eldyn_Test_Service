@@ -1,7 +1,6 @@
 package ru.web.ets.model;
 
 import org.hibernate.annotations.BatchSize;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -9,15 +8,17 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+
 @Access(AccessType.FIELD)
 @Entity
-@Table(name="test")
-public class Test implements BaseEntity {
-    public static final int global_seqTest = 1;
+@Table(name="question")
+public class UserQuestion implements BaseEntity {
+
+    public static final int global_seqQuestion = 1;
 
     @Id
-    @SequenceGenerator(name = "global_seqTest", sequenceName = "global_seqTest", allocationSize = 1, initialValue = global_seqTest)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seqTest")
+    @SequenceGenerator(name = "global_seqQuestion", sequenceName = "global_seqTest", allocationSize = 1, initialValue = global_seqQuestion)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seqQuestion")
     @Access(value = AccessType.PROPERTY)
     private Integer id;
 
@@ -29,6 +30,7 @@ public class Test implements BaseEntity {
     private byte[] image;
 
     @Column(name = "creationdatetime", columnDefinition = "timestamp default now()")
+    @NotNull
     private Date creationdatetime = new Date();
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -36,34 +38,32 @@ public class Test implements BaseEntity {
     @BatchSize(size = 200)
     private User creator;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="testAndQuestions",
-            joinColumns = @JoinColumn(name = "testId",
+/*    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="answerAndQuestions",
+            joinColumns = @JoinColumn(name = "questionID",
                     referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "questionID",
+            inverseJoinColumns = @JoinColumn(name = "answerID",
                     referencedColumnName = "id"))
-    private List<Question> questionsList;
+    private List<Answer> answersList;*/
 
-//    @Column(name = "creatorId")
-//    private Integer creatorId;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "questionID")
+    private List<UserAnswer> answersList;
 
-    public Test() {
+
+    public UserQuestion(){}
+
+    public UserQuestion(Question question) {
+        this.id = question.getId();
+        this.text = question.getText();
+        this.creationdatetime = question.getCreationdatetime();
+        this.image = question.getImage();
+        this.creator = question.getCreator();
+        if(this.answersList == null) this.answersList = new ArrayList<>();
+        question.getAnswersList().forEach(
+                x->this.answersList.add(new UserAnswer(x.getAnswer())));
     }
 
-    public Test(Test test) {
-        this.text = test.getText();
-        this.creationdatetime = test.getCreationdatetime();
-        this.image = test.getImage();
-        this.creator = test.getCreator();
-        this.questionsList = test.questionsList;
-    }
-
-    public Test(Integer id, String text, byte[] image) {
-        this.id = id;
-        this.text = text;
-        this.image = image;
-        this.questionsList = new ArrayList<>();
-    }
 
     public String getText() {
         return text;
@@ -97,22 +97,6 @@ public class Test implements BaseEntity {
         this.creator = creator;
     }
 
-    public List<Question> getQuestionsList() {
-        return questionsList;
-    }
-
-    public void setQuestionsList(List<Question> questionsList) {
-        this.questionsList = questionsList;
-    }
-
-    //    public Integer getCreatorId() {
-//        return creatorId;
-//    }
-//
-//    public void setCreatorId(Integer creatorId) {
-//        this.creatorId = creatorId;
-//    }
-
     @Override
     public boolean isNew() {
         return this.id == null;
@@ -128,31 +112,39 @@ public class Test implements BaseEntity {
         return this.id;
     }
 
+    public List<UserAnswer> getAnswersList() {
+        return answersList;
+    }
+
+    public void setAnswersList(List<UserAnswer> answersList) {
+        this.answersList = answersList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Test test = (Test) o;
-        return Objects.equals(id, test.id) &&
-                Objects.equals(text, test.text) &&
-                Objects.equals(creationdatetime, test.creationdatetime)/* &&
-                Objects.equals(creator, test.creator)*/;
+        UserQuestion question = (UserQuestion) o;
+        return Objects.equals(id, question.id) &&
+                Objects.equals(text, question.text) &&
+                Objects.equals(creationdatetime, question.creationdatetime) &&
+                Objects.equals(creator, question.creator);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, creationdatetime);
+        return Objects.hash(id, creationdatetime, creator);
     }
 
     @Override
     public String toString() {
         return "Test{" +
                 "id=" + id +
-                ", text='" + text + '\'' +
+                ", text='" + text +
+                ", image=" + image +
                 ", creationdatetime=" + creationdatetime +
-                ", creator=" + creator +
-                ", questionsList=" + questionsList +
+                ", creator=" + creator.getId() +
                 '}';
     }
 }

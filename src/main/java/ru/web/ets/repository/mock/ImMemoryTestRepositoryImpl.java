@@ -22,7 +22,7 @@ public class ImMemoryTestRepositoryImpl implements TestRepository {
     }
 
     @Override
-    public Test save(Test Test) {
+    public Test save(Test Test, int userId) {
         if (Test.isNew()) {
             Test.setId(counter.incrementAndGet());
         }
@@ -41,7 +41,7 @@ public class ImMemoryTestRepositoryImpl implements TestRepository {
     }
 
     @Override
-    public Test get(int id) {
+    public Test get(int id, int userId) {
         return null;
     }
 

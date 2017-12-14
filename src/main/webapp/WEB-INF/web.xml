@@ -17,7 +17,7 @@
         <url-pattern>/users</url-pattern>
     </servlet-mapping>
 
-   <servlet>
+<!--   <servlet>
         <servlet-name>questionsServlet</servlet-name>
         <servlet-class>ru.web.ets.web.QuestionServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
@@ -25,7 +25,7 @@
     <servlet-mapping>
         <servlet-name>questionsServlet</servlet-name>
         <url-pattern>/questions</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
     
     <servlet>
         <servlet-name>testServlet</servlet-name>

@@ -10,6 +10,7 @@
     <h3><a href="index.html">Home</a></h3>
     <h2>Tests</h2>
 
+    <a href="tests?action=create">Add Tests</a>
     <%--<form method="post" action="testAndQuestions">--%>
     <table border="1" cellpadding="8" cellspacing="0">
         <thead>
@@ -17,6 +18,8 @@
             <th>Test ID</th>
             <th>Text</th>
             <th>Creator's Email</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <c:forEach items="${tests}" var="test">
@@ -25,6 +28,8 @@
                 <td>${test.id}</td>
                 <td><a href="test?id=${test.id}">${test.text}</a> </td>
                 <td>${test.creator.email}</td>
+                <td><a href="tests?action=update&id=${test.id}">Update</a></td>
+                <td><a href="tests?action=delete&id=${test.id}">Delete</a></td>
                     <%--                <td>
                                         <table>
                                             <c:forEach items="${question.answerList}" var="answer">
