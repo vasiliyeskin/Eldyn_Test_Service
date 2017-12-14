@@ -4,7 +4,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.web.ets.dto.UserAnswer;
 import ru.web.ets.dto.UserQuestion;
+import ru.web.ets.model.Question;
 import ru.web.ets.model.Test;
+import ru.web.ets.web.question.QuestionRestController;
 import ru.web.ets.web.test.TestRestController;
 
 import javax.servlet.ServletConfig;
@@ -20,12 +22,14 @@ import java.util.Objects;
 public class TestServlet extends HttpServlet {
     private ConfigurableApplicationContext springContext;
     private TestRestController testRestController;
+    private QuestionRestController questionRestController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
         testRestController = springContext.getBean(TestRestController.class);
+        questionRestController = springContext.getBean(QuestionRestController.class);
     }
 
     @Override
@@ -80,6 +84,7 @@ public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+        String testid = request.getParameter("testid");
 
 /*        switch (action == null ? "all" : action) {
             default:
@@ -91,6 +96,18 @@ public class TestServlet extends HttpServlet {
 
 
         switch (action == null ? "all" : action) {
+            case "createQuestion":
+            case "updateQuestion":
+                Test test2 = testRestController.get(Integer.parseInt(testid));
+                request.setAttribute("test", test2);
+                Question question = "createQuestion".equals(action) ? new Question(0,"",null) :                        questionRestController.get(getId(request));
+
+//                questionRestController.create(question);
+//                request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
+                request.setAttribute("question", question);
+                request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
+
+                break;
             case "create":
             case "update":
                 final Test test =

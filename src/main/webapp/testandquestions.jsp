@@ -20,7 +20,6 @@
     <h3><a href="index.html">Home</a></h3>
     <h2>${param.action == 'create' ? 'Create test' : 'Edit test'}</h2>
     <jsp:useBean id="test" scope="request" class="ru.web.ets.model.Test"/>
-
     <form method="post" action="tests">
         <input type="hidden" name="testid" value="${test.id}">
         <dl>
@@ -31,7 +30,7 @@
 
         <c:if test="${test.id > 0}">
             <h2>Questions</h2>
-            <a href="tests?action=createQuestion">Add Question</a>
+            <a href="tests?action=createQuestion&testid=${test.id}">Add Question</a>
             <hr/>
             <table border="1" cellpadding="8" cellspacing="0">
                 <thead>
@@ -59,8 +58,8 @@
                                 </c:forEach>
                             </table>
                         </td>
-                        <td><a href="tests?action=updateQuestion&id=${question.id}">Update</a></td>
-                        <td><a href="tests?action=deleteQuestion&id=${question.id}">Delete</a></td>
+                        <td><a href="tests?action=updateQuestion&testid=${test.id}&id=${question.id}">Update</a></td>
+                        <td><a href="tests?action=deleteQuestion&testid=${test.id}&id=${question.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </table>

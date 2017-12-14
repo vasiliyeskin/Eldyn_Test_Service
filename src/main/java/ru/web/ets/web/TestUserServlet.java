@@ -69,6 +69,11 @@ public class TestUserServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         switch (action == null ? "all" : action) {
+            /*case "createQuestion":
+                Test test = testRestController.get(1);
+                request.setAttribute("test", test);
+                request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
+                break;*/
             default:
                 Test currentTest = testRestController.get(id);
                 request.setAttribute("currenttest", currentTest);

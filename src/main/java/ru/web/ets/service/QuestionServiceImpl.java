@@ -24,8 +24,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question create(Question question) {
-        return repository.save(question);
+    public Question create(Question question, int userId) {
+        return repository.save(question, userId);
     }
 
     @Override
@@ -34,13 +34,13 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question get(int id) throws NotFoundException {
-        return repository.get(id);
+    public Question get(int id, int userId) throws NotFoundException {
+        return repository.get(id, userId);
     }
 
     @Override
-    public void update(Question question) {
-        repository.save(question);
+    public void update(Question question, int userId) {
+        repository.save(question, userId);
     }
 
     @Override

@@ -58,6 +58,12 @@ public class Question implements BaseEntity {
         this.creator = question.getCreator();
     }
 
+    public Question(Integer id, String text, byte[] image) {
+        this.id = id;
+        this.text = text;
+        this.image = image;
+    }
+
 
     public String getText() {
         return text;

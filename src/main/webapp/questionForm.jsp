@@ -28,31 +28,33 @@
     <h3><a href="index.html">Home</a></h3>
     <h2>${param.action == 'create' ? 'Create question' : 'Edit question'}</h2>
     <hr>
-    <jsp:useBean id="question" type="ru.web.ets.model.Question" scope="request"/>
+    <jsp:useBean id="test" scope="request" class="ru.web.ets.model.Test"/>
+    <jsp:useBean id="question" scope="request" type="ru.web.ets.model.Question"/>
     <form method="post" action="questions">
+        <input type="hidden" name="testid" value="${test.id}">
         <input type="hidden" name="id" value="${question.id}">
         <dl>
             <dt>Text:</dt>
             <dd><input type="text" value="${question.text}" name="text"></dd>
         </dl>
         <dl>
-            <c:if testAndQuestions="${question.text.length() > 0}">
-            <table>
+            <c:if test="${question.text.length() > 0}">
+            <table  border="1" cellpadding="8" cellspacing="0">
                 <thead>
                 <tr>
                     <th>Answer Text</th>
                     <th></th>
                 </tr>
                 </thead>
-                <c:forEach items="${question.answerList}" var="answer">
-                    <jsp:useBean id="answer" scope="page" type="ru.web.ets.model.Answer"/>
+                <c:forEach items="${question.answersList}" var="answer">
+                    <jsp:useBean id="answer" scope="page" type="ru.web.ets.model.TeacherAnswer"/>
                     <tr class="normal">
                         <td><input type="hidden" name="id${answer.id}" value="${answer.id}">
                             <dl>
                                 <dt>Text:</dt>
-                                <dd><input type="text" value="${answer.text}" name="text${answer.id}"></dd>
+                                <dd><input type="text" value="${answer.answer.text}" name="text${answer.id}"></dd>
                                 <dt>is correct answer:</dt>
-                                <dd><input type="checkbox" value="${answer.correct}" name="chbox${answer.id}"  <%=answer.isCorrect() ? "checked='checked'" : "" %>></dd>
+                                <dd><input type="checkbox" value="${answer.right}" name="chbox${answer.id}"  <%=answer.getRight() ? "checked='checked'" : "" %>></dd>
                             </dl>
                         </td>
                         <td><a href="questions?action=deleteAns&id=${question.id}&idAns=${answer.id}">Delete</a></td>

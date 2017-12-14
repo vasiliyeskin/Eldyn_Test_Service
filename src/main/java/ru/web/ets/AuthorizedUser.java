@@ -4,7 +4,7 @@ import ru.web.ets.model.AbstractBaseEntity;
 
 
 public class AuthorizedUser {
-    private static int id = AbstractBaseEntity.START_SEQ;
+    private static int id = AbstractBaseEntity.START_SEQ + 1;
 
     public static int id() {
         return id;

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import ru.web.ets.AuthorizedUser;
 import ru.web.ets.model.Question;
 import ru.web.ets.service.QuestionService;
 
@@ -27,12 +28,12 @@ public class QuestionRestController {
 
     public Question get(int id) {
         log.info("get {}", id);
-        return service.get(id);
+        return service.get(id, AuthorizedUser.id());
     }
 
     public Question create(Question question) {
         log.info("create {}", question);
-        return service.create(question);
+        return service.create(question, AuthorizedUser.id());
     }
 
     public void delete(int id) {
@@ -42,7 +43,7 @@ public class QuestionRestController {
 
     public void update(Question question, int id) {
         log.info("update {} with id={}", question, id);
-        service.update(question);
+        service.update(question, AuthorizedUser.id());
     }
 
     public void deleteAnswer(int id, int idAns) {

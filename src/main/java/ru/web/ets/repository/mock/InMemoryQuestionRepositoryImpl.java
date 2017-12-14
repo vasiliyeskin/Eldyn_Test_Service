@@ -1,4 +1,4 @@
-package ru.web.ets.repository.datajpa;
+package ru.web.ets.repository.mock;
 
 import org.springframework.stereotype.Repository;
 import ru.web.ets.model.Answer;
@@ -65,7 +65,7 @@ public class InMemoryQuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public Question save(Question question) {
+    public Question save(Question question, int userId) {
         if (question.isNew()) {
             question.setId(counter.incrementAndGet());
         }
@@ -80,12 +80,12 @@ public class InMemoryQuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public void delete(int id) {
-            repository.remove(id);
+    public boolean delete(int id) {
+            return repository.remove(id) != null;
     }
 
     @Override
-    public Question get(int id) {
+    public Question get(int id, int userId) {
         Question q = repository.get(id);
         return q;
     }

@@ -2,9 +2,7 @@ package ru.web.ets.web;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.web.ets.model.Answer;
 import ru.web.ets.model.Question;
-import ru.web.ets.repository.datajpa.InMemoryQuestionRepositoryImpl;
 import ru.web.ets.web.question.QuestionRestController;
 
 import javax.servlet.ServletConfig;
@@ -13,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class QuestionServlet extends HttpServlet {

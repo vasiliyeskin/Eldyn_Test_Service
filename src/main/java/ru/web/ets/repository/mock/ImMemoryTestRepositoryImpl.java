@@ -3,7 +3,6 @@ package ru.web.ets.repository.mock;
 import org.springframework.stereotype.Repository;
 import ru.web.ets.model.Test;
 import ru.web.ets.repository.TestRepository;
-import ru.web.ets.repository.datajpa.InMemoryQuestionRepositoryImpl;
 
 import java.util.List;
 import java.util.Map;

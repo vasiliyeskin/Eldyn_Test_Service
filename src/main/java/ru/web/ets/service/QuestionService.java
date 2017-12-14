@@ -7,13 +7,13 @@ import java.util.Collection;
 
 public interface QuestionService {
 
-    Question create(Question question);
+    Question create(Question question, int userId);
 
     void delete(int id) throws NotFoundException;
 
-    Question get(int id) throws NotFoundException;
+    Question get(int id, int userId) throws NotFoundException;
 
-    void update(Question question);
+    void update(Question question, int userId);
 
     Collection<Question> getAll();
 
