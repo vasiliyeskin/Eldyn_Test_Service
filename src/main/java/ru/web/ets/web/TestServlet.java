@@ -4,8 +4,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.web.ets.dto.UserAnswer;
 import ru.web.ets.dto.UserQuestion;
+import ru.web.ets.model.Answer;
 import ru.web.ets.model.Question;
 import ru.web.ets.model.Test;
+import ru.web.ets.web.answer.AnswerRestController;
 import ru.web.ets.web.question.QuestionRestController;
 import ru.web.ets.web.test.TestRestController;
 
@@ -23,6 +25,7 @@ public class TestServlet extends HttpServlet {
     private ConfigurableApplicationContext springContext;
     private TestRestController testRestController;
     private QuestionRestController questionRestController;
+    private AnswerRestController answerRestController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -46,7 +49,7 @@ public class TestServlet extends HttpServlet {
 
         Test test;
         if (testid.isEmpty() || "0".equals(testid)) {
-            test = new Test(null, request.getParameter("testtext"),null);
+            test = new Test(null, request.getParameter("testtext"), null);
             test = testRestController.create(test);
         } else {
             test = testRestController.get(Integer.parseInt(testid));
@@ -100,7 +103,7 @@ public class TestServlet extends HttpServlet {
             case "updateQuestion":
                 Test test2 = testRestController.get(Integer.parseInt(testid));
                 request.setAttribute("test", test2);
-                Question question = "createQuestion".equals(action) ? new Question(0,"",null) :                        questionRestController.get(getId(request));
+                Question question = "createQuestion".equals(action) ? new Question(0, "", null) : questionRestController.get(getId(request));
 
 //                questionRestController.create(question);
 //                request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
@@ -108,11 +111,29 @@ public class TestServlet extends HttpServlet {
                 request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
 
                 break;
+            case "createAnswer":
+            case "updateAnswer":
+                Test test3 = testRestController.get(Integer.parseInt(testid));
+                request.setAttribute("test", test3);
+                Answer answer = "createAnswer".equals(action) ? new Answer(0, "", null) : answerRestController.get(getIdAns(request));
+
+                request.setAttribute("answer", answer);
+                request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
+
+                break;
+
+            case "deleteAns":
+                /*Question questionUdpAnswer = questionRestController.get(getId(request));
+                questionUdpAnswer*/
+                questionRestController.deleteAnswer(getId(request), getIdAns(request));
+                request.setAttribute("question", questionRestController.get(getId(request)));
+                request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
+                break;
             case "create":
             case "update":
                 final Test test =
-                       "create".equals(action) ? new Test(0, "", null) :
-                        testRestController.get(getId(request));
+                        "create".equals(action) ? new Test(0, "", null) :
+                                testRestController.get(getId(request));
                 request.setAttribute("test", test);
                 request.getRequestDispatcher("/testandquestions.jsp").forward(request, response);
                 break;

@@ -85,6 +85,22 @@ public class Answer implements BaseEntity {
         this.image = image;
     }
 
+    public Date getCreationdatetime() {
+        return creationdatetime;
+    }
+
+    public void setCreationdatetime(Date creationdatetime) {
+        this.creationdatetime = creationdatetime;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
     @Override
     public String toString() {
         return "Answer{" +

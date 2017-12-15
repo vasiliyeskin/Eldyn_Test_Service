@@ -21,7 +21,8 @@ public class DataJpaTestRepositoryImpl implements TestRepository {
 
     @Override
     public Test getTest(int id) {
-        return crudTestRepository.findById(id).orElse(null);
+        return crudTestRepository.findById(id)
+                .orElse(null);
     }
 
     @Override

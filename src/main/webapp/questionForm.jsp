@@ -30,7 +30,7 @@
     <hr>
     <jsp:useBean id="test" scope="request" class="ru.web.ets.model.Test"/>
     <jsp:useBean id="question" scope="request" type="ru.web.ets.model.Question"/>
-    <form method="post" action="questions">
+    <form method="post" action="tests">
         <input type="hidden" name="testid" value="${test.id}">
         <input type="hidden" name="id" value="${question.id}">
         <dl>
@@ -57,7 +57,7 @@
                                 <dd><input type="checkbox" value="${answer.right}" name="chbox${answer.id}"  <%=answer.getRight() ? "checked='checked'" : "" %>></dd>
                             </dl>
                         </td>
-                        <td><a href="questions?action=deleteAns&id=${question.id}&idAns=${answer.id}">Delete</a></td>
+                        <td><a href="tests?action=deleteAns&id=${question.id}&idAns=${answer.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </table>
