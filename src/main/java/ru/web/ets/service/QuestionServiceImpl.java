@@ -39,8 +39,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void update(Question question, int userId) {
-        repository.save(question, userId);
+    public Question update(Question question, int userId) {
+        return repository.save(question, userId);
     }
 
     @Override

@@ -58,8 +58,8 @@
                                 </c:forEach>
                             </table>
                         </td>
-                        <td><a href="tests?action=updateQuestion&testid=${test.id}&id=${question.id}">Update</a></td>
-                        <td><a href="tests?action=deleteQuestion&testid=${test.id}&id=${question.id}">Delete</a></td>
+                        <td><a href="tests?action=updateQuestion&testid=${test.id}&qid=${question.id}">Update</a></td>
+                        <td><a href="tests?action=deleteQuestion&testid=${test.id}&qid=${question.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </table>

@@ -32,10 +32,10 @@
     <jsp:useBean id="question" scope="request" type="ru.web.ets.model.Question"/>
     <form method="post" action="tests">
         <input type="hidden" name="testid" value="${test.id}">
-        <input type="hidden" name="id" value="${question.id}">
+        <input type="hidden" name="qid" value="${question.id}">
         <dl>
             <dt>Text:</dt>
-            <dd><input type="text" value="${question.text}" name="text"></dd>
+            <dd><input type="text" value="${question.text}" name="textquestion"></dd>
         </dl>
         <dl>
             <c:if test="${question.text.length() > 0}">

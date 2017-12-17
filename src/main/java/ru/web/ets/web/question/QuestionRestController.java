@@ -41,9 +41,9 @@ public class QuestionRestController {
         service.delete(id);
     }
 
-    public void update(Question question, int id) {
+    public Question update(Question question, int id) {
         log.info("update {} with id={}", question, id);
-        service.update(question, AuthorizedUser.id());
+        return service.update(question, AuthorizedUser.id());
     }
 
     public void deleteAnswer(int id, int idAns) {

@@ -4,6 +4,7 @@ import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -62,6 +63,7 @@ public class Question implements BaseEntity {
         this.id = id;
         this.text = text;
         this.image = image;
+        this.answersList = new ArrayList<>();
     }
 
 
@@ -141,10 +143,10 @@ public class Question implements BaseEntity {
     public String toString() {
         return "Question{" +
                 "id=" + id +
-                ", text='" + text +
-                ", image=" + image +
+                ", text='" + text + '\'' +
                 ", creationdatetime=" + creationdatetime +
-                ", creator=" + creator.getId() +
+                ", creator=" + creator +
+                ", answersList=" + answersList +
                 '}';
     }
 }

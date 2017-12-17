@@ -65,7 +65,7 @@ public class TestUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-        int id = TestServlet.getId(request);
+        int id = TestServlet.getId(request, "testid");
         String action = request.getParameter("action");
 
         switch (action == null ? "all" : action) {

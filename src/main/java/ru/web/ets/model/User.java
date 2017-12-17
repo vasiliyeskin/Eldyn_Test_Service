@@ -67,10 +67,6 @@ public class User extends AbstractBaseEntity {
         this(u.getId(), u.getFirstname(), u.getLastname(), u.getEmail(), u.getPassword(), u.isActive(), u.getRegistered(), u.getRoles());
     }
 
-    public User(Integer id, String firstname, String laststname, String email, String password, Role role, Role... roles) {
-        this(id, firstname,  laststname, email, password, true, new Date(), EnumSet.of(role, roles));
-    }
-
     public User(Integer id, String firstname, String laststname,String email, String password, boolean active, Date registered, Collection<Role> roles) {
         super(id);
         this.firstname = firstname;
@@ -80,6 +76,10 @@ public class User extends AbstractBaseEntity {
         this.active = active;
         this.registered = registered;
         setRoles(roles);
+    }
+
+    public User(Integer id, String firstname, String laststname, String email, String password, Role role, Role... roles) {
+        this(id, firstname,  laststname, email, password, true, new Date(), EnumSet.of(role, roles));
     }
 
     public static int getStartSeq() {

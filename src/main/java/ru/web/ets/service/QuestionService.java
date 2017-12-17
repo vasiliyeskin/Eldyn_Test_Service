@@ -13,7 +13,7 @@ public interface QuestionService {
 
     Question get(int id, int userId) throws NotFoundException;
 
-    void update(Question question, int userId);
+    Question update(Question question, int userId);
 
     Collection<Question> getAll();
 

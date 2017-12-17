@@ -26,10 +26,10 @@
             <jsp:useBean id="test" scope="page" type="ru.web.ets.model.Test"/>
             <tr class="normal">
                 <td>${test.id}</td>
-                <td><a href="test?id=${test.id}">${test.text}</a> </td>
+                <td><a href="test?testid=${test.id}">${test.text}</a> </td>
                 <td>${test.creator.email}</td>
-                <td><a href="tests?action=update&id=${test.id}">Update</a></td>
-                <td><a href="tests?action=delete&id=${test.id}">Delete</a></td>
+                <td><a href="tests?action=update&testid=${test.id}">Update</a></td>
+                <td><a href="tests?action=delete&testid=${test.id}">Delete</a></td>
                     <%--                <td>
                                         <table>
                                             <c:forEach items="${question.answerList}" var="answer">
