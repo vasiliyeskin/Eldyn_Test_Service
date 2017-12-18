@@ -22,12 +22,12 @@
                 </tr>
                 </thead>
                 <c:forEach items="${currenttest.questionsList}" var="question">
-                    <jsp:useBean id="question" scope="page" type="ru.web.ets.model.Question"/>
+                    <jsp:useBean id="question" scope="page" type="ru.web.ets.model.QuestionForTest"/>
                     <tr class="normal">
-                        <td>${question.text}</td>
+                        <td>${question.question.text}</td>
                         <td>
                             <table>
-                                <c:forEach items="${question.answersList}" var="tanswer">
+                                <c:forEach items="${question.question.answersList}" var="tanswer">
                                     <jsp:useBean id="tanswer" scope="page" type="ru.web.ets.model.TeacherAnswer"/>
                                     <tr class="normal">
                                         <td>${tanswer.answer.text}</td>

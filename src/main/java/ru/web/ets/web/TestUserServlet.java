@@ -44,8 +44,8 @@ public class TestUserServlet extends HttpServlet {
         // copy of questions
         List<UserQuestion> userQuestions = new ArrayList<>();
 //        test.getQuestionsList().forEach(x->userQuestions.add(new UserQuestion(x)));
-        for (Question q: test.getQuestionsList()) {
-            UserQuestion uq = new UserQuestion(q);
+        for (QuestionForTest qt: test.getQuestionsList()) {
+            UserQuestion uq = new UserQuestion(qt.getQuestion());
             userQuestions.add(uq);
         }
 

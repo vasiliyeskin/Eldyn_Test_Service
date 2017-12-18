@@ -33,16 +33,16 @@ public class Test implements BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "creatorId")
-    @BatchSize(size = 200)
     private User creator;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="testAndQuestions",
-            joinColumns = @JoinColumn(name = "testId",
-                    referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "questionID",
-                    referencedColumnName = "id"))
-    private List<Question> questionsList;
+    @OneToMany(mappedBy = "test", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<QuestionForTest> questionsList;
+//    @JoinTable(name="testAndQuestions",
+//            joinColumns = @JoinColumn(name = "testId",
+//                    referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "questionID",
+//                    referencedColumnName = "id"))
+//    private List<Question> questionsList;
 
 //    @Column(name = "creatorId")
 //    private Integer creatorId;
@@ -97,12 +97,17 @@ public class Test implements BaseEntity {
         this.creator = creator;
     }
 
-    public List<Question> getQuestionsList() {
+    public List<QuestionForTest> getQuestionsList() {
         return questionsList;
     }
 
-    public void setQuestionsList(List<Question> questionsList) {
+    public void setQuestionsList(List<QuestionForTest> questionsList) {
         this.questionsList = questionsList;
+    }
+
+    public void addQuestion(Question question)
+    {
+        questionsList.add(new QuestionForTest(question, this));
     }
 
     //    public Integer getCreatorId() {
@@ -135,14 +140,14 @@ public class Test implements BaseEntity {
         Test test = (Test) o;
         return Objects.equals(id, test.id) &&
                 Objects.equals(text, test.text) &&
-                Objects.equals(creationdatetime, test.creationdatetime)/* &&
-                Objects.equals(creator, test.creator)*/;
+                Objects.equals(creationdatetime, test.creationdatetime) &&
+                Objects.equals(creator, test.creator);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, creationdatetime);
+        return Objects.hash(id, creationdatetime, creator);
     }
 
     @Override

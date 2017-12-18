@@ -2,6 +2,8 @@ package ru.web.ets.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.web.ets.model.Question;
+import ru.web.ets.model.QuestionForTest;
 import ru.web.ets.model.Test;
 import ru.web.ets.repository.TestRepository;
 import ru.web.ets.util.exception.NotFoundException;
@@ -36,5 +38,10 @@ public class TestServiceImpl implements TestService{
     @Override
     public List<Test> getAll() {
         return testRepository.getAll();
+    }
+
+    public QuestionForTest save(Test test, QuestionForTest questionForTest, int userId)
+    {
+        return testRepository.save(test, questionForTest, userId);
     }
 }

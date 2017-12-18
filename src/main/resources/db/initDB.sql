@@ -76,8 +76,9 @@ CREATE TABLE test
 CREATE TABLE testAndQuestions
 (
   id               INTEGER PRIMARY KEY DEFAULT nextval('global_seqTQ'),
-  testId           INTEGER,
-  questionID       INTEGER,
+--   id               SERIAL PRIMARY KEY,
+  testId           INTEGER NOT NULL,
+  questionID       INTEGER NOT NULL,
   creationdatetime TIMESTAMP DEFAULT now() not NULL,
   creatorId        INTEGER,
   FOREIGN KEY (creatorId) REFERENCES USERS (id) ON DELETE CASCADE,
@@ -89,8 +90,8 @@ CREATE UNIQUE INDEX testAndQuestions_unique_idx ON testAndQuestions (testId, que
 CREATE TABLE answerAndQuestions
 (
   id                 INTEGER PRIMARY KEY DEFAULT nextval('global_seqATQ'),
-  questionID         INTEGER,
-  answerID           INTEGER,
+  questionID         INTEGER NOT NULL,
+  answerID           INTEGER NOT NULL,
   isRight            BOOLEAN,
   testAnswer         VARCHAR,
   creationdatetime   TIMESTAMP DEFAULT now() not NULL,
@@ -104,8 +105,8 @@ CREATE UNIQUE INDEX answerAndQuestions_unique_idx ON answerAndQuestions (questio
 CREATE TABLE UserAnswer
 (
   id                 INTEGER PRIMARY KEY DEFAULT nextval('global_seqUserAnswer'),
-  questionID         INTEGER,
-  answerID           INTEGER,
+  questionID         INTEGER NOT NULL,
+  answerID           INTEGER NOT NULL,
   isRight            BOOLEAN,
   testAnswer         VARCHAR,
   creationdatetime   TIMESTAMP DEFAULT now() not NULL,

@@ -1,6 +1,7 @@
 package ru.web.ets.repository.mock;
 
 import org.springframework.stereotype.Repository;
+import ru.web.ets.model.QuestionForTest;
 import ru.web.ets.model.Test;
 import ru.web.ets.repository.TestRepository;
 
@@ -46,6 +47,11 @@ public class ImMemoryTestRepositoryImpl implements TestRepository {
 
     @Override
     public List<Test> getAll() {
+        return null;
+    }
+
+    @Override
+    public QuestionForTest save(Test test, QuestionForTest questionForTest, int userId) {
         return null;
     }
 }

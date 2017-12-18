@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import ru.web.ets.model.QuestionForTest;
 import ru.web.ets.model.Test;
 import ru.web.ets.repository.TestRepository;
 
@@ -18,6 +19,9 @@ public class DataJpaTestRepositoryImpl implements TestRepository {
 
     @Autowired
     private CrudUserRepository crudUserRepository;
+
+    @Autowired
+    private CrudQuestionForTest crudQuestionForTest;
 
     @Override
     public Test getTest(int id) {
@@ -48,5 +52,15 @@ public class DataJpaTestRepositoryImpl implements TestRepository {
     @Override
     public List<Test> getAll() {
         return crudTestRepository.findAll(SORT_NAME);
+    }
+
+
+    @Transactional
+    public QuestionForTest save(Test test, QuestionForTest questionForTest, int userId) {
+        if (!questionForTest.isNew() && get(questionForTest.getId(), userId) == null) {
+            return null;
+        }
+        questionForTest.setCreator(crudUserRepository.getOne(userId));
+        return crudQuestionForTest.save(questionForTest);
     }
 }

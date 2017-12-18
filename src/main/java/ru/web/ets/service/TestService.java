@@ -1,5 +1,6 @@
 package ru.web.ets.service;
 
+import ru.web.ets.model.QuestionForTest;
 import ru.web.ets.model.Test;
 import ru.web.ets.util.exception.NotFoundException;
 
@@ -15,4 +16,6 @@ public interface TestService {
     Test update(Test test, int userId);
 
     List<Test> getAll();
+
+    QuestionForTest save(Test test, QuestionForTest questionForTest, int userId);
 }

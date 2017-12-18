@@ -3,6 +3,7 @@ package ru.web.ets.web;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.web.ets.model.Question;
+import ru.web.ets.model.QuestionForTest;
 import ru.web.ets.model.Test;
 import ru.web.ets.web.answer.AnswerRestController;
 import ru.web.ets.web.question.QuestionRestController;
@@ -61,7 +62,7 @@ public class TestServlet extends HttpServlet {
                 if (qid.isEmpty() || "0".equals(qid)) {
                     q = new Question(null, request.getParameter("textquestion"), null);
                     q = questionRestController.create(q);
-                    test.getQuestionsList().add(q);
+                    test.addQuestion(q);
                 }
                 else
                 {
@@ -70,7 +71,7 @@ public class TestServlet extends HttpServlet {
                     q = questionRestController.update(q, tid);
                 }
             }
-                test = testRestController.save(test, test.getId());
+                test = testRestController.save(test);
         }
 
         request.setAttribute("test", test);

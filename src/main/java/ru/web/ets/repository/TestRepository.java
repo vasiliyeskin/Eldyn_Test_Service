@@ -1,5 +1,6 @@
 package ru.web.ets.repository;
 
+import ru.web.ets.model.QuestionForTest;
 import ru.web.ets.model.Test;
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface TestRepository {
     Test get(int id, int userId);
 
     List<Test> getAll();
+
+    QuestionForTest save(Test test, QuestionForTest questionForTest, int userId);
 }

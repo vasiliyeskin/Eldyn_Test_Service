@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.web.ets.AuthorizedUser;
+import ru.web.ets.model.QuestionForTest;
 import ru.web.ets.model.Test;
 import ru.web.ets.service.TestService;
 
@@ -26,13 +27,18 @@ public class TestRestController {
         return testService.create(test, AuthorizedUser.id());
     }
 
-    public Test save(Test test, int id) {
-        log.info("update {} with id={}", test, id);
+    public Test save(Test test) {
+        log.info("update {} with id={}", test, test.getId());
         return testService.update(test, AuthorizedUser.id());
     }
 
 
     public List<Test> getAll() {
         return testService.getAll();
+    }
+
+    public QuestionForTest save(Test test, QuestionForTest questionForTest)
+    {
+        return testService.save(test, questionForTest, AuthorizedUser.id());
     }
 }

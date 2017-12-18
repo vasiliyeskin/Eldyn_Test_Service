@@ -36,9 +36,8 @@ public class TeacherAnswer implements BaseEntity{
         return this.id;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "answerID")
-    @BatchSize(size = 200)
     private Answer answer;
 
     @Column(name = "isRight")
@@ -46,7 +45,6 @@ public class TeacherAnswer implements BaseEntity{
 
     @Column(name = "testAnswer")
     private String testAnswer;
-
 
     @Column(name = "creationdatetime", columnDefinition = "timestamp default now()")
     @NotNull
@@ -56,6 +54,9 @@ public class TeacherAnswer implements BaseEntity{
     @JoinColumn(name = "creatorId")
     private User creator;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "questionId", referencedColumnName = "id")
+    private Question question;
 
     public Answer getAnswer() {
         return answer;
@@ -95,6 +96,14 @@ public class TeacherAnswer implements BaseEntity{
 
     public void setCreator(User creator) {
         this.creator = creator;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 
     @Override

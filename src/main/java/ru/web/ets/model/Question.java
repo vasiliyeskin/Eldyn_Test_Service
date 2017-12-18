@@ -34,20 +34,23 @@ public class Question implements BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "creatorId")
-    @BatchSize(size = 200)
     private User creator;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="answerAndQuestions",
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<TeacherAnswer> answersList;
+/*    @JoinTable(name="answerAndQuestions",
             joinColumns = @JoinColumn(name = "questionID",
                     referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "answerID",
-                    referencedColumnName = "id"))
-    private List<TeacherAnswer> answersList;
+                    referencedColumnName = "id"))*/
 
-   /* @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "questionID")
-    private List<TeacherAnswer> answersList;*/
+/*    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name="testAndQuestions",
+            joinColumns = @JoinColumn(name = "questionID",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "testId",
+                    referencedColumnName = "id"))
+    private Test test;*/
 
 
     public Question(){}
@@ -66,6 +69,13 @@ public class Question implements BaseEntity {
         this.answersList = new ArrayList<>();
     }
 
+/*    public Test getTest() {
+        return test;
+    }
+
+    public void setTest(Test test) {
+        this.test = test;
+    }*/
 
     public String getText() {
         return text;
