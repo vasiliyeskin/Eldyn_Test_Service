@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 import ru.web.ets.model.QuestionForTest;
+import ru.web.ets.model.Test;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +25,8 @@ public interface CrudQuestionForTest extends JpaRepository<QuestionForTest, Inte
 
     @Override
     Optional<QuestionForTest> findById(Integer id);
+
+    List<QuestionForTest> findByTest(Test test);
 
     @Override
     List<QuestionForTest> findAll(Sort sort);

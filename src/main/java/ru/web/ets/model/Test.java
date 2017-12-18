@@ -1,7 +1,5 @@
 package ru.web.ets.model;
 
-import org.hibernate.annotations.BatchSize;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -29,6 +27,7 @@ public class Test implements BaseEntity {
     private byte[] image;
 
     @Column(name = "creationdatetime", columnDefinition = "timestamp default now()")
+    @NotNull
     private Date creationdatetime = new Date();
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -138,16 +137,13 @@ public class Test implements BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Test test = (Test) o;
-        return Objects.equals(id, test.id) &&
-                Objects.equals(text, test.text) &&
-                Objects.equals(creationdatetime, test.creationdatetime) &&
-                Objects.equals(creator, test.creator);
+        return Objects.equals(id, test.id);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, creationdatetime, creator);
+        return Objects.hash(id);
     }
 
     @Override

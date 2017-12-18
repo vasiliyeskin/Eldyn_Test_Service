@@ -1,7 +1,5 @@
 package ru.web.ets.model;
 
-import org.hibernate.annotations.BatchSize;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -137,16 +135,13 @@ public class Question implements BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Question question = (Question) o;
-        return Objects.equals(id, question.id) &&
-                Objects.equals(text, question.text) &&
-                Objects.equals(creationdatetime, question.creationdatetime) &&
-                Objects.equals(creator, question.creator);
+        return Objects.equals(id, question.id);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, creationdatetime, creator);
+        return Objects.hash(id);
     }
 
     @Override

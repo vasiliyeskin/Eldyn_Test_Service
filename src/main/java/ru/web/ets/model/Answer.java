@@ -1,7 +1,5 @@
 package ru.web.ets.model;
 
-import org.hibernate.annotations.BatchSize;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;

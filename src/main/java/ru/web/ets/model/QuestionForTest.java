@@ -1,7 +1,5 @@
 package ru.web.ets.model;
 
-import org.hibernate.annotations.BatchSize;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.*;
@@ -94,18 +92,19 @@ public class QuestionForTest implements BaseEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof QuestionForTest)) return false;
+
         QuestionForTest that = (QuestionForTest) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(question, that.question) &&
-                Objects.equals(creationdatetime, that.creationdatetime) &&
-                Objects.equals(creator, that.creator);
+
+        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        return getCreator() != null ? getCreator().equals(that.getCreator()) : that.getCreator() == null;
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, question, creationdatetime, creator);
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getCreator() != null ? getCreator().hashCode() : 0);
+        return result;
     }
 
     @Override
