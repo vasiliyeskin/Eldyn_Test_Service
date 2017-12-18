@@ -2,11 +2,8 @@ package ru.web.ets;
 
 import ru.web.ets.model.Test;
 
-import java.time.Month;
 import java.util.Arrays;
-import java.util.List;
 
-import static java.time.LocalDateTime.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static ru.web.ets.model.AbstractBaseEntity.START_SEQ;
 

@@ -16,7 +16,7 @@ public class Question implements BaseEntity {
     public static final int global_seqQuestion = 1;
 
     @Id
-    @SequenceGenerator(name = "global_seqQuestion", sequenceName = "global_seqTest", allocationSize = 1, initialValue = global_seqQuestion)
+    @SequenceGenerator(name = "global_seqQuestion", sequenceName = "global_seqQuestion", allocationSize = 1, initialValue = global_seqQuestion)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seqQuestion")
     @Access(value = AccessType.PROPERTY)
     private Integer id;
