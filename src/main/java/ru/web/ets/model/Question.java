@@ -67,6 +67,11 @@ public class Question implements BaseEntity {
         this.answersList = new ArrayList<>();
     }
 
+    public void addAnswer(Answer answer)
+    {
+        answersList.add(new TeacherAnswer(answer, this, false));
+    }
+
 /*    public Test getTest() {
         return test;
     }

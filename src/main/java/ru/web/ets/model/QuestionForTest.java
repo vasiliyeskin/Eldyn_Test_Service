@@ -46,7 +46,7 @@ public class QuestionForTest implements BaseEntity {
     private Test test;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "questionID")
+    @JoinColumn(name = "questionID", referencedColumnName = "id")
     private Question question;
 
     @Column(name = "creationdatetime", columnDefinition = "timestamp default now()")

@@ -37,8 +37,20 @@ public class TeacherAnswer implements BaseEntity{
     public TeacherAnswer() {
     }
 
+    public TeacherAnswer(Answer answer, Question question, boolean b) {
+        this.answer = answer;
+        this.question = question;
+        this.isRight = b;
+    }
+
     public TeacherAnswer(Answer answer) {
         this.answer = answer;
+    }
+
+    public TeacherAnswer(Answer answer, Question question) {
+        this.answer = answer;
+        this.question = question;
+        this.isRight = false;
     }
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

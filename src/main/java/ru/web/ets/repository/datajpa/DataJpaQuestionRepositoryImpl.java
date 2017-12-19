@@ -41,7 +41,8 @@ public class DataJpaQuestionRepositoryImpl implements QuestionRepository {
 
     @Override
     public Question get(int id, int userId) {
-        return crudQuestionRepository.findById(id).filter(q -> q.getCreator().getId() == userId).orElse(null);
+        /*return crudQuestionRepository.findById(id).filter(q -> q.getCreator().getId() == userId).orElse(null);*/
+        return crudQuestionRepository.findById(id).orElse(null);
     }
 
     @Override

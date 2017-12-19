@@ -61,7 +61,7 @@ public class TestServlet extends HttpServlet {
                 Question q;
                 if (qid.isEmpty() || "0".equals(qid)) {
                     q = new Question(null, request.getParameter("textquestion"), null);
-                    q = questionRestController.create(q);
+              //      q = questionRestController.create(q);
                     test.addQuestion(q);
                 }
                 else
@@ -70,18 +70,16 @@ public class TestServlet extends HttpServlet {
                    // q = questionRestController.get(getId(request, "qid"));
                     q.setText(request.getParameter("textquestion"));
 
-                    List<TeacherAnswer> listAnswer = new ArrayList<>();
                     q.getAnswersList().
                             forEach(x -> {
                                 x.getAnswer().setText(request.getParameter("text" + x.getId()));
                                 x.setRight(request.getParameterValues("chbox" + x.getId())!=null && request.getParameterValues("chbox" + x.getId()).length != 0);
-                                listAnswer.add(x);
                             });
 
                     // add answer
                     String textAnswer = request.getParameter("addAnswerText");
                     if (textAnswer != null && textAnswer.length() > 0)
-                        listAnswer.add(new TeacherAnswer(new Answer(null, textAnswer, null)));
+                        q.addAnswer(new Answer(null, textAnswer, null));
 
                     //q = questionRestController.update(q, tid);
                 }
