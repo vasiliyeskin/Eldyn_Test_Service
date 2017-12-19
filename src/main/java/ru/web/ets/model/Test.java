@@ -34,7 +34,7 @@ public class Test implements BaseEntity {
     @JoinColumn(name = "creatorId")
     private User creator;
 
-    @OneToMany(mappedBy = "test", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "test", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
     private List<QuestionForTest> questionsList;
 //    @JoinTable(name="testAndQuestions",
 //            joinColumns = @JoinColumn(name = "testId",
@@ -155,5 +155,12 @@ public class Test implements BaseEntity {
                 ", creator=" + creator +
                 ", questionsList=" + questionsList +
                 '}';
+    }
+
+    public Question getQuestion(int qid) {
+        for (QuestionForTest tq: questionsList) {
+            if(tq.getQuestion().getId() == qid)return tq.getQuestion();
+        }
+        return null;
     }
 }

@@ -34,6 +34,13 @@ public class TeacherAnswer implements BaseEntity{
         return this.id;
     }
 
+    public TeacherAnswer() {
+    }
+
+    public TeacherAnswer(Answer answer) {
+        this.answer = answer;
+    }
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "answerID")
     private Answer answer;
@@ -52,7 +59,7 @@ public class TeacherAnswer implements BaseEntity{
     @JoinColumn(name = "creatorId")
     private User creator;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "questionId", referencedColumnName = "id")
     private Question question;
 

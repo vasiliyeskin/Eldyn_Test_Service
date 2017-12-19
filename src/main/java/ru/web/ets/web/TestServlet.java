@@ -2,9 +2,7 @@ package ru.web.ets.web;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.web.ets.model.Question;
-import ru.web.ets.model.QuestionForTest;
-import ru.web.ets.model.Test;
+import ru.web.ets.model.*;
 import ru.web.ets.web.answer.AnswerRestController;
 import ru.web.ets.web.question.QuestionRestController;
 import ru.web.ets.web.test.TestRestController;
@@ -15,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class TestServlet extends HttpServlet {
@@ -66,9 +66,24 @@ public class TestServlet extends HttpServlet {
                 }
                 else
                 {
-                    q = questionRestController.get(getId(request, "qid"));
+                    q = test.getQuestion(getId(request, "qid"));
+                   // q = questionRestController.get(getId(request, "qid"));
                     q.setText(request.getParameter("textquestion"));
-                    q = questionRestController.update(q, tid);
+
+                    List<TeacherAnswer> listAnswer = new ArrayList<>();
+                    q.getAnswersList().
+                            forEach(x -> {
+                                x.getAnswer().setText(request.getParameter("text" + x.getId()));
+                                x.setRight(request.getParameterValues("chbox" + x.getId())!=null && request.getParameterValues("chbox" + x.getId()).length != 0);
+                                listAnswer.add(x);
+                            });
+
+                    // add answer
+                    String textAnswer = request.getParameter("addAnswerText");
+                    if (textAnswer != null && textAnswer.length() > 0)
+                        listAnswer.add(new TeacherAnswer(new Answer(null, textAnswer, null)));
+
+                    //q = questionRestController.update(q, tid);
                 }
             }
                 test = testRestController.save(test);
@@ -97,9 +112,9 @@ public class TestServlet extends HttpServlet {
         request.setAttribute("userQuestions", userQuestions);
         request.getRequestDispatcher("/testCorrectAnswer.jsp").forward(request, response);
 */
-
-
     }
+
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

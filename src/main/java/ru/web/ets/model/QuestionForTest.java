@@ -41,7 +41,7 @@ public class QuestionForTest implements BaseEntity {
     }
 
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "testId", referencedColumnName = "id")
     private Test test;
 
