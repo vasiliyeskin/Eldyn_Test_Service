@@ -41,4 +41,14 @@ public class TestRestController {
     {
         return testService.save(test, questionForTest, AuthorizedUser.id());
     }
+
+    public void delete(int testid) {
+        log.info("delete test with id={}", testid);
+        testService.delete(testid);
+    }
+
+    public Test deleteQuestion(int testid, int qid) {
+        log.info("delete question with id={} from test with id={}", qid, testid);
+        return testService.deleteQuestion(testid, qid);
+    }
 }

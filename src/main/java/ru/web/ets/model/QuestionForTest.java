@@ -20,9 +20,10 @@ public class QuestionForTest implements BaseEntity {
     public QuestionForTest() {
     }
 
-    public QuestionForTest(Question question, Test test) {
+    public QuestionForTest(Question question, Test test, User user) {
         this.question = question;
         this.test = test;
+        this.creator = user;
     }
 
     @Override

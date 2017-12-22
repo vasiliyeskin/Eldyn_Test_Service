@@ -57,7 +57,7 @@
                                 <dd><input type="checkbox" value="${answer.right}" name="chbox${answer.id}"  <%=answer.getRight() ? "checked='checked'" : "" %>></dd>
                             </dl>
                         </td>
-                        <td><a href="tests?action=deleteAns&id=${question.id}&idAns=${answer.id}">Delete</a></td>
+                        <td><a href="tests?action=deleteAns&testid=${test.id}&qid=${question.id}&idAns=${answer.id}">Delete</a></td>
                     </tr>
                 </c:forEach>
             </table>

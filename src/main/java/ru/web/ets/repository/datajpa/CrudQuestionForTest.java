@@ -16,7 +16,7 @@ public interface CrudQuestionForTest extends JpaRepository<QuestionForTest, Inte
     @Transactional
     @Modifying
 //    @Query(name = User.DELETE)
-    @Query("DELETE FROM Question t WHERE t.id=:id")
+    @Query("DELETE FROM QuestionForTest qft WHERE qft.id=:id")
     int delete(@Param("id") int id);
 
     @Override

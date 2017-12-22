@@ -47,6 +47,12 @@ public class DataJpaTestRepositoryImpl implements TestRepository {
     }
 
     @Override
+    public Test deleteQuestion(int testid, int qid) {
+        crudQuestionForTest.delete(qid);
+        return getTest(testid);
+    }
+
+    @Override
     public Test get(int id, int userId) {
         return crudTestRepository.findById(id).filter(test -> test.getCreator().getId() == userId).orElse(null);
     }

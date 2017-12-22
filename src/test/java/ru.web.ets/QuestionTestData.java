@@ -1,6 +1,7 @@
 package ru.web.ets;
 
 import ru.web.ets.model.Question;
+import ru.web.ets.model.User;
 
 import java.util.Arrays;
 
@@ -10,14 +11,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class QuestionTestData {
     public static final int TEST1_ID = START_SEQ + 2;
     public static final int ADMIN_TEST_ID = START_SEQ + 8;
+    public static User user = new User();
 
 
     public static Question getCreated() {
-        return new Question(null, "Созданный вопрос", null);
+        return new Question(null, "Созданный вопрос", null, user);
     }
 
     public static Question getUpdated() {
-        return new Question(TEST1_ID, "Обновленный вопрос", null);
+        return new Question(TEST1_ID, "Обновленный вопрос", null, user);
     }
 
     public static void assertMatch(Question actual, Question expected) {

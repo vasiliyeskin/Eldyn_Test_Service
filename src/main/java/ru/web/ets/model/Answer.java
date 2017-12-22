@@ -49,10 +49,11 @@ public class Answer implements BaseEntity {
 
     public Answer() { }
 
-    public Answer(Integer id, String text, byte[] image) {
+    public Answer(Integer id, String text, byte[] image, User user) {
         this.id = id;
         this.text = text;
         this.image = image;
+        this.creator = user;
     }
 
     public Answer(Integer id, String text, byte[] image, boolean b) {

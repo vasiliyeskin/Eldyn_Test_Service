@@ -19,4 +19,6 @@ public interface TestRepository {
     List<Test> getAll();
 
     QuestionForTest save(Test test, QuestionForTest questionForTest, int userId);
+
+    Test deleteQuestion(int testid, int qid);
 }

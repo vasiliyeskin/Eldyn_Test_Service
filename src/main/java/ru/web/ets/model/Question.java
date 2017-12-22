@@ -60,16 +60,17 @@ public class Question implements BaseEntity {
         this.creator = question.getCreator();
     }
 
-    public Question(Integer id, String text, byte[] image) {
+    public Question(Integer id, String text, byte[] image, User user) {
         this.id = id;
         this.text = text;
         this.image = image;
         this.answersList = new ArrayList<>();
+        this.creator = user;
     }
 
     public void addAnswer(Answer answer)
     {
-        answersList.add(new TeacherAnswer(answer, this, false));
+        answersList.add(new TeacherAnswer(answer, this, false, answer.getCreator()));
     }
 
 /*    public Test getTest() {

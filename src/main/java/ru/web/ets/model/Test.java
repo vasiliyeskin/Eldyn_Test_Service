@@ -2,10 +2,7 @@ package ru.web.ets.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Access(AccessType.FIELD)
 @Entity
@@ -57,11 +54,12 @@ public class Test implements BaseEntity {
         this.questionsList = test.questionsList;
     }
 
-    public Test(Integer id, String text, byte[] image) {
+    public Test(Integer id, String text, byte[] image, User user) {
         this.id = id;
         this.text = text;
         this.image = image;
         this.questionsList = new ArrayList<>();
+        this.creator = user;
     }
 
     public String getText() {
@@ -106,7 +104,7 @@ public class Test implements BaseEntity {
 
     public void addQuestion(Question question)
     {
-        questionsList.add(new QuestionForTest(question, this));
+        questionsList.add(new QuestionForTest(question, this, question.getCreator()));
     }
 
     //    public Integer getCreatorId() {
@@ -162,5 +160,12 @@ public class Test implements BaseEntity {
             if(tq.getQuestion().getId() == qid)return tq.getQuestion();
         }
         return null;
+    }
+
+    public void deleteQuestion(int qid) {
+        for (Iterator<QuestionForTest> iterator = questionsList.listIterator(); iterator.hasNext();) {
+            QuestionForTest qft = iterator.next();
+            if(qft.getId() == qid) {iterator.remove(); break;}
+        }
     }
 }

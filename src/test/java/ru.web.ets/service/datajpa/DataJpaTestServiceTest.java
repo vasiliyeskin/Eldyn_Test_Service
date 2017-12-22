@@ -15,7 +15,7 @@ public class DataJpaTestServiceTest extends AbstractServiceTest {
 
     @Test
     public void create() throws Exception {
-        ru.web.ets.model.Test newtest = new ru.web.ets.model.Test(null, "adfd", null);
+        ru.web.ets.model.Test newtest = new ru.web.ets.model.Test(null, "adfd", null, user);
         ru.web.ets.model.Test created = service.create(newtest, USER_ID );
         newtest.setId(created.getId());
         assertMatch(service.getAll(), newtest);

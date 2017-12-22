@@ -3,6 +3,7 @@ package ru.web.ets.repository.mock;
 import org.springframework.stereotype.Repository;
 import ru.web.ets.model.Answer;
 import ru.web.ets.model.Question;
+import ru.web.ets.model.User;
 import ru.web.ets.repository.QuestionRepository;
 
 
@@ -16,37 +17,38 @@ public class InMemoryQuestionRepositoryImpl implements QuestionRepository {
     private Map<Integer, Question> repository = new ConcurrentHashMap<>();
     private AtomicInteger counter = new AtomicInteger(0);
     public static AtomicInteger countAns = new AtomicInteger(0);
+    public static User user = new User();
 
     {
         final List<Answer> ans1 = Arrays.asList(
                 new Answer(countAns.incrementAndGet(), "2", null, true),
-                new Answer(countAns.incrementAndGet(), "3", null),
-                new Answer(countAns.incrementAndGet(), "4", null)
+                new Answer(countAns.incrementAndGet(), "3", null, user),
+                new Answer(countAns.incrementAndGet(), "4", null, user)
         );
         final List<Answer> ans2 = Arrays.asList(
                 new Answer(countAns.incrementAndGet(), "2", null, true),
-                new Answer(countAns.incrementAndGet(), "3", null),
-                new Answer(countAns.incrementAndGet(), "4", null)
+                new Answer(countAns.incrementAndGet(), "3", null, user),
+                new Answer(countAns.incrementAndGet(), "4", null, user)
         );
         final List<Answer> ans3 = Arrays.asList(
-                new Answer(countAns.incrementAndGet(), "2", null),
-                new Answer(countAns.incrementAndGet(), "3", null),
-                new Answer(countAns.incrementAndGet(), "4", null)
+                new Answer(countAns.incrementAndGet(), "2", null, user),
+                new Answer(countAns.incrementAndGet(), "3", null, user),
+                new Answer(countAns.incrementAndGet(), "4", null, user)
         );
         final List<Answer> ans4 = Arrays.asList(
                 new Answer(countAns.incrementAndGet(), "2", null, true),
-                new Answer(countAns.incrementAndGet(), "3", null),
-                new Answer(countAns.incrementAndGet(), "4", null)
+                new Answer(countAns.incrementAndGet(), "3", null, user),
+                new Answer(countAns.incrementAndGet(), "4", null, user)
         );
         final List<Answer> ans5 = Arrays.asList(
                 new Answer(countAns.incrementAndGet(), "2", null, true),
-                new Answer(countAns.incrementAndGet(), "3", null),
-                new Answer(countAns.incrementAndGet(), "4", null)
+                new Answer(countAns.incrementAndGet(), "3", null, user),
+                new Answer(countAns.incrementAndGet(), "4", null, user)
         );
         final List<Answer> ans6 = Arrays.asList(
                 new Answer(countAns.incrementAndGet(), "2", null, true),
-                new Answer(countAns.incrementAndGet(), "3", null),
-                new Answer(countAns.incrementAndGet(), "4", null)
+                new Answer(countAns.incrementAndGet(), "3", null, user),
+                new Answer(countAns.incrementAndGet(), "4", null, user)
         );
 
         List<Integer> listCorrect = new ArrayList<Integer>();
@@ -91,7 +93,7 @@ public class InMemoryQuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public void deleteAnswer(int idQuesiton, int idAns) {
+    public void deleteAnswer(int idAns) {
     //    this.save(new Question(repository.get(idQuesiton), deleteAnswerFromList(idQuesiton, idAns)));
     }
 

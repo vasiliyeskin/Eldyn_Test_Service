@@ -2,10 +2,12 @@ package ru.web.ets.web;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.web.ets.AuthorizedUser;
 import ru.web.ets.model.*;
 import ru.web.ets.web.answer.AnswerRestController;
 import ru.web.ets.web.question.QuestionRestController;
 import ru.web.ets.web.test.TestRestController;
+import ru.web.ets.web.user.AdminRestController;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -21,7 +23,7 @@ public class TestServlet extends HttpServlet {
     private ConfigurableApplicationContext springContext;
     private TestRestController testRestController;
     private QuestionRestController questionRestController;
-    private AnswerRestController answerRestController;
+    private AdminRestController adminRestController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -29,6 +31,7 @@ public class TestServlet extends HttpServlet {
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
         testRestController = springContext.getBean(TestRestController.class);
         questionRestController = springContext.getBean(QuestionRestController.class);
+        adminRestController = springContext.getBean(AdminRestController.class);
     }
 
     @Override
@@ -41,10 +44,11 @@ public class TestServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String testid = Objects.requireNonNull(request.getParameter("testid"));
+        User user = adminRestController.get(AuthorizedUser.id());
 
         Test test;
         if (testid.isEmpty() || "0".equals(testid)) {
-                test = new Test(null, request.getParameter("testtext"), null);
+                test = new Test(null, request.getParameter("testtext"), null, user);
                 test = testRestController.create(test);
         } else {
             int tid = getId(request, "testid");
@@ -60,7 +64,7 @@ public class TestServlet extends HttpServlet {
                 String qid = Objects.requireNonNull(request.getParameter("qid"));
                 Question q;
                 if (qid.isEmpty() || "0".equals(qid)) {
-                    q = new Question(null, request.getParameter("textquestion"), null);
+                    q = new Question(null, request.getParameter("textquestion"), null, user);
               //      q = questionRestController.create(q);
                     test.addQuestion(q);
                 }
@@ -79,7 +83,7 @@ public class TestServlet extends HttpServlet {
                     // add answer
                     String textAnswer = request.getParameter("addAnswerText");
                     if (textAnswer != null && textAnswer.length() > 0)
-                        q.addAnswer(new Answer(null, textAnswer, null));
+                        q.addAnswer(new Answer(null, textAnswer, null, user));
 
                     //q = questionRestController.update(q, tid);
                 }
@@ -133,7 +137,7 @@ public class TestServlet extends HttpServlet {
             case "updateQuestion":
                 Test test2 = testRestController.get(getId(request,"testid"));
                 request.setAttribute("test", test2);
-                Question question = "createQuestion".equals(action) ? new Question(0, "", null) : questionRestController.get(getId(request, "qid"));
+                Question question = "createQuestion".equals(action) ? new Question(0, "", null, adminRestController.get(AuthorizedUser.id())) : questionRestController.get(getId(request, "qid"));
 
 //                questionRestController.create(question);
 //                request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
@@ -141,28 +145,29 @@ public class TestServlet extends HttpServlet {
                 request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
 
                 break;
-//            case "createAnswer":
-//            case "updateAnswer":
-//                Test test3 = testRestController.get(Integer.parseInt(testid));
-//                request.setAttribute("test", test3);
-//                Answer answer = "createAnswer".equals(action) ? new Answer(0, "", null) : answerRestController.get(getId(request, "idAnsS"));
-//
-//                request.setAttribute("answer", answer);
-//                request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
-//
-//                break;
-
-//            case "deleteAns":
-//                /*Question questionUdpAnswer = questionRestController.get(getId(request));
-//                questionUdpAnswer*/
-//                questionRestController.deleteAnswer(getId(request, "id"), getId(request, "idAns"));
-//                request.setAttribute("question", questionRestController.get(getId(request, "id")));
-//                request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
-//                break;
+            case "deleteAns":
+                questionRestController.deleteAnswer(getId(request, "qid"), getId(request, "idAns"));
+                Test test5 = testRestController.get(getId(request,"testid"));
+                Question question2 = questionRestController.get(getId(request, "qid"));
+                request.setAttribute("test", test5);
+                request.setAttribute("question", question2);
+                request.getRequestDispatcher("/questionForm.jsp").forward(request, response);
+                break;
+            case "deleteQuestion":
+                Test test4 = testRestController.deleteQuestion(getId(request, "testid"), getId(request, "qid"));
+                request.setAttribute("test", test4);
+                request.getRequestDispatcher("/testandquestions.jsp").forward(request, response);
+                break;
+            case "delete":
+                testRestController.delete(getId(request, "testid"));
+                request.setAttribute("tests",
+                        testRestController.getAll());
+                request.getRequestDispatcher("/tests.jsp").forward(request, response);
+                break;
             case "create":
             case "update":
                 final Test test =
-                        "create".equals(action) ? new Test(0, "", null) :
+                        "create".equals(action) ? new Test(0, "", null, adminRestController.get(AuthorizedUser.id())) :
                                 testRestController.get(getId(request, "testid"));
                 request.setAttribute("test", test);
                 request.getRequestDispatcher("/testandquestions.jsp").forward(request, response);

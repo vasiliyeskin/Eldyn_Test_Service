@@ -16,7 +16,7 @@ public class DataJpaQuestionServiceTest extends AbstractServiceTest {
 
     @Test
     public void create() throws Exception {
-        Question question = new Question(null, "adfd", null);
+        Question question = new Question(null, "adfd", null, user);
         Question created = service.create(question, USER_ID );
         question.setId(created.getId());
         assertMatch(service.getAll(), question);

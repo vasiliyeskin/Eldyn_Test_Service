@@ -36,6 +36,11 @@ public class ImMemoryTestRepositoryImpl implements TestRepository {
     }
 
     @Override
+    public Test deleteQuestion(int testid, int qid) {
+        return null;
+    }
+
+    @Override
     public boolean delete(int id) {
         return false;
     }

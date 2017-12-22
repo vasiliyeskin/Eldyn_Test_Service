@@ -37,10 +37,11 @@ public class TeacherAnswer implements BaseEntity{
     public TeacherAnswer() {
     }
 
-    public TeacherAnswer(Answer answer, Question question, boolean b) {
+    public TeacherAnswer(Answer answer, Question question, boolean b, User user) {
         this.answer = answer;
         this.question = question;
         this.isRight = b;
+        this.creator = user;
     }
 
     public TeacherAnswer(Answer answer) {

@@ -14,7 +14,7 @@ public interface QuestionRepository {
 
     Question save(Question question, int userId);
 
-    void deleteAnswer(int id, int idAns);
+    void deleteAnswer(int idAns);
 
     void createAnswer(int id, String text);
 }

@@ -44,8 +44,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void deleteAnswer(int id, int idAns) {
-        repository.deleteAnswer(id, idAns);
+    public void deleteAnswer(int idAns) {
+        repository.deleteAnswer(idAns);
     }
 
     @Override

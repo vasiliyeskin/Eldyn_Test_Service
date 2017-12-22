@@ -48,7 +48,7 @@ public class QuestionRestController {
 
     public void deleteAnswer(int id, int idAns) {
         log.info("delete answer {} from question {}", idAns, id);
-        service.deleteAnswer(id, idAns);
+        service.deleteAnswer(idAns);
     }
 
     public void createAnswer(int id, String text) {

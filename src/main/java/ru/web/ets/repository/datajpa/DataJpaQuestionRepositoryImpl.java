@@ -19,6 +19,9 @@ public class DataJpaQuestionRepositoryImpl implements QuestionRepository {
     @Autowired
     private CrudUserRepository crudUserRepository;
 
+    @Autowired
+    private CrudTeacherAnswerRepository crudTeacherAnswerRepository;
+
 //    @Override
 //    public Question getQuestion(int id) {
 //        return crudQuestionRepository.findById(id).orElse(null);
@@ -51,12 +54,11 @@ public class DataJpaQuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public void deleteAnswer(int id, int idAns) {
-
+    public void deleteAnswer(int idAns) {
+        crudTeacherAnswerRepository.delete(idAns);
     }
 
     @Override
     public void createAnswer(int id, String text) {
-
     }
 }

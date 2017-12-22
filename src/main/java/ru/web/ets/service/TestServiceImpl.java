@@ -31,6 +31,16 @@ public class TestServiceImpl implements TestService{
     }
 
     @Override
+    public void delete(int testid) {
+        testRepository.delete(testid);
+    }
+
+    @Override
+    public Test deleteQuestion(int testid, int qid) {
+        return testRepository.deleteQuestion(testid, qid);
+    }
+
+    @Override
     public Test update(Test test, int userId) {
         return testRepository.save(test, userId);
     }

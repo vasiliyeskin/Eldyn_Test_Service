@@ -18,4 +18,8 @@ public interface TestService {
     List<Test> getAll();
 
     QuestionForTest save(Test test, QuestionForTest questionForTest, int userId);
+
+    void delete(int testid);
+
+    Test deleteQuestion(int testid, int qid);
 }

@@ -19,6 +19,9 @@ public interface CrudTestRepository extends JpaRepository<Test, Integer>{
     @Query("DELETE FROM Test t WHERE t.id=:id")
     int delete(@Param("id") int id);
 
+//    @Query("DELETE FROM QuestionForTest q WHERE q.test.id=:testid AND q.id=:qid")
+//    int deleteQuestion(@Param("testid") int testid, @Param("qid") int qid);
+
     @Override
     @Transactional
     Test save(Test test);
