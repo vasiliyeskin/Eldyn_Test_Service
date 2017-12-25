@@ -1,9 +1,12 @@
 package ru.web.ets.web;
 
+import org.hibernate.Hibernate;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.web.ets.AuthorizedUser;
 import ru.web.ets.model.*;
 import ru.web.ets.web.test.TestRestController;
+import ru.web.ets.web.user.AdminRestController;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -18,12 +21,14 @@ import java.util.Objects;
 public class TestUserServlet extends HttpServlet {
     private ConfigurableApplicationContext springContext;
     private TestRestController testRestController;
+    private AdminRestController adminRestController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
         testRestController = springContext.getBean(TestRestController.class);
+        adminRestController = springContext.getBean(AdminRestController.class);
     }
 
     @Override
@@ -39,25 +44,16 @@ public class TestUserServlet extends HttpServlet {
         int id = Integer.valueOf(Objects.requireNonNull(request.getParameter("testid")));
         String textAnswer = request.getParameter("addAnswerText");
         Test test = testRestController.get(id);
-        UserTest userTest = new UserTest(test);
+//        Hibernate.initialize(test.getQuestionsList().forEach(x->x.getQuestion().initializeUserAnswersList()));
 
-        // copy of questions
-        List<UserQuestion> userQuestions = new ArrayList<>();
-//        test.getQuestionsList().forEach(x->userQuestions.add(new UserQuestion(x)));
-        for (QuestionForTest qt: test.getQuestionsList()) {
-            UserQuestion uq = new UserQuestion(qt.getQuestion());
-            userQuestions.add(uq);
-        }
+        User user = adminRestController.get(AuthorizedUser.id());
+        // create of user's answer
+        test.getQuestionsList().forEach(
+                x -> x.getQuestion().getAnswersList().forEach(
+                        y -> x.getQuestion().addUserAnswerToList(new UserAnswer(y.getAnswer(), (request.getParameterValues("chbox" + y.getId()) != null && request.getParameterValues("chbox" + y.getId()).length != 0), "", user))));
 
-        userQuestions.forEach(x -> x.getAnswersList().
-                forEach(y -> {
-                    y.setRight(request.getParameterValues("chbox" + y.getId()) != null && request.getParameterValues("chbox" + y.getId()).length != 0);
-                }));
-
-        userTest.setQuestionsList(userQuestions);
-
-
-        request.setAttribute("userTest", userTest);
+        test = testRestController.save(test);
+        request.setAttribute("userTest", test);
         request.setAttribute("teacherTest", test);
         request.getRequestDispatcher("/testCorrectAnswer.jsp").forward(request, response);
    }

@@ -1,5 +1,8 @@
 package ru.web.ets.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -36,6 +39,13 @@ public class Question implements BaseEntity {
 
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<TeacherAnswer> answersList;
+
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<UserAnswer> userAnswersList;
+
+
+
 /*    @JoinTable(name="answerAndQuestions",
             joinColumns = @JoinColumn(name = "questionID",
                     referencedColumnName = "id"),
@@ -134,6 +144,22 @@ public class Question implements BaseEntity {
 
     public void setAnswersList(List<TeacherAnswer> answersList) {
         this.answersList = answersList;
+    }
+
+    public List<UserAnswer> getUserAnswersList() {
+        return userAnswersList;
+    }
+
+    public void initializeUserAnswersList() {
+    }
+
+    public void setUserAnswersList(List<UserAnswer> userAnswersList) {
+        this.userAnswersList = userAnswersList;
+    }
+
+    public void addUserAnswerToList(UserAnswer userAnswer)
+    {
+        this.userAnswersList.add(userAnswer);
     }
 
     @Override

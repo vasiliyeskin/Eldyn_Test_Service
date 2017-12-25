@@ -50,9 +50,9 @@
                         <th>Your answers</th>
                     </tr>
                     </thead>
-                    <jsp:useBean id="userTest" scope="session" class="ru.web.ets.model.UserTest"/>
+                    <jsp:useBean id="userTest" scope="session" class="ru.web.ets.model.Test"/>
                     <c:forEach items="${userTest.questionsList}" var="yquestion">
-                        <jsp:useBean id="yquestion" scope="page" type="ru.web.ets.model.UserQuestion"/>
+                        <jsp:useBean id="yquestion" scope="page" type="ru.web.ets.model.Question"/>
                         <tr class="normal">
                             <td>${yquestion.text}</td>
                             <td>
@@ -64,6 +64,7 @@
                                             <td><input type="checkbox" value="${yanswer.right}"
                                                        disabled="disabled" <%=yanswer.getRight() ? "checked='checked'" : "" %>
                                                        name="yourchbox${yanswer.id}"></td>
+                                            <td>${yanswer.creationdatetime}</td>
                                         </tr>
                                     </c:forEach>
                                 </table>

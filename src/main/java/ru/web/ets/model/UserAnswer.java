@@ -1,8 +1,9 @@
 package ru.web.ets.model;
 
-import org.hibernate.annotations.BatchSize;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.Objects;
 
 @Access(AccessType.FIELD)
 @Entity
@@ -32,9 +33,8 @@ public class UserAnswer implements BaseEntity {
         return this.id;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "answerID")
-    @BatchSize(size = 200)
     private Answer answer;
 
     @Column(name = "isRight")
@@ -42,6 +42,18 @@ public class UserAnswer implements BaseEntity {
 
     @Column(name = "testAnswer")
     private String testAnswer;
+
+    @Column(name = "creationdatetime", columnDefinition = "timestamp default now()")
+    @NotNull
+    private Date creationdatetime = new Date();
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "questionId", referencedColumnName = "id")
+    private Question question;
 
     public UserAnswer(){}
 
@@ -52,13 +64,13 @@ public class UserAnswer implements BaseEntity {
         this.testAnswer = "";
     }
 
-    public UserAnswer(Answer answer, Boolean isRight, String testAnswer) {
+    public UserAnswer(Answer answer, Boolean isRight, String testAnswer, User user) {
         this.id = answer.getId();
         this.answer = answer;
         this.isRight = isRight;
         this.testAnswer = testAnswer;
+        this.user = user;
     }
-
     public Answer getAnswer() {
         return answer;
     }
@@ -81,5 +93,59 @@ public class UserAnswer implements BaseEntity {
 
     public void setTestAnswer(String testAnswer) {
         this.testAnswer = testAnswer;
+    }
+
+    public Date getCreationdatetime() {
+        return creationdatetime;
+    }
+
+    public void setCreationdatetime(Date creationdatetime) {
+        this.creationdatetime = creationdatetime;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserAnswer that = (UserAnswer) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(answer, that.answer) &&
+                Objects.equals(creationdatetime, that.creationdatetime) &&
+                Objects.equals(user, that.user) &&
+                Objects.equals(question, that.question);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, answer, creationdatetime, user, question);
+    }
+
+    @Override
+    public String toString() {
+        return "UserAnswer{" +
+                "id=" + id +
+                ", answer=" + answer +
+                ", isRight=" + isRight +
+                ", testAnswer='" + testAnswer + '\'' +
+                ", creationdatetime=" + creationdatetime +
+                ", user=" + user +
+                '}';
     }
 }
