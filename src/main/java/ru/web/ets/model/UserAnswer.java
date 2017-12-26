@@ -33,9 +33,12 @@ public class UserAnswer implements BaseEntity {
         return this.id;
     }
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "answerID")
-    private Answer answer;
+//    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
+//    @JoinColumn(name = "answerID")
+//    private Answer answer;
+
+    @Column(name = "answerID")
+    private Integer answerID;
 
     @Column(name = "isRight")
     private Boolean isRight;
@@ -57,26 +60,35 @@ public class UserAnswer implements BaseEntity {
 
     public UserAnswer(){}
 
-    public UserAnswer(Answer answer) {
-        this.id = answer.getId();
-        this.answer = answer;
+    public UserAnswer(Integer id) {
+        this.answerID = id;
         this.isRight = false;
         this.testAnswer = "";
     }
 
-    public UserAnswer(Answer answer, Boolean isRight, String testAnswer, User user) {
-        this.id = answer.getId();
-        this.answer = answer;
+    public UserAnswer(Integer answerID, Boolean isRight, String testAnswer, User user, Question question) {
+       // this.id = answer.getId();
+       // this.answer = answer;
+        this.answerID = answerID;
         this.isRight = isRight;
         this.testAnswer = testAnswer;
         this.user = user;
+        this.question = question;
     }
-    public Answer getAnswer() {
+/*    public Answer getAnswer() {
         return answer;
     }
 
     public void setAnswer(Answer answer) {
         this.answer = answer;
+    }*/
+
+    public Integer getAnswerID() {
+        return answerID;
+    }
+
+    public void setAnswerID(Integer answerID) {
+        this.answerID = answerID;
     }
 
     public Boolean getRight() {
@@ -125,7 +137,7 @@ public class UserAnswer implements BaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         UserAnswer that = (UserAnswer) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(answer, that.answer) &&
+              //  Objects.equals(answer, that.answer) &&
                 Objects.equals(creationdatetime, that.creationdatetime) &&
                 Objects.equals(user, that.user) &&
                 Objects.equals(question, that.question);
@@ -134,18 +146,19 @@ public class UserAnswer implements BaseEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, answer, creationdatetime, user, question);
+        return Objects.hash(id, creationdatetime, user, question);
     }
 
     @Override
     public String toString() {
         return "UserAnswer{" +
                 "id=" + id +
-                ", answer=" + answer +
+                ", answerID=" + answerID +
                 ", isRight=" + isRight +
                 ", testAnswer='" + testAnswer + '\'' +
                 ", creationdatetime=" + creationdatetime +
                 ", user=" + user +
+                ", question=" + question +
                 '}';
     }
 }

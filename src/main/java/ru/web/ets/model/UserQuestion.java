@@ -61,7 +61,7 @@ public class UserQuestion implements BaseEntity {
         this.creator = question.getCreator();
         if(this.answersList == null) this.answersList = new ArrayList<>();
         question.getAnswersList().forEach(
-                x->this.answersList.add(new UserAnswer(x.getAnswer())));
+                x->this.answersList.add(new UserAnswer(x.getAnswer().getId())));
     }
 
 
