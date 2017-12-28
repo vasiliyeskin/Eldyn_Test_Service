@@ -22,12 +22,12 @@
                     </thead>
                     <jsp:useBean id="teacherTest" scope="session" class="ru.web.ets.model.Test"/>
                     <c:forEach items="${teacherTest.questionsList}" var="question">
-                        <jsp:useBean id="question" scope="page" type="ru.web.ets.model.Question"/>
+                        <jsp:useBean id="question" scope="page" type="ru.web.ets.model.QuestionForTest"/>
                         <tr class="normal">
-                            <td>${question.text}</td>
+                            <td>${question.question.text}</td>
                             <td>
                                 <table>
-                                    <c:forEach items="${question.answersList}" var="answer">
+                                    <c:forEach items="${question.question.answersList}" var="answer">
                                         <jsp:useBean id="answer" scope="page" type="ru.web.ets.model.TeacherAnswer"/>
                                         <tr class="normal">
                                             <td>${answer.answer.text}</td>
@@ -52,15 +52,14 @@
                     </thead>
                     <jsp:useBean id="userTest" scope="session" class="ru.web.ets.model.Test"/>
                     <c:forEach items="${userTest.questionsList}" var="yquestion">
-                        <jsp:useBean id="yquestion" scope="page" type="ru.web.ets.model.Question"/>
+                        <jsp:useBean id="yquestion" scope="page" type="ru.web.ets.model.QuestionForTest"/>
                         <tr class="normal">
-                            <td>${yquestion.text}</td>
+                            <td>${yquestion.question.text}</td>
                             <td>
                                 <table>
-                                    <c:forEach items="${yquestion.answersList}" var="yanswer">
+                                    <c:forEach items="${yquestion.question.userAnswersList}" var="yanswer">
                                         <jsp:useBean id="yanswer" scope="page" type="ru.web.ets.model.UserAnswer"/>
                                         <tr class="normal">
-                                            <td>${yanswer.answer.text}</td>
                                             <td><input type="checkbox" value="${yanswer.right}"
                                                        disabled="disabled" <%=yanswer.getRight() ? "checked='checked'" : "" %>
                                                        name="yourchbox${yanswer.id}"></td>
