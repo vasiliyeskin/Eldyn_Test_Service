@@ -1,101 +1,43 @@
 package ru.web.ets.model;
-
-import org.hibernate.annotations.BatchSize;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Access(AccessType.FIELD)
 @Entity
-@Table(name="question")
+@Table(name="UserQuestions")
 public class UserQuestion implements BaseEntity {
 
-    public static final int global_seqQuestion = 1;
+    public static final int global_seqUserQuestion = 1;
 
     @Id
-    @SequenceGenerator(name = "global_seqQuestion", sequenceName = "global_seqTest", allocationSize = 1, initialValue = global_seqQuestion)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seqQuestion")
+    @SequenceGenerator(name = "global_seqUserQuestion", sequenceName = "global_seqUserQuestion", allocationSize = 1, initialValue = global_seqUserQuestion)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seqUserQuestion")
     @Access(value = AccessType.PROPERTY)
     private Integer id;
 
-    @Column(name = "text")
-    private String text;
+    public UserQuestion() {
+    }
 
-    @Lob
-    @Column(name = "image", columnDefinition = "oid")
-    private byte[] image;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "usertestID", referencedColumnName = "id")
+    private UserTest userTest;
 
     @Column(name = "creationdatetime", columnDefinition = "timestamp default now()")
     @NotNull
     private Date creationdatetime = new Date();
 
+    @Column(name = "questionTestID")
+    @NotNull
+    private Integer questionTestID;
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "creatorId")
-    @BatchSize(size = 200)
-    private User creator;
+    @JoinColumn(name = "userID")
+    private User user;
 
-/*    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="answerAndQuestions",
-            joinColumns = @JoinColumn(name = "questionID",
-                    referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "answerID",
-                    referencedColumnName = "id"))
-    private List<Answer> answersList;*/
-
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "questionID")
-    private List<UserAnswer> answersList;
-
-
-    public UserQuestion(){}
-
-    public UserQuestion(Question question) {
-        this.id = question.getId();
-        this.text = question.getText();
-        this.creationdatetime = question.getCreationdatetime();
-        this.image = question.getImage();
-        this.creator = question.getCreator();
-        if(this.answersList == null) this.answersList = new ArrayList<>();
-        question.getAnswersList().forEach(
-                x->this.answersList.add(new UserAnswer(x.getAnswer())));
-    }
-
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-    public Date getCreationdatetime() {
-        return creationdatetime;
-    }
-
-    public void setCreationdatetime(Date creationdatetime) {
-        this.creationdatetime = creationdatetime;
-    }
-
-    public User getCreator() {
-        return creator;
-    }
-
-    public void setCreator(User creator) {
-        this.creator = creator;
-    }
+    @OneToMany(mappedBy = "userQuestion", fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+    private List<UserAnswer> userAnswersList;
 
     @Override
     public boolean isNew() {
@@ -112,39 +54,71 @@ public class UserQuestion implements BaseEntity {
         return this.id;
     }
 
-    public List<UserAnswer> getAnswersList() {
-        return answersList;
+    public UserTest getUserTest() {
+        return userTest;
     }
 
-    public void setAnswersList(List<UserAnswer> answersList) {
-        this.answersList = answersList;
+    public void setUserTest(UserTest userTest) {
+        this.userTest = userTest;
+    }
+
+    public Date getCreationdatetime() {
+        return creationdatetime;
+    }
+
+    public void setCreationdatetime(Date creationdatetime) {
+        this.creationdatetime = creationdatetime;
+    }
+
+    public Integer getQuestionTestID() {
+        return questionTestID;
+    }
+
+    public void setQuestionTestID(Integer questionTestID) {
+        this.questionTestID = questionTestID;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<UserAnswer> getUserAnswersList() {
+        return userAnswersList;
+    }
+
+    public void setUserAnswersList(List<UserAnswer> userAnswersList) {
+        this.userAnswersList = userAnswersList;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserQuestion question = (UserQuestion) o;
-        return Objects.equals(id, question.id) &&
-                Objects.equals(text, question.text) &&
-                Objects.equals(creationdatetime, question.creationdatetime) &&
-                Objects.equals(creator, question.creator);
+        UserQuestion that = (UserQuestion) o;
+        return Objects.equals(userTest, that.userTest) &&
+                Objects.equals(creationdatetime, that.creationdatetime) &&
+                Objects.equals(questionTestID, that.questionTestID) &&
+                Objects.equals(user, that.user);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, creationdatetime, creator);
+        return Objects.hash(userTest, creationdatetime, questionTestID, user);
     }
 
     @Override
     public String toString() {
-        return "Test{" +
+        return "UserQuestion{" +
                 "id=" + id +
-                ", text='" + text +
-                ", image=" + image +
+                ", userTestsID=" + userTest.getId() +
                 ", creationdatetime=" + creationdatetime +
-                ", creator=" + creator.getId() +
+                ", questionTestID=" + questionTestID +
+                ", userID=" + user.getId() +
                 '}';
     }
 }

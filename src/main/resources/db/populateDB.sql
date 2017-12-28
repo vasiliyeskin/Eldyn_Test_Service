@@ -1,18 +1,22 @@
 DELETE FROM user_roles;
-DELETE FROM UserAnswer;
+DELETE FROM UserAnswers;
+DELETE FROM UserQuestions;
+DELETE FROM UserTests;
 DELETE FROM answerAndQuestions;
 DELETE FROM testAndQuestions;
 DELETE FROM test;
 DELETE FROM question;
 DELETE FROM answer;
 DELETE FROM users;
-ALTER SEQUENCE global_seq           RESTART WITH 100000;
-ALTER SEQUENCE global_seqTest       RESTART WITH 1;
-ALTER SEQUENCE global_seqQuestion   RESTART WITH 1;
-ALTER SEQUENCE global_seqAnswer     RESTART WITH 1;
-ALTER SEQUENCE global_seqTQ         RESTART WITH 1;
-ALTER SEQUENCE global_seqATQ        RESTART WITH 1;
-ALTER SEQUENCE global_seqUserAnswer RESTART WITH 1;
+ALTER SEQUENCE global_seq              RESTART WITH 100000;
+ALTER SEQUENCE global_seqTest          RESTART WITH 1;
+ALTER SEQUENCE global_seqQuestion      RESTART WITH 1;
+ALTER SEQUENCE global_seqAnswer        RESTART WITH 1;
+ALTER SEQUENCE global_seqTQ            RESTART WITH 1;
+ALTER SEQUENCE global_seqATQ           RESTART WITH 1;
+ALTER SEQUENCE global_seqUserAnswer    RESTART WITH 1;
+ALTER SEQUENCE global_seqUserQuestion  RESTART WITH 1;
+ALTER SEQUENCE global_seqUserTest      RESTART WITH 1;
 
 
 
@@ -43,8 +47,8 @@ INSERT INTO user_roles (role, user_id) VALUES
                  FROM USERS
                  WHERE email = 'user@yandex.ru')),
   ('ROLE_TEACHER', (SELECT id
-                 FROM USERS
-                 WHERE email = 'teacher@yandex.ru')),
+                    FROM USERS
+                    WHERE email = 'teacher@yandex.ru')),
   ('ROLE_ADMIN', (SELECT id
                   FROM USERS
                   WHERE email = 'admin@gmail.com')),
@@ -62,8 +66,8 @@ INSERT INTO user_roles (role, user_id) VALUES
                  WHERE email = 'user4@yandex.ru'));
 
 INSERT INTO test (text, image, creationdatetime, creatorId) VALUES
-('algebra', NULL, now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
-('geometry', NULL, now(), (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
+  ('algebra', NULL, now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  ('geometry', NULL, now(), (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
 
 
 INSERT INTO question (text, image, creationdatetime, creatorId) VALUES
@@ -100,77 +104,14 @@ INSERT INTO answerAndQuestions (questionid, answerID, isRight, testAnswer, creat
   (4, 4, FALSE , NULL ,now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
 
 
+INSERT INTO usertests (testID, creationdatetime, userId) VALUES
+  (1, now(), (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  (1, now(), (SELECT id FROM users WHERE email ='user@yandex.ru'));
 
-/*select
-  test0_.id as id1_3_0_,
-  test0_.creationdatetime as creation2_3_0_,
-  test0_.creatorId as creatorI5_3_0_,
-  test0_.image as image3_3_0_,
-  test0_.text as text4_3_0_,
-  user1_.id as id1_7_1_,
-  user1_.active as active2_7_1_,
-  user1_.email as email3_7_1_,
-  user1_.firstname as firstnam4_7_1_,
-  user1_.lastname as lastname5_7_1_,
-  user1_.password as password6_7_1_,
-  user1_.registered as register7_7_1_,
-  roles2_.user_id as user_id1_5_2_,
-  roles2_.role as role2_5_2_,
-  questionsl3_.testId as testId1_4_3_,
-  question4_.id as question2_4_3_,
-  question4_.id as id1_2_4_,
-  question4_.creationdatetime as creation2_2_4_,
-  question4_.creatorId as creatorI5_2_4_,
-  question4_.image as image3_2_4_,
-  question4_.text as text4_2_4_,
-  answerslis5_.questionID as question7_1_5_,
-  teacherans6_.id as answerID5_1_5_,
-  teacherans6_.id as id1_1_6_,
-  teacherans6_.answerID as answerID5_1_6_,
-  teacherans6_.creationdatetime as creation2_1_6_,
-  teacherans6_.creatorId as creatorI6_1_6_,
-  teacherans6_.isRight as isRight3_1_6_,
-  teacherans6_.testAnswer as testAnsw4_1_6_,
-  user7_.id as id1_7_7_,
-  user7_.active as active2_7_7_,
-  user7_.email as email3_7_7_,
-  user7_.firstname as firstnam4_7_7_,
-  user7_.lastname as lastname5_7_7_,
-  user7_.password as password6_7_7_,
-  user7_.registered as register7_7_7_,
-  user8_.id as id1_7_8_,
-  user8_.active as active2_7_8_,
-  user8_.email as email3_7_8_,
-  user8_.firstname as firstnam4_7_8_,
-  user8_.lastname as lastname5_7_8_,
-  user8_.password as password6_7_8_,
-  user8_.registered as register7_7_8_
-from
-  test test0_
-  left outer join
-  users user1_
-    on test0_.creatorId=user1_.id
-  left outer join
-  user_roles roles2_
-    on user1_.id=roles2_.user_id
-  left outer join
-  testAndQuestions questionsl3_
-    on test0_.id=questionsl3_.testId
-  left outer join
-  question question4_
-    on questionsl3_.questionID=question4_.id
-  left outer join
-  answerAndQuestions answerslis5_
-    on question4_.id=answerslis5_.questionID
-  left outer join
-  answerAndQuestions teacherans6_
-    on answerslis5_.answerID=teacherans6_.id
-  left outer join
-  users user7_
-    on teacherans6_.creatorId=user7_.id
-  left outer join
-  users user8_
-    on question4_.creatorId=user8_.id
-where
-  test0_.id=1*/
+INSERT INTO UserQuestions (usertestID, questionTestID, creationdatetime, userId) VALUES
+  (1, 1, now(), (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  (2, 3, now(), (SELECT id FROM users WHERE email ='user@yandex.ru'));
 
+INSERT INTO UserAnswers (userquestionID, answerID, isRight, testAnswer, creationdatetime, userId) VALUES
+  (1, 1, TRUE, '', now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
+  (2, 7, TRUE, '', now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru'));

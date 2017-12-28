@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS user_roles;
-DROP TABLE IF EXISTS UserAnswer;
+DROP TABLE IF EXISTS UserAnswers;
+DROP TABLE IF EXISTS UserQuestions;
+DROP TABLE IF EXISTS UserTests;
 DROP TABLE IF EXISTS answerAndQuestions;
 DROP TABLE IF EXISTS testAndQuestions;
 DROP TABLE IF EXISTS test;
@@ -13,14 +15,18 @@ DROP SEQUENCE IF EXISTS global_seqAnswer;
 DROP SEQUENCE IF EXISTS global_seqTQ;
 DROP SEQUENCE IF EXISTS global_seqATQ;
 DROP SEQUENCE IF EXISTS global_seqUserAnswer;
+DROP SEQUENCE IF EXISTS global_seqUserQuestion;
+DROP SEQUENCE IF EXISTS global_seqUserTest;
 
-CREATE SEQUENCE global_seq           START 100000;
-CREATE SEQUENCE global_seqTest       START 1;
-CREATE SEQUENCE global_seqQuestion   START 1;
-CREATE SEQUENCE global_seqAnswer     START 1;
-CREATE SEQUENCE global_seqTQ         START 1;
-CREATE SEQUENCE global_seqATQ        START 1;
-CREATE SEQUENCE global_seqUserAnswer START 1;
+CREATE SEQUENCE global_seq              START 100000;
+CREATE SEQUENCE global_seqTest          START 1;
+CREATE SEQUENCE global_seqQuestion      START 1;
+CREATE SEQUENCE global_seqAnswer        START 1;
+CREATE SEQUENCE global_seqTQ            START 1;
+CREATE SEQUENCE global_seqATQ           START 1;
+CREATE SEQUENCE global_seqUserAnswer    START 1;
+CREATE SEQUENCE global_seqUserQuestion  START 1;
+CREATE SEQUENCE global_seqUserTest      START 1;
 
 
 CREATE TABLE users
@@ -102,17 +108,44 @@ CREATE TABLE answerAndQuestions
 );
 CREATE UNIQUE INDEX answerAndQuestions_unique_idx ON answerAndQuestions (questionID, answerID);
 
-CREATE TABLE UserAnswer
+
+CREATE TABLE UserTests
+(
+  id                 INTEGER PRIMARY KEY DEFAULT nextval('global_seqUserTest'),
+  testID             INTEGER NOT NULL,
+  creationdatetime   TIMESTAMP DEFAULT now() not NULL,
+  userID             INTEGER NOT NULL,
+  FOREIGN KEY (userID)         REFERENCES users (id) ON DELETE CASCADE,
+  FOREIGN KEY (testID)         REFERENCES test (id) ON DELETE CASCADE
+);
+CREATE UNIQUE INDEX UserTests_unique_idx ON UserTests (testID, userID, creationdatetime);
+
+
+CREATE TABLE UserQuestions
+(
+  id                 INTEGER PRIMARY KEY DEFAULT nextval('global_seqUserQuestion'),
+  usertestID         INTEGER NOT NULL,
+  questionTestID     INTEGER NOT NULL,
+  creationdatetime   TIMESTAMP DEFAULT now() not NULL,
+  userID             INTEGER NOT NULL,
+  FOREIGN KEY (userID)         REFERENCES users (id) ON DELETE CASCADE,
+  FOREIGN KEY (questionTestID) REFERENCES testAndQuestions (id) ON DELETE CASCADE,
+  FOREIGN KEY (usertestID)     REFERENCES UserTests (id) ON DELETE CASCADE
+);
+CREATE UNIQUE INDEX UserQuestion_unique_idx ON UserQuestions (usertestID, questionTestID, userID, creationdatetime);
+
+
+CREATE TABLE UserAnswers
 (
   id                 INTEGER PRIMARY KEY DEFAULT nextval('global_seqUserAnswer'),
-  questionID         INTEGER NOT NULL,
+  userquestionID     INTEGER NOT NULL,
   answerID           INTEGER NOT NULL,
-  isRight            BOOLEAN,
+  isRight            BOOLEAN NOT NULL,
   testAnswer         VARCHAR,
   creationdatetime   TIMESTAMP DEFAULT now() not NULL,
-  userID          INTEGER,
+  userID             INTEGER NOT NULL,
   FOREIGN KEY (userID) REFERENCES USERS (id) ON DELETE CASCADE,
-  FOREIGN KEY (questionID) REFERENCES testAndQuestions (id) ON DELETE CASCADE,
+  FOREIGN KEY (userquestionID) REFERENCES UserQuestions (id) ON DELETE CASCADE,
   FOREIGN KEY (answerID) REFERENCES answer (id) ON DELETE CASCADE
 );
-CREATE UNIQUE INDEX UserAnswer_unique_idx ON UserAnswer (questionID, answerID, creationdatetime);
+CREATE UNIQUE INDEX UserAnswer_unique_idx ON UserAnswers (userquestionID, answerID, creationdatetime);

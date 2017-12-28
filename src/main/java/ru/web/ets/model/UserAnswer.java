@@ -7,10 +7,9 @@ import java.util.Objects;
 
 @Access(AccessType.FIELD)
 @Entity
-@Table(name="UserAnswer")
+@Table(name="UserAnswers")
 public class UserAnswer implements BaseEntity {
     public static final int  global_seqUserAnswer = 1;
-
 
     @Id
     @SequenceGenerator(name = "global_seqUserAnswer", sequenceName = "global_seqUserAnswer", allocationSize = 1, initialValue = global_seqUserAnswer)
@@ -33,9 +32,9 @@ public class UserAnswer implements BaseEntity {
         return this.id;
     }
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "answerID")
-    private Answer answer;
+    @Column(name = "answerID")
+    @NotNull
+    private Integer answerID;
 
     @Column(name = "isRight")
     private Boolean isRight;
@@ -52,31 +51,15 @@ public class UserAnswer implements BaseEntity {
     private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "questionId", referencedColumnName = "id")
-    private Question question;
+    @JoinColumn(name = "userQuestionID")
+    private UserQuestion userQuestion;
 
-    public UserAnswer(){}
-
-    public UserAnswer(Answer answer) {
-        this.id = answer.getId();
-        this.answer = answer;
-        this.isRight = false;
-        this.testAnswer = "";
+    public Integer getAnswerID() {
+        return answerID;
     }
 
-    public UserAnswer(Answer answer, Boolean isRight, String testAnswer, User user) {
-        this.id = answer.getId();
-        this.answer = answer;
-        this.isRight = isRight;
-        this.testAnswer = testAnswer;
-        this.user = user;
-    }
-    public Answer getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(Answer answer) {
-        this.answer = answer;
+    public void setAnswerID(Integer answerID) {
+        this.answerID = answerID;
     }
 
     public Boolean getRight() {
@@ -111,12 +94,12 @@ public class UserAnswer implements BaseEntity {
         this.user = user;
     }
 
-    public Question getQuestion() {
-        return question;
+    public UserQuestion getUserQuestion() {
+        return userQuestion;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public void setUserQuestion(UserQuestion userQuestion) {
+        this.userQuestion = userQuestion;
     }
 
     @Override
@@ -124,28 +107,28 @@ public class UserAnswer implements BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserAnswer that = (UserAnswer) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(answer, that.answer) &&
+        return Objects.equals(answerID, that.answerID) &&
                 Objects.equals(creationdatetime, that.creationdatetime) &&
                 Objects.equals(user, that.user) &&
-                Objects.equals(question, that.question);
+                Objects.equals(userQuestion, that.userQuestion);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, answer, creationdatetime, user, question);
+        return Objects.hash(answerID, creationdatetime, user, userQuestion);
     }
 
     @Override
     public String toString() {
         return "UserAnswer{" +
                 "id=" + id +
-                ", answer=" + answer +
+                ", answerID=" + answerID +
                 ", isRight=" + isRight +
                 ", testAnswer='" + testAnswer + '\'' +
                 ", creationdatetime=" + creationdatetime +
-                ", user=" + user +
+                ", userID=" + user.getId() +
+                ", userQuestionID=" + userQuestion.getId() +
                 '}';
     }
 }

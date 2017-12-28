@@ -40,9 +40,9 @@ public class Question implements BaseEntity {
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<TeacherAnswer> answersList;
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<UserAnswer> userAnswersList;
+//    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @Fetch(value = FetchMode.SUBSELECT)
+//    private List<UserAnswer> userAnswersList;
 
 
 
@@ -82,14 +82,6 @@ public class Question implements BaseEntity {
     {
         answersList.add(new TeacherAnswer(answer, this, false, answer.getCreator()));
     }
-
-/*    public Test getTest() {
-        return test;
-    }
-
-    public void setTest(Test test) {
-        this.test = test;
-    }*/
 
     public String getText() {
         return text;
@@ -144,22 +136,6 @@ public class Question implements BaseEntity {
 
     public void setAnswersList(List<TeacherAnswer> answersList) {
         this.answersList = answersList;
-    }
-
-    public List<UserAnswer> getUserAnswersList() {
-        return userAnswersList;
-    }
-
-    public void initializeUserAnswersList() {
-    }
-
-    public void setUserAnswersList(List<UserAnswer> userAnswersList) {
-        this.userAnswersList = userAnswersList;
-    }
-
-    public void addUserAnswerToList(UserAnswer userAnswer)
-    {
-        this.userAnswersList.add(userAnswer);
     }
 
     @Override

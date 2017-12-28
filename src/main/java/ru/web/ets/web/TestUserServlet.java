@@ -48,9 +48,9 @@ public class TestUserServlet extends HttpServlet {
 
         User user = adminRestController.get(AuthorizedUser.id());
         // create of user's answer
-        test.getQuestionsList().forEach(
+/*        test.getQuestionsList().forEach(
                 x -> x.getQuestion().getAnswersList().forEach(
-                        y -> x.getQuestion().addUserAnswerToList(new UserAnswer(y.getAnswer(), (request.getParameterValues("chbox" + y.getId()) != null && request.getParameterValues("chbox" + y.getId()).length != 0), "", user))));
+                        y -> x.getQuestion().addUserAnswerToList(new UserAnswer(y.getAnswer(), (request.getParameterValues("chbox" + y.getId()) != null && request.getParameterValues("chbox" + y.getId()).length != 0), "", user))));*/
 
         test = testRestController.save(test);
         request.setAttribute("userTest", test);
