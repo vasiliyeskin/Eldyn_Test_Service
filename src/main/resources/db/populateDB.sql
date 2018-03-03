@@ -22,10 +22,10 @@ ALTER SEQUENCE global_seqUserTest      RESTART WITH 1;
 
 
 INSERT INTO users (firstname, lastname, email, password)
-VALUES ('User', 'Smith', 'user@yandex.ru', 'password');
+VALUES ('Student', 'Smith', 'user@yandex.ru', 'password');
 -- PasswordUtil.encode("password");
 -- INSERT INTO users (firstname, lastname, email, password)
--- VALUES ('User', 'Smith', 'user@yandex.ru', '$2a$10$i09JKq1iXzAYl2o6yLvfBuJYRXhypm9P06voTexk0X6N46qTNt606');
+-- VALUES ('Student', 'Smith', 'user@yandex.ru', '$2a$10$i09JKq1iXzAYl2o6yLvfBuJYRXhypm9P06voTexk0X6N46qTNt606');
 
 INSERT INTO users (firstname, lastname, email, password)
 VALUES ('T1000', 'T2', 'teacher@yandex.ru', 'password');
@@ -115,3 +115,11 @@ INSERT INTO UserQuestions (usertestID, questionTestID, creationdatetime, userId)
 INSERT INTO UserAnswers (userquestionID, answerID, isRight, testAnswer, creationdatetime, userId) VALUES
   (1, 1, TRUE, '', now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru')),
   (2, 7, TRUE, '', now(),  (SELECT id FROM users WHERE email ='teacher@yandex.ru'));
+
+
+
+
+INSERT INTO students (lastname, firstname, midlename,course, active)
+VALUES ('Порфирьев','Павел','Сергеевич', 3, TRUE),
+ ('Смирнов','Дмитрий','Валерьевич', 3, TRUE),
+ ('Шурыгин','Александр','Евгеньевич', 3, TRUE);

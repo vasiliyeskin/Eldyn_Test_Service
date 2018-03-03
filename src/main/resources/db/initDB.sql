@@ -29,6 +29,7 @@ CREATE SEQUENCE global_seqUserQuestion  START 1;
 CREATE SEQUENCE global_seqUserTest      START 1;
 
 
+
 CREATE TABLE users
 (
   id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
@@ -149,3 +150,25 @@ CREATE TABLE UserAnswers
   FOREIGN KEY (answerID) REFERENCES answer (id) ON DELETE CASCADE
 );
 CREATE UNIQUE INDEX UserAnswer_unique_idx ON UserAnswers (userquestionID, answerID, creationdatetime);
+
+
+
+
+
+DROP TABLE IF EXISTS students;
+DROP SEQUENCE IF EXISTS global_seq_student;
+CREATE SEQUENCE global_seq_student          START 1;
+
+CREATE TABLE students
+(
+  id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq_student'),
+  firstname        VARCHAR(255)            NOT NULL,
+  midlename        VARCHAR(255)                NULL,
+  lastname         VARCHAR(255)            NOT NULL,
+  course           INTEGER                 NOT NULL,
+  email            VARCHAR(255)                NULL,
+  phone            NUMERIC                     NULL,
+  registered       TIMESTAMP DEFAULT now() NOT NULL,
+  active           BOOLEAN DEFAULT TRUE    NOT NULL
+);
+CREATE UNIQUE INDEX studnts_unique_firstname_lastname_idx ON students (firstname,lastname);
