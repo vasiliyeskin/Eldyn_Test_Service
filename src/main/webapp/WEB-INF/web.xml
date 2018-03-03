@@ -26,6 +26,18 @@
         <servlet-name>questionsServlet</servlet-name>
         <url-pattern>/questions</url-pattern>
     </servlet-mapping>-->
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:spring/spring-app.xml
+            classpath:spring/spring-db.xml
+        </param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
     
     <servlet>
         <servlet-name>testServlet</servlet-name>

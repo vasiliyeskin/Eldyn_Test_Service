@@ -3,6 +3,8 @@ package ru.web.ets.web;
 import org.hibernate.Hibernate;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import ru.web.ets.AuthorizedUser;
 import ru.web.ets.model.*;
 import ru.web.ets.web.test.TestRestController;
@@ -19,24 +21,16 @@ import java.util.List;
 import java.util.Objects;
 
 public class TestUserServlet extends HttpServlet {
-    private ConfigurableApplicationContext springContext;
     private TestRestController testRestController;
     private AdminRestController adminRestController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
+        WebApplicationContext springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
         testRestController = springContext.getBean(TestRestController.class);
         adminRestController = springContext.getBean(AdminRestController.class);
     }
-
-    @Override
-    public void destroy() {
-        springContext.close();
-        super.destroy();
-    }
-
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

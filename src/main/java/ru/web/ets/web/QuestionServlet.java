@@ -2,6 +2,8 @@ package ru.web.ets.web;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import ru.web.ets.model.Question;
 import ru.web.ets.web.question.QuestionRestController;
 
@@ -15,20 +17,13 @@ import java.util.Objects;
 
 public class QuestionServlet extends HttpServlet {
 
-    private ConfigurableApplicationContext springContext;
     private QuestionRestController questionRestController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml","spring/spring-db.xml");
+        WebApplicationContext springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
         questionRestController = springContext.getBean(QuestionRestController.class);
-    }
-
-    @Override
-    public void destroy() {
-        springContext.close();
-        super.destroy();
     }
 
     @Override

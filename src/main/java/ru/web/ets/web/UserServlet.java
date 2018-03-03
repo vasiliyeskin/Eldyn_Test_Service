@@ -2,6 +2,8 @@ package ru.web.ets.web;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import ru.web.ets.web.user.AdminRestController;
 
 import javax.servlet.ServletConfig;
@@ -13,20 +15,13 @@ import java.io.IOException;
 
 public class UserServlet extends HttpServlet {
 
-    private ConfigurableApplicationContext springContext;
     private AdminRestController adminRestController;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        springContext = new ClassPathXmlApplicationContext("spring/spring-app.xml", "spring/spring-db.xml");
+        WebApplicationContext springContext = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
         adminRestController = springContext.getBean(AdminRestController.class);
-    }
-
-    @Override
-    public void destroy() {
-        springContext.close();
-        super.destroy();
     }
 
     @Override
@@ -49,5 +44,4 @@ public class UserServlet extends HttpServlet {
                 break;
         }
     }
-
 }
