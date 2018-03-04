@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <fmt:setBundle basename="messages.app"/>
-
 <html>
 <jsp:include page="fragments/headTag.jsp"/>
 <body>
@@ -14,7 +13,6 @@
     <div class="header clearfix">
         <h3 class="text-muted">Students</h3>
     </div>
-
     <div class="jumbotron">
         <table class="table table-striped display" id="datatable">
             <thead class="thead-dark">
