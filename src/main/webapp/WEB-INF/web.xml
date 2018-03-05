@@ -27,6 +27,7 @@
         <url-pattern>/questions</url-pattern>
     </servlet-mapping>-->
 
+    <!-- Encoding in UTF-8-->
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

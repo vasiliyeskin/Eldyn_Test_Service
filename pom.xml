@@ -239,6 +239,20 @@
             <version>${webjars-noty.version}</version>
         </dependency>
 
+        <!-- Workin with MS Word -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.15</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+            <version>3.15</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <profiles>

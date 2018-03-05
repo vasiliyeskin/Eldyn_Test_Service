@@ -20,5 +20,4 @@ public class DataJpaTestServiceTest extends AbstractServiceTest {
         newtest.setId(created.getId());
         assertMatch(service.getAll(), newtest);
     }
-
 }
