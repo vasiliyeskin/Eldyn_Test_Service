@@ -1,5 +1,6 @@
 package ru.web.ets.service.forDocs;
 
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.hwpf.HWPFDocument;
 import org.apache.poi.hwpf.usermodel.CharacterRun;
 import org.apache.poi.hwpf.usermodel.Paragraph;
@@ -10,7 +11,6 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 
 public class WordReplaceText {
     private String sourceFile;
@@ -18,19 +18,19 @@ public class WordReplaceText {
 
 
 
-/*    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         String SOURCE_FILE = "lipsum.doc";
         String OUTPUT_FILE = "new-lipsum.doc";
 
         WordReplaceText instance = new WordReplaceText(
-                "G:\\JAVA\\JAVA_EE\\Eldyn_Test_Service\\src\\main\\resources\\AppTemplate.docx",
-                "G:\\JAVA\\JAVA_EE\\Eldyn_Test_Service\\src\\main\\resources\\AppTemplate_stud.docx");
+                "g:\\JAVA\\JAVA_EE\\Eldyn_Test_Service\\wordFiles\\appTemplate.doc",
+                "g:\\JAVA\\JAVA_EE\\Eldyn_Test_Service\\wordFiles\\appTemplate_stud.doc");
         HWPFDocument doc = instance.openDocument();
         if (doc != null) {
-            doc = instance.replaceText(doc, "$fio", "StudentFIO");
+            doc = instance.replaceText(doc, "$student$", "StudentFIO");
             instance.saveDocument(doc);
         }
-    }*/
+    }
 
 
     public WordReplaceText(String SOURCE_FILE, String OUTPUT_FILE) {
@@ -38,7 +38,7 @@ public class WordReplaceText {
         this.outputFile = OUTPUT_FILE;
     }
 
-     public HWPFDocument replaceText(HWPFDocument doc, String findText, String replaceText) {
+    public HWPFDocument replaceText(HWPFDocument doc, String findText, String replaceText) {
         Range r = doc.getRange();
         for (int i = 0; i < r.numSections(); ++i) {
             Section s = r.getSection(i);
@@ -49,6 +49,9 @@ public class WordReplaceText {
                     String text = run.text();
                     if (text.contains(findText)) {
                         run.replaceText(findText, replaceText);
+                        run.setBold(true);
+                        run.setUnderlineCode(1);
+                        run.setColor(HSSFColor.RED.index);
                     }
                 }
             }
@@ -57,11 +60,10 @@ public class WordReplaceText {
     }
 
     public HWPFDocument openDocument() throws Exception {
-        URL res = getClass().getClassLoader().getResource(sourceFile);
+        File file = new File(sourceFile);
         HWPFDocument document = null;
-        if (res != null) {
-            document = new HWPFDocument(new POIFSFileSystem(
-                    new File(res.getPath())));
+        if (file != null) {
+            document = new HWPFDocument(new POIFSFileSystem(file));
         }
         return document;
     }
