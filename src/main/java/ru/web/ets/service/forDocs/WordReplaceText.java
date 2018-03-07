@@ -27,7 +27,7 @@ public class WordReplaceText {
                 "g:\\JAVA\\JAVA_EE\\Eldyn_Test_Service\\wordFiles\\appTemplate_stud.doc");
         HWPFDocument doc = instance.openDocument();
         if (doc != null) {
-            doc = instance.replaceText(doc, "$student$", "StudentFIO");
+            doc = instance.replaceText(doc, "$student$", "Фамилия Имя Отчество");
             instance.saveDocument(doc);
         }
     }

@@ -7,25 +7,7 @@
     <display-name>ETS</display-name>
 
 
-    <servlet>
-        <servlet-name>userServlet</servlet-name>
-        <servlet-class>ru.web.ets.web.UserServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>userServlet</servlet-name>
-        <url-pattern>/users</url-pattern>
-    </servlet-mapping>
 
-<!--   <servlet>
-        <servlet-name>questionsServlet</servlet-name>
-        <servlet-class>ru.web.ets.web.QuestionServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>questionsServlet</servlet-name>
-        <url-pattern>/questions</url-pattern>
-    </servlet-mapping>-->
 
     <!-- Encoding in UTF-8-->
     <filter>
@@ -53,38 +35,72 @@
         </param-value>
     </context-param>
 
+    <!-- Spring MVC -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
-    
-    <servlet>
-        <servlet-name>testServlet</servlet-name>
-        <servlet-class>ru.web.ets.web.TestServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>testServlet</servlet-name>
-        <url-pattern>/tests</url-pattern>
-    </servlet-mapping>
 
     <servlet>
-        <servlet-name>testUserServlet</servlet-name>
-        <servlet-class>ru.web.ets.web.TestUserServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/spring-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>testUserServlet</servlet-name>
-        <url-pattern>/test</url-pattern>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>studentServlet</servlet-name>
-        <servlet-class>ru.web.ets.web.forDocs.StudentServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>studentServlet</servlet-name>
-        <url-pattern>/students</url-pattern>
-    </servlet-mapping>
+      <!--  <servlet>
+            <servlet-name>testServlet</servlet-name>
+            <servlet-class>ru.web.ets.web.TestServlet</servlet-class>
+            <load-on-startup>0</load-on-startup>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>testServlet</servlet-name>
+            <url-pattern>/tests</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>testUserServlet</servlet-name>
+            <servlet-class>ru.web.ets.web.TestUserServlet</servlet-class>
+            <load-on-startup>0</load-on-startup>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>testUserServlet</servlet-name>
+            <url-pattern>/test</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>studentServlet</servlet-name>
+            <servlet-class>ru.web.ets.web.forDocs.StudentServlet</servlet-class>
+            <load-on-startup>0</load-on-startup>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>studentServlet</servlet-name>
+            <url-pattern>/students</url-pattern>
+        </servlet-mapping>
+        <servlet>
+            <servlet-name>userServlet</servlet-name>
+            <servlet-class>ru.web.ets.web.UserServlet</servlet-class>
+            <load-on-startup>0</load-on-startup>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>userServlet</servlet-name>
+            <url-pattern>/users</url-pattern>
+        </servlet-mapping>
+
+        &lt;!&ndash;   <servlet>
+                <servlet-name>questionsServlet</servlet-name>
+                <servlet-class>ru.web.ets.web.QuestionServlet</servlet-class>
+                <load-on-startup>0</load-on-startup>
+            </servlet>
+            <servlet-mapping>
+                <servlet-name>questionsServlet</servlet-name>
+                <url-pattern>/questions</url-pattern>
+            </servlet-mapping>&ndash;&gt;-->
 
 </web-app>
