@@ -44,7 +44,6 @@ public class Student implements BaseEntity {
     @Column(name = "lastname", nullable = false)
     protected String lastname;
 
-    @NotBlank
     @Column(name = "course", nullable = false)
     protected Integer course;
 
@@ -66,10 +65,10 @@ public class Student implements BaseEntity {
     }
 
     public Student(Student u) {
-        this(u.getId(), u.getFirstname(), u.getMidlename(), u.getLastname(), u.getEmail(), u.getPhone(), u.getCourse(), u.isActive(), u.getRegistered());
+        this(u.getId(), u.getFirstname(), u.getMidlename(), u.getLastname(), u.getCourse(), u.getEmail(), u.getPhone(), u.isActive(), u.getRegistered());
     }
 
-    public Student(Integer id, String firstname, String midlename, String laststname, String email, String phone, Integer course, boolean active, Date registered) {
+    public Student(Integer id, String firstname, String midlename, String laststname, Integer course, String email, String phone, boolean active, Date registered) {
         this.id = id;
         this.firstname = firstname;
         this.midlename = midlename;
@@ -82,7 +81,19 @@ public class Student implements BaseEntity {
     }
 
     public Student(Integer id, String firstname, String midlename, String laststname, Integer course, String email) {
-        this(id, firstname, midlename, laststname, email, "", course, true, new Date());
+        this(id, firstname, midlename, laststname, course, email, "", true, new Date());
+    }
+
+    public Student(Integer id, String firstname, String midlename, String laststname, Integer course, String email, String phone) {
+        this(id, firstname, midlename, laststname, course, email, phone, true, new Date());
+    }
+
+    public Student(String firstname, String midlename, String laststname, Integer course, String email) {
+        this(null, firstname, midlename, laststname, course, email, "", true, new Date());
+    }
+
+    public Student(String firstname, String midlename, String laststname, Integer course, String email, String phone) {
+        this(null, firstname, midlename, laststname, course, email, phone, true, new Date());
     }
 
     public String getFirstname() {

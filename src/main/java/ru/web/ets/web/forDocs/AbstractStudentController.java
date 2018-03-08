@@ -43,4 +43,10 @@ public abstract class AbstractStudentController {
         log.info("getByEmail {}", email);
         return service.getByEmail(email);
     }
+
+    public void active(int id, boolean active)
+    {
+        log.info((active ? "enable " : "disable ") + id);
+        service.active(id, active);
+    }
 }

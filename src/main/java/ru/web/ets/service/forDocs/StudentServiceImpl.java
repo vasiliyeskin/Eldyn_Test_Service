@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.web.ets.model.forDocs.Student;
 import ru.web.ets.repository.datajpa.StudentRepository;
@@ -59,4 +60,14 @@ public class StudentServiceImpl implements StudentService {
         Assert.notNull(Student, "Student must not be null");
         checkNotFoundWithId(repository.save(Student), Student.getId());
     }
+
+    @CacheEvict(value = "students", allEntries = true)
+    @Override
+    @Transactional
+    public void active(int id, boolean active) {
+        Student student = get(id);
+        student.setActive(active);
+        repository.save(student);
+    }
+
 }

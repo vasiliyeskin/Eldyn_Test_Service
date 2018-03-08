@@ -167,7 +167,7 @@ CREATE TABLE students
   lastname         VARCHAR(255)            NOT NULL,
   course           INTEGER                 NOT NULL,
   email            VARCHAR(255)                NULL,
-  phone            NUMERIC                     NULL,
+  phone            VARCHAR(255)                NULL,
   registered       TIMESTAMP DEFAULT now() NOT NULL,
   active           BOOLEAN DEFAULT TRUE    NOT NULL
 );

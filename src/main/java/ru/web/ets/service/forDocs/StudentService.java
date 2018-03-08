@@ -18,4 +18,6 @@ public interface StudentService {
     void update(Student student);
 
     List<Student> getAll();
+
+    void active(int id, boolean active);
 }

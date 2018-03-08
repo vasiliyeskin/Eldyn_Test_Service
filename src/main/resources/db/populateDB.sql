@@ -120,7 +120,7 @@ INSERT INTO UserAnswers (userquestionID, answerID, isRight, testAnswer, creation
 
 DELETE FROM students;
 ALTER SEQUENCE global_seq_student      RESTART WITH 1;
-INSERT INTO students (lastname, firstname, midlename,course, active)
-VALUES ('Порфирьев','Павел','Сергеевич', 3, TRUE),
- ('Смирнов','Дмитрий','Валерьевич', 3, TRUE),
- ('Шурыгин','Александр','Евгеньевич', 3, TRUE);
+INSERT INTO students (lastname, firstname, midlename, course, active, email, phone)
+VALUES ('Порфирьев','Павел','Сергеевич', 3, TRUE, 'test@test.ru', 'test'),
+ ('Смирнов','Дмитрий','Валерьевич', 3, TRUE, 'test@test.ru', 'test'),
+ ('Шурыгин','Александр','Евгеньевич', 3, TRUE, 'test@test.ru', 'test');
