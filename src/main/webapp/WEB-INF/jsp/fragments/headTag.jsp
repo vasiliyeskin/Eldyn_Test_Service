@@ -1,16 +1,16 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<fmt:setBundle basename="messages.app"/>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title><fmt:message key="app.title"/></title>
+    <title><spring:message code="app.title"/></title>
 
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
     <link rel="stylesheet" href="webjars/datatables/1.10.16/css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="webja  rs/noty/3.1.0/lib/noty.css"/>
+    <link rel="stylesheet" href="webjars/noty/3.1.0/lib/noty.css"/>
     <link rel="stylesheet" href="webjars/datetimepicker/2.5.11/jquery.datetimepicker.css">
     <%--<link rel="shortcut icon" href="resources/images/icon-meal.png">--%>
 
