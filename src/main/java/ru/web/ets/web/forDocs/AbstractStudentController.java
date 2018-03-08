@@ -8,7 +8,7 @@ import ru.web.ets.service.forDocs.StudentService;
 
 import java.util.List;
 
-public abstract class AbstracStudentController {
+public abstract class AbstractStudentController {
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
