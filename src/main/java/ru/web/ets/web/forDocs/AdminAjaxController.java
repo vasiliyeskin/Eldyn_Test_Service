@@ -17,6 +17,12 @@ public class AdminAjaxController extends AbstractStudentController {
     }
 
     @Override
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Student get(@PathVariable("id") int id) {
+        return super.get(id);
+    }
+
+    @Override
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") int id) {
         super.delete(id);
@@ -34,6 +40,8 @@ public class AdminAjaxController extends AbstractStudentController {
         Student student = new Student(id, firstname, middlename, lastname, course, email, phone);
         if (student.isNew()) {
             super.create(student);
+        } else {
+            super.update(student, student.getId());
         }
     }
 

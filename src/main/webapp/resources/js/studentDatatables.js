@@ -11,7 +11,7 @@ function enable(chkbox, id) {
     $.ajax({
         url: ajaxUrl + id,
         type: "POST",
-        data: "active=" + enabled
+        data: "enabled=" + enabled
     }).done(function () {
         chkbox.closest("tr").toggleClass("disabled");
         successNoty(enabled ? "Enabled" : "Disabled");
@@ -23,6 +23,10 @@ function enable(chkbox, id) {
 //$(document).ready(function () {
 $(function () {
     datatableApi = $("#datatable").DataTable({
+        "ajax": {
+            "url": ajaxUrl,
+            "dataSrc": ""
+        },
         "paging": false,
         "info": true,
         "columns": [
@@ -42,24 +46,44 @@ $(function () {
                 "data": "course"
             },
             {
-                "data": "email"
+                "data": "email",
+                "render": function (data, type, row) {
+                    if (type === "display") {
+                        return "<a href='mailto:" + data + "'>" + data + "</a>";
+                    }
+                    return data;
+                }
             },
             {
                 "data": "phone"
             },
             {
-                "data": "registered"
+                "data": "registered",
+                "render": function (date, type, row) {
+                    if (type === "display") {
+                        return date.substring(0, 10);
+                    }
+                    return date;
+                }
             },
             {
-                "data": "active"
+                "data": "active",
+                "render": function (data, type, row) {
+                    if (type === "display") {
+                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='enable($(this)," + row.id + ");'/>";
+                    }
+                    return data;
+                }
             },
             {
-                "defaultContent": "Edit",
-                "orderable": false
+                "orderable": false,
+                "defaultContent": "",
+                "render": renderEditBtn
             },
             {
-                "defaultContent": "Delete",
-                "orderable": false
+                "orderable": false,
+                "defaultContent": "",
+                "render": renderDeleteBtn
             }
         ],
         "order": [
@@ -67,7 +91,12 @@ $(function () {
                 0,
                 "asc"
             ]
-        ]
+        ],
+        "createdRow": function (row, data, dataIndex) {
+            if (!data.active) {
+                $(row).addClass("disabled");
+            }
+        },
+        "initComplete": makeEditable
     });
-    makeEditable();
 });

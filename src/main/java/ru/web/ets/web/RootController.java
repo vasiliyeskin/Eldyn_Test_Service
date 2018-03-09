@@ -19,10 +19,8 @@ public class RootController {
     }
 
     @GetMapping("/students")
-    public String srudents(Model model)
+    public String srudents()
     {
-        model.addAttribute("students",
-                controller.getAll());
         return "students";
     }
 }
