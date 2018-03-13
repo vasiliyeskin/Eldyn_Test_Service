@@ -3,9 +3,7 @@ package ru.web.ets.repository.datajpa.forDocs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
-import ru.web.ets.model.User;
 import ru.web.ets.model.forDocs.Student;
-import ru.web.ets.repository.UserRepository;
 import ru.web.ets.repository.datajpa.StudentRepository;
 
 import java.util.List;

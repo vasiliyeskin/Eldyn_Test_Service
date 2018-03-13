@@ -61,6 +61,25 @@ public class Student implements BaseEntity {
     @Column(name = "active", nullable = false, columnDefinition = "bool default true")
     private boolean active = true;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @BatchSize(size = 200)
+    @JoinTable(name="students_scientificadviser",
+            joinColumns = @JoinColumn(name = "student_id",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "adiver_id",
+                    referencedColumnName = "id"))
+    private ScientificAdviser adviser;
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @BatchSize(size = 200)
+    @JoinTable(name="students_practice",
+            joinColumns = @JoinColumn(name = "student_id",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "practice_id",
+                    referencedColumnName = "id"))
+    private Practice practice;
+
+
     public Student() {
     }
 
@@ -160,6 +179,22 @@ public class Student implements BaseEntity {
         this.registered = registered;
     }
 
+    public ScientificAdviser getAdviser() {
+        return adviser;
+    }
+
+    public void setAdviser(ScientificAdviser adviser) {
+        this.adviser = adviser;
+    }
+
+    public Practice getPractice() {
+        return practice;
+    }
+
+    public void setPractice(Practice practice) {
+        this.practice = practice;
+    }
+
     @Override
     public boolean isNew() {
         return this.id == null;
@@ -204,6 +239,8 @@ public class Student implements BaseEntity {
                 ", phone='" + phone + '\'' +
                 ", registered=" + registered +
                 ", active=" + active +
+                ", advise=" + adviser +
+                ", practice=" + practice +
                 '}';
     }
 }

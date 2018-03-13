@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.web.ets.model.forDocs.Student;
 import ru.web.ets.service.datajpa.AbstractServiceTest;
 
+import java.util.List;
+
 import static ru.web.ets.service.StudentTestData.*;
 
 import static org.junit.Assert.*;
@@ -36,6 +38,7 @@ public class StudentServiceImplTest extends AbstractServiceTest {
 
     @Test
     public void getAll() {
+        List<Student> students = studentService.getAll();
     }
 
     @Test
