@@ -8,6 +8,16 @@ DELETE FROM test;
 DELETE FROM question;
 DELETE FROM answer;
 DELETE FROM users;
+DELETE FROM students_practice;
+DELETE FROM  students_scientificadviser;
+DELETE FROM adviser_position;
+DELETE FROM adviser_organization;
+DELETE FROM students;
+DELETE FROM scientific_adviser;
+DELETE FROM position_in_the_organization;
+DELETE FROM organization;
+DELETE FROM practice;
+
 ALTER SEQUENCE global_seq              RESTART WITH 100000;
 ALTER SEQUENCE global_seqTest          RESTART WITH 1;
 ALTER SEQUENCE global_seqQuestion      RESTART WITH 1;
@@ -123,4 +133,112 @@ ALTER SEQUENCE global_seq_student      RESTART WITH 1;
 INSERT INTO students (lastname, firstname, midlename, course, active, email, phone)
 VALUES ('Порфирьев','Павел','Сергеевич', 3, TRUE, 'test@test.ru', 'test'),
  ('Смирнов','Дмитрий','Валерьевич', 3, TRUE, 'test@test.ru', 'test'),
- ('Шурыгин','Александр','Евгеньевич', 3, TRUE, 'test@test.ru', 'test');
+ ('Шурыгин','Александр','Евгеньевич', 3, TRUE, 'test@test.ru', 'test'),
+  ('Емельянов','Илья','Александрович', 3, TRUE, 'test@test.ru', 'test'),
+  ('Лобанова','Анастасия','Александровна', 3, TRUE, 'test@test.ru', 'test'),
+  ('Опачанов','Сергей','Геннадьевич', 3, TRUE, 'test@test.ru', 'test'),
+  ('Степаненков','Виктор','Николаевич', 3, TRUE, 'test@test.ru', 'test'),
+  ('Гапонов','Юлий','Михайлович', 3, TRUE, 'test@test.ru', 'test'),
+  ('Жданов','Николай','Кириллович', 3, TRUE, 'test@test.ru', 'test'),
+  ('Пухов','Дмитрий','Денисович', 3, TRUE, 'test@test.ru', 'test'),
+  ('Федяков','Дмитрий','Вадимович', 3, TRUE, 'test@test.ru', 'test');
+
+
+DELETE FROM scientific_adviser;
+ALTER SEQUENCE global_seq_sa      RESTART WITH 1;
+INSERT INTO scientific_adviser (lastname, firstname, middlename, email, phone)
+VALUES
+  ('Гущин','Михаил','Евгеньевич', '', ''),
+  ('Волков','Петр','Витальевич', '', ''),
+  ('Умнов','Алексей','Львович', '', ''),
+  ('Кирсанов','Алексей','Владимирович', '', ''),
+  ('Зиновьев','Андрей','Петрович', '', '');
+
+
+DELETE FROM position_in_the_organization;
+ALTER SEQUENCE global_seq_pio      RESTART WITH 1;
+INSERT INTO position_in_the_organization (positionio)
+VALUES
+  ('научный сотрудник '),
+  ('доцент');
+
+
+DELETE FROM organization;
+ALTER SEQUENCE global_seq_o      RESTART WITH 1;
+INSERT INTO organization (name, namegenitive, shortname)
+VALUES
+  ('Институт прикладной физики Российской Академии наук','Института прикладной физики Российской Академии наук','ИПФ РАН'),
+  ('кафедра электродинамики ННГУ ','кафедры электродинамики ННГУ ',''),
+  ('Институт физики микроструктур Российской Академии наук ','Института физики микроструктур Российской Академии наук ','ИФМ РАН');
+
+
+SET datestyle = dmy;
+DELETE FROM practice;
+ALTER SEQUENCE global_seq_practice      RESTART WITH 1;
+INSERT INTO practice (name, nameDirection, startDate, enddate)
+VALUES
+  ('УЧЕБНАЯ ПРАКТИКА; ПРАКТИКА ПО ПОЛУЧЕНИЮ ПЕРВИЧНЫХ ПРОФЕССИОНАЛЬНЫХ УМЕНИЙ И НАВЫКОВ, В ТОМ ЧИСЛЕ ПЕРВИЧНЫХ УМЕНИЙ И НАВЫКОВ НАУЧНО-ИССЛЕДОВАТЕЛЬСКОЙ ДЕЯТЕЛЬНОСТИ','УЧЕБНУЮ ПРАКТИКУ; ПРАКТИКУ ПО ПОЛУЧЕНИЮ ПЕРВИЧНЫХ ПРОФЕССИОНАЛЬНЫХ УМЕНИЙ И НАВЫКОВ, В ТОМ ЧИСЛЕ ПЕРВИЧНЫХ УМЕНИЙ И НАВЫКОВ НАУЧНО-ИССЛЕДОВАТЕЛЬСКОЙ ДЕЯТЕЛЬНОСТИ', '02.02.2018', '31.05.2018');
+
+INSERT INTO students_practice (student_id, practice_id) VALUES
+  ((SELECT id
+    FROM students
+    WHERE lastname = 'Порфирьев'), 1),
+  ((SELECT id
+    FROM students
+    WHERE lastname = 'Смирнов'), 1),
+  ((SELECT id
+    FROM students
+    WHERE lastname = 'Шурыгин'), 1),
+  ((SELECT id
+    FROM students
+    WHERE lastname = 'Емельянов'), 1),
+  ((SELECT id
+    FROM students
+    WHERE lastname = 'Лобанова'), 1),
+  ((SELECT id
+    FROM students
+    WHERE lastname = 'Опачанов'), 1),
+  ((SELECT id
+    FROM students
+    WHERE lastname = 'Степаненков'), 1),
+  ((SELECT id
+    FROM students
+    WHERE lastname = 'Гапонов'), 1),
+  ((SELECT id
+    FROM students
+    WHERE lastname = 'Жданов'), 1),
+  ((SELECT id
+    FROM students
+    WHERE lastname = 'Пухов'), 1),
+  ((SELECT id
+    FROM students
+    WHERE lastname = 'Федяков'), 1);
+
+
+INSERT INTO students_scientificadviser (student_id, adiver_id) VALUES
+  ((SELECT id FROM students  WHERE lastname = 'Порфирьев'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Кирсанов')),
+  ((SELECT id  FROM students  WHERE lastname = 'Смирнов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Кирсанов')),
+  ((SELECT id FROM students WHERE lastname = 'Шурыгин'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Зиновьев')),
+  ((SELECT id FROM students WHERE lastname = 'Емельянов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Гущин')),
+  ((SELECT id FROM students WHERE lastname = 'Лобанова'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Волков')),
+  ((SELECT id FROM students WHERE lastname = 'Опачанов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Гущин')),
+  ((SELECT id FROM students WHERE lastname = 'Степаненков'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Волков')),
+  ((SELECT id FROM students WHERE lastname = 'Гапонов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Умнов')),
+  ((SELECT id FROM students WHERE lastname = 'Жданов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Умнов')),
+  ((SELECT id FROM students WHERE lastname = 'Пухов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Умнов')),
+  ((SELECT id FROM students WHERE lastname = 'Федяков'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Умнов'));
+
+INSERT INTO adviser_position (adiver_id, position_id) VALUES
+  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Кирсанов'), 1),
+  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Зиновьев'), 1),
+  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Гущин'), 1),
+  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Волков'), 1),
+  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Умнов'), 2);
+
+INSERT INTO adviser_organization (adiver_id, organization_id) VALUES
+  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Кирсанов'), 1),
+  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Зиновьев'), 1),
+  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Гущин'), 1),
+  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Волков'), 3),
+  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Умнов'), 2);
+
