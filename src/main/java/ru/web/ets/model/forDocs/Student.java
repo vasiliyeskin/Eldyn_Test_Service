@@ -70,6 +70,17 @@ public class Student implements BaseEntity {
                     referencedColumnName = "id"))
     private ScientificAdviser adviser;
 
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @BatchSize(size = 200)
+    @JoinTable(name="curator",
+            joinColumns = @JoinColumn(name = "student_id",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "curator_id",
+                    referencedColumnName = "id"))
+    private ScientificAdviser curator;
+
+
     @OneToOne(fetch = FetchType.EAGER)
     @BatchSize(size = 200)
     @JoinTable(name="students_practice",
@@ -193,6 +204,14 @@ public class Student implements BaseEntity {
 
     public void setPractice(Practice practice) {
         this.practice = practice;
+    }
+
+    public ScientificAdviser getCurator() {
+        return curator;
+    }
+
+    public void setCurator(ScientificAdviser curator) {
+        this.curator = curator;
     }
 
     @Override

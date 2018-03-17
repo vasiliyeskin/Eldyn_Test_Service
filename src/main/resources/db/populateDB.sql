@@ -14,6 +14,7 @@ DELETE FROM adviser_position;
 DELETE FROM adviser_organization;
 DELETE FROM students;
 DELETE FROM scientific_adviser;
+DELETE FROM curator;
 DELETE FROM position_in_the_organization;
 DELETE FROM organization;
 DELETE FROM practice;
@@ -128,6 +129,10 @@ INSERT INTO UserAnswers (userquestionID, answerID, isRight, testAnswer, creation
 
 
 
+
+
+-- students and curator
+
 DELETE FROM students;
 ALTER SEQUENCE global_seq_student      RESTART WITH 1;
 INSERT INTO students (lastname, firstname, midlename, course, active, email, phone)
@@ -152,7 +157,8 @@ VALUES
   ('Волков','Петр','Витальевич', '', ''),
   ('Умнов','Алексей','Львович', '', ''),
   ('Кирсанов','Алексей','Владимирович', '', ''),
-  ('Зиновьев','Андрей','Петрович', '', '');
+  ('Зиновьев','Андрей','Петрович', '', ''),
+  ('Еськин','Василий','Алексеевич', '', '');
 
 
 DELETE FROM position_in_the_organization;
@@ -228,12 +234,27 @@ INSERT INTO students_scientificadviser (student_id, adiver_id) VALUES
   ((SELECT id FROM students WHERE lastname = 'Пухов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Умнов')),
   ((SELECT id FROM students WHERE lastname = 'Федяков'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Умнов'));
 
+INSERT INTO curator (student_id, curator_id) VALUES
+  ((SELECT id FROM students  WHERE lastname = 'Порфирьев'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Еськин')),
+  ((SELECT id  FROM students  WHERE lastname = 'Смирнов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Еськин')),
+  ((SELECT id FROM students WHERE lastname = 'Шурыгин'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Еськин')),
+  ((SELECT id FROM students WHERE lastname = 'Емельянов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Еськин')),
+  ((SELECT id FROM students WHERE lastname = 'Лобанова'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Еськин')),
+  ((SELECT id FROM students WHERE lastname = 'Опачанов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Еськин')),
+  ((SELECT id FROM students WHERE lastname = 'Степаненков'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Еськин')),
+  ((SELECT id FROM students WHERE lastname = 'Гапонов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Еськин')),
+  ((SELECT id FROM students WHERE lastname = 'Жданов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Еськин')),
+  ((SELECT id FROM students WHERE lastname = 'Пухов'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Еськин')),
+  ((SELECT id FROM students WHERE lastname = 'Федяков'), (SELECT id FROM scientific_adviser  WHERE lastname = 'Еськин'));
+
+
 INSERT INTO adviser_position (adiver_id, position_id) VALUES
   ((SELECT id FROM scientific_adviser  WHERE lastname = 'Кирсанов'), 1),
   ((SELECT id FROM scientific_adviser  WHERE lastname = 'Зиновьев'), 1),
   ((SELECT id FROM scientific_adviser  WHERE lastname = 'Гущин'), 1),
   ((SELECT id FROM scientific_adviser  WHERE lastname = 'Волков'), 1),
-  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Умнов'), 2);
+  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Умнов'), 2),
+  ((SELECT id FROM scientific_adviser  WHERE lastname = 'Еськин'), 2);
 
 INSERT INTO adviser_organization (adiver_id, organization_id) VALUES
   ((SELECT id FROM scientific_adviser  WHERE lastname = 'Кирсанов'), 1),

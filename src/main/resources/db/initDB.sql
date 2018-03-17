@@ -161,6 +161,7 @@ DROP TABLE IF EXISTS students_practice;
 DROP TABLE IF EXISTS students_scientificadviser;
 DROP TABLE IF EXISTS adviser_position;
 DROP TABLE IF EXISTS adviser_organization;
+DROP TABLE IF EXISTS curator;
 
 DROP TABLE IF EXISTS students;
 DROP SEQUENCE IF EXISTS global_seq_student;
@@ -270,4 +271,13 @@ CREATE TABLE adviser_organization
   CONSTRAINT adviser_organization_idx UNIQUE (adiver_id, organization_id),
   FOREIGN KEY (adiver_id) REFERENCES scientific_adviser (id) ON DELETE CASCADE,
   FOREIGN KEY (organization_id) REFERENCES organization (id) ON DELETE CASCADE
+);
+
+CREATE TABLE curator
+(
+  student_id   INTEGER NOT NULL,
+  curator_id  INTEGER NOT NULL,
+  CONSTRAINT curator_idx UNIQUE (student_id, curator_id),
+  FOREIGN KEY (student_id) REFERENCES students (id) ON DELETE CASCADE,
+  FOREIGN KEY (curator_id) REFERENCES scientific_adviser (id) ON DELETE CASCADE
 );
