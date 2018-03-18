@@ -1,4 +1,4 @@
-var ajaxUrl = "ajax/admin/students/";
+var ajaxUrl = "ajax/admin/organizations/";
 var datatableApi;
 
 function updateTable() {
@@ -34,46 +34,13 @@ $(function () {
                 "data": "id"
             },
             {
-                "data": "firstname"
+                "data": "name"
             },
             {
-                "data": "midlename"
+                "data": "nameGenitive"
             },
             {
-                "data": "lastname"
-            },
-            {
-                "data": "course"
-            },
-            {
-                "data": "email",
-                "render": function (data, type, row) {
-                    if (type === "display") {
-                        return "<a href='mailto:" + data + "'>" + data + "</a>";
-                    }
-                    return data;
-                }
-            },
-            {
-                "data": "phone"
-            },
-            {
-                "data": "registered",
-                "render": function (date, type, row) {
-                    if (type === "display") {
-                        return date.substring(0, 10);
-                    }
-                    return date;
-                }
-            },
-            {
-                "data": "active",
-                "render": function (data, type, row) {
-                    if (type === "display") {
-                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='enable($(this)," + row.id + ");'/>";
-                    }
-                    return data;
-                }
+                "data": "shortname"
             },
             {
                 "orderable": false,
@@ -93,9 +60,6 @@ $(function () {
             ]
         ],
         "createdRow": function (row, data, dataIndex) {
-            if (!data.active) {
-                $(row).addClass("disabled");
-            }
         },
         "initComplete": makeEditable
     });

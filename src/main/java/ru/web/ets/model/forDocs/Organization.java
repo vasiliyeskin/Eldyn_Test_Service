@@ -47,6 +47,13 @@ public class Organization implements BaseEntity {
     public Organization() {
     }
 
+    public Organization(Integer id, @NotBlank String name, @NotBlank String nameGenitive, @NotBlank String shortname) {
+        this.id = id;
+        this.name = name;
+        this.nameGenitive = nameGenitive;
+        this.shortname = shortname;
+    }
+
     public String getName() {
         return name;
     }

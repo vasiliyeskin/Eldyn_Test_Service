@@ -3,9 +3,22 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <a href="tests" class="navbar-brand"><spring:message code="app.title"/></a>
+        <a href="#" class="navbar-brand"><spring:message code="app.title"/></a>
         <a href="${pageContext.request.contextPath}/" class="navbar-brand"><spring:message code="app.home"/></a>
         <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" id="dropdown01" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="true">Docs<b class="caret"></b></a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                        <li><a class="dropdown-item" href="practices">Practices</a></li>
+                        <li><a class="dropdown-item" href="students">Students</a></li>
+                        <li><a class="dropdown-item" href="curators">Curators</a></li>
+                        <li><a class="dropdown-item" href="scientificadviser">Scientific Adviser</a></li>
+                        <li><a class="dropdown-item" href="organizations">Organizations</a></li>
+                    </ul>
+                </li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">${pageContext.response.locale}<b
@@ -26,6 +39,5 @@
             </a>
         </form>
     </div>--%>
-</div>
 </div>
 
