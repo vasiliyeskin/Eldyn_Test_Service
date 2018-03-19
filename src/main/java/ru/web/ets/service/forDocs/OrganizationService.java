@@ -12,7 +12,6 @@ import ru.web.ets.util.exception.NotFoundException;
 
 import java.util.List;
 
-import static ru.web.ets.util.ValidationUtil.checkNotFound;
 import static ru.web.ets.util.ValidationUtil.checkNotFoundWithId;
 
 @Service

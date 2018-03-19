@@ -158,6 +158,7 @@ CREATE UNIQUE INDEX UserAnswer_unique_idx ON UserAnswers (userquestionID, answer
 
 -- Tables for Docs
 DROP TABLE IF EXISTS students_practice;
+DROP TABLE IF EXISTS students_trainingdirection;
 DROP TABLE IF EXISTS students_scientificadviser;
 DROP TABLE IF EXISTS adviser_position;
 DROP TABLE IF EXISTS adviser_organization;
@@ -280,4 +281,25 @@ CREATE TABLE curator
   CONSTRAINT curator_idx UNIQUE (student_id, curator_id),
   FOREIGN KEY (student_id) REFERENCES students (id) ON DELETE CASCADE,
   FOREIGN KEY (curator_id) REFERENCES scientific_adviser (id) ON DELETE CASCADE
+);
+
+DROP TABLE IF EXISTS training_direction;
+DROP SEQUENCE IF EXISTS global_seq_td;
+CREATE SEQUENCE global_seq_td          START 1;
+CREATE TABLE training_direction
+(
+  id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq_td'),
+  name             text                    NOT NULL,
+  shortname        VARCHAR(255)            NOT NULL
+);
+CREATE UNIQUE INDEX td_unique_idx ON training_direction (name);
+
+
+CREATE TABLE students_trainingdirection
+(
+  student_id   INTEGER NOT NULL,
+  td_id        INTEGER NOT NULL,
+  CONSTRAINT student_td_idx UNIQUE (student_id, td_id),
+  FOREIGN KEY (student_id) REFERENCES students (id) ON DELETE CASCADE,
+  FOREIGN KEY (td_id) REFERENCES training_direction (id) ON DELETE CASCADE
 );

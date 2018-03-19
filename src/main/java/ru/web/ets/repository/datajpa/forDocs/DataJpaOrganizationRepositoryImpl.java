@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class DataJpaOrganizationRepositoryImpl implements OrganizationRepository {
 
-    private static final Sort SORT_NAME_EMAIL = new Sort("name");
+    private static final Sort SORT_ID = new Sort("id");
 
     @Autowired
     private CrudOrganizationRepository crudOrganizationRepository;
@@ -33,7 +33,7 @@ public class DataJpaOrganizationRepositoryImpl implements OrganizationRepository
 
     @Override
     public List<Organization> getAll() {
-        return crudOrganizationRepository.findAll(SORT_NAME_EMAIL);
+        return crudOrganizationRepository.findAll(SORT_ID);
     }
 
 }

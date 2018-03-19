@@ -90,6 +90,14 @@ public class Student implements BaseEntity {
                     referencedColumnName = "id"))
     private Practice practice;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinTable(name="students_trainingdirection",
+            joinColumns = @JoinColumn(name = "student_id",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "td_id",
+                    referencedColumnName = "id"))
+    private TrainingDirection trainingDirection;
+
 
     public Student() {
     }
@@ -212,6 +220,14 @@ public class Student implements BaseEntity {
 
     public void setCurator(ScientificAdviser curator) {
         this.curator = curator;
+    }
+
+    public TrainingDirection getTrainingDirection() {
+        return trainingDirection;
+    }
+
+    public void setTrainingDirection(TrainingDirection trainingDirection) {
+        this.trainingDirection = trainingDirection;
     }
 
     @Override

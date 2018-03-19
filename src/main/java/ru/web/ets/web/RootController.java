@@ -22,4 +22,10 @@ public class RootController {
     {
         return "organizations";
     }
+
+    @GetMapping("/scientificadviser")
+    public String scientificadviser()
+    {
+        return "scientificadviser";
+    }
 }

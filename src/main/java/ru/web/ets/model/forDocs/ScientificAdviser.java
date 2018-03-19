@@ -128,6 +128,15 @@ public class ScientificAdviser implements BaseEntity {
     public ScientificAdviser() {
     }
 
+    public ScientificAdviser(Integer id,@NotBlank String firstname, @NotBlank String middlename, @NotBlank String lastname, @Email String email, String phone) {
+        this.id = id;
+        this.firstname = firstname;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.email = email;
+        this.phone = phone;
+    }
+
     @Override
     public boolean isNew() {
         return this.id == null;
