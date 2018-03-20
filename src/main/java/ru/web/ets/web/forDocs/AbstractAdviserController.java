@@ -4,9 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.web.ets.model.forDocs.Organization;
+import ru.web.ets.model.forDocs.PositionInTheOrganization;
 import ru.web.ets.model.forDocs.ScientificAdviser;
 import ru.web.ets.service.forDocs.AdviserService;
 import ru.web.ets.service.forDocs.OrganizationService;
+import ru.web.ets.service.forDocs.PositionService;
 
 import java.util.List;
 
@@ -18,6 +20,9 @@ public abstract class AbstractAdviserController {
 
     @Autowired
     private OrganizationService organizationService;
+
+    @Autowired
+    private PositionService positionService;
 
     public List<ScientificAdviser> getAll() {
         log.info("getAll");
@@ -47,5 +52,9 @@ public abstract class AbstractAdviserController {
     public Organization getOrg(Integer orgID)
     {
         return organizationService.get(orgID);
+    }
+
+    public PositionInTheOrganization getPosition(Integer posID) {
+        return positionService.get(posID);
     }
 }

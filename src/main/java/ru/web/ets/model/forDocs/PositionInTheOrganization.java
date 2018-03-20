@@ -31,12 +31,16 @@ public class PositionInTheOrganization implements BaseEntity {
         return this.id;
     }
 
-
     @NotBlank
     @Column(name = "positionIO", nullable = false)
     protected String positionIO;
 
     public PositionInTheOrganization() {
+    }
+
+    public PositionInTheOrganization(Integer id, @NotBlank String positionIO) {
+        this.id = id;
+        this.positionIO = positionIO;
     }
 
     public String getPositionIO() {

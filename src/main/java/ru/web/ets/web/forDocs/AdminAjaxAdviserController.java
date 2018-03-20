@@ -35,10 +35,12 @@ public class AdminAjaxAdviserController extends AbstractAdviserController {
                                @RequestParam("lastname") String lastname,
                                @RequestParam("org") Integer organizationID,
                                @RequestParam("email") String email,
-                               @RequestParam("phone") String phone) {
+                               @RequestParam("phone") String phone,
+                               @RequestParam("position") Integer positionID) {
 
         ScientificAdviser adviser = new ScientificAdviser(id, firstname, middlename, lastname, email, phone);
         adviser.setOrganization(super.getOrg(organizationID));
+        adviser.setPosition(super.getPosition(positionID));
         if (adviser.isNew()) {
             super.create(adviser);
         } else {

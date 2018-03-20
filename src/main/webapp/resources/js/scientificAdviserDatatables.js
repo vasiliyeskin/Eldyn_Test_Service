@@ -46,6 +46,9 @@ $(function () {
                 "data": "organization.name"
             },
             {
+                "data": "position.positionIO"
+            },
+            {
                 "data": "email",
                 "render": function (data, type, row) {
                     if (type === "display") {
@@ -69,10 +72,10 @@ $(function () {
             {
                 "orderable": false,
                 "defaultContent": "",
-                "data": "organization.id",
+                "data": null,
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<a onclick='updateRow(" + row.id + ");fillDropdownOrg("+(data-1)+");'>" +
+                        return "<a onclick='updateRow(" + row.id + ");fillDropdownOrg(" + (data.organization.id-1) + ");fillDropdownPosition(" + (data.position.id - 1) + ");'>" +
                             "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
                     }
                 }
@@ -102,6 +105,18 @@ function fillDropdownOrg(id) {
         dropdown.find("option").remove();
         $.each(data, function (key, val) {
             dropdown.append($('<option></option>').attr('value', val.id).text(val.name));
+        });
+        dropdown.prop('selectedIndex', id);
+    });
+}
+
+function fillDropdownPosition(id) {
+
+    $.get("ajax/admin/position/", function (data) {
+        var dropdown = $("#position");
+        dropdown.find("option").remove();
+        $.each(data, function (key, val) {
+            dropdown.append($('<option></option>').attr('value', val.id).text(val.positionIO));
         });
         dropdown.prop('selectedIndex', id);
     });

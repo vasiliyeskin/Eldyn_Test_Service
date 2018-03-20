@@ -27,6 +27,7 @@
                 <th scope="col">Middle Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Organization</th>
+                <th scope="col">Position</th>
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Date of registration</th>
@@ -85,6 +86,14 @@
 
                         <div class="col-xs-9">
                             <select type="dropdown" class="form-control" id="org" name="org"> </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="position" class="control-label col-xs-3">Position</label>
+
+                        <div class="col-xs-9">
+                            <select type="dropdown" class="form-control" id="position" name="position"> </select>
                         </div>
                     </div>
 
