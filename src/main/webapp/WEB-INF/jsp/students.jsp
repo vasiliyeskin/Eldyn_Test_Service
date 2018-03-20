@@ -26,9 +26,10 @@
                 <th scope="col">First name</th>
                 <th scope="col">Middle Name</th>
                 <th scope="col">Last Name</th>
+                <th scope="col">Adviser</th>
                 <th scope="col">Course</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
+              <%--  <th scope="col">Email</th>
+                <th scope="col">Phone</th>--%>
                 <th scope="col">Date of registration</th>
                 <th scope="col">Active</th>
                 <th></th>
@@ -72,12 +73,20 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="lastname" class="control-label col-xs-3"><spring:message
-                                code="student.lastname"/></label>
+                    <label for="lastname" class="control-label col-xs-3"><spring:message
+                            code="student.lastname"/></label>
+
+                    <div class="col-xs-9">
+                        <input type="text" class="form-control" id="lastname" name="lastname"
+                               placeholder="<spring:message code="student.lastname"/>">
+                    </div>
+                </div>
+
+                    <div class="form-group">
+                        <label for="adviser" class="control-label col-xs-3">Scientific Adviser</label>
 
                         <div class="col-xs-9">
-                            <input type="text" class="form-control" id="lastname" name="lastname"
-                                   placeholder="<spring:message code="student.lastname"/>">
+                            <select type="dropdown" class="form-control" id="adviser" name="adviser"> </select>
                         </div>
                     </div>
 
@@ -91,7 +100,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <%--<div class="form-group">
                         <label for="email" class="control-label col-xs-3"><spring:message code="student.email"/></label>
 
                         <div class="col-xs-9">
@@ -107,7 +116,7 @@
                             <input type="phone" class="form-control" id="phone" name="phone"
                                    placeholder="<spring:message code="student.phone"/>">
                         </div>
-                    </div>
+                    </div>--%>
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">

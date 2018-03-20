@@ -3,7 +3,9 @@ package ru.web.ets.web.forDocs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.web.ets.model.forDocs.ScientificAdviser;
 import ru.web.ets.model.forDocs.Student;
+import ru.web.ets.service.forDocs.AdviserService;
 import ru.web.ets.service.forDocs.StudentService;
 
 import java.util.List;
@@ -13,6 +15,9 @@ public abstract class AbstractStudentController {
 
     @Autowired
     private StudentService service;
+
+    @Autowired
+    private AdviserService adviserService;
 
     public List<Student> getAll() {
         log.info("getAll");
@@ -48,5 +53,10 @@ public abstract class AbstractStudentController {
     {
         log.info((active ? "enable " : "disable ") + id);
         service.active(id, active);
+    }
+
+    public ScientificAdviser getAdviser(Integer adivser_id)
+    {
+        return adviserService.get(adivser_id);
     }
 }

@@ -48,7 +48,6 @@ public class Student implements BaseEntity {
     protected Integer course;
 
     @Column(name = "email")
-    @Email
     private String email;
 
     @Column(name = "phone")

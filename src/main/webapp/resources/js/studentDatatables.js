@@ -43,9 +43,19 @@ $(function () {
                 "data": "lastname"
             },
             {
-                "data": "course"
+                "orderable": false,
+                "defaultContent": "",
+                "data": null,
+                "render": function (data, type, row) {
+                    if (type === "display") {
+                        return [data.adviser.lastname, data.adviser.firstname, data.adviser.middlename].join(" ");
+                    }
+                }
             },
             {
+                "data": "course"
+            },
+/*            {
                 "data": "email",
                 "render": function (data, type, row) {
                     if (type === "display") {
@@ -56,7 +66,7 @@ $(function () {
             },
             {
                 "data": "phone"
-            },
+            },*/
             {
                 "data": "registered",
                 "render": function (date, type, row) {
@@ -78,7 +88,13 @@ $(function () {
             {
                 "orderable": false,
                 "defaultContent": "",
-                "render": renderEditBtn
+                "data": null,
+                "render": function (data, type, row) {
+                    if (type === "display") {
+                        return "<a onclick='updateRow(" + row.id + ");fillDropdownAdviser(" + (data.adviser.id-1) + ");'>" +
+                            "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
+                    }
+                }
             },
             {
                 "orderable": false,
@@ -100,3 +116,15 @@ $(function () {
         "initComplete": makeEditable
     });
 });
+
+function fillDropdownAdviser(id) {
+
+    $.get("ajax/admin/advisers/", function (data) {
+        var dropdown = $("#adviser");
+        dropdown.find("option").remove();
+        $.each(data, function (key, val) {
+            dropdown.append($('<option></option>').attr('value', val.id).text([val.lastname, val.firstname, val.middlename].join(" ")));
+        });
+        dropdown.prop('selectedIndex', id);
+    });
+}

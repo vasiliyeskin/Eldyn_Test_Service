@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ajax/admin/students")
-public class AdminAjaxController extends AbstractStudentController {
+public class AdminAjaxStudentController extends AbstractStudentController {
 
     @Override
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,10 +34,10 @@ public class AdminAjaxController extends AbstractStudentController {
                                @RequestParam("midlename") String middlename,
                                @RequestParam("lastname") String lastname,
                                @RequestParam("course") Integer course,
-                               @RequestParam("email") String email,
-                               @RequestParam("phone") String phone) {
+                               @RequestParam("adviser") Integer adviserID) {
 
-        Student student = new Student(id, firstname, middlename, lastname, course, email, phone);
+        Student student = new Student(id, firstname, middlename, lastname, course, "", "");
+        student.setAdviser(this.getAdviser(adviserID));
         if (student.isNew()) {
             super.create(student);
         } else {

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public class DataJpaAdviserRepositoryImpl implements AdviserRepository {
-    private static final Sort SORT_NAME = new Sort("lastname");
+    private static final Sort SORT_ID = new Sort("id");
 
     @Autowired
     private CrudAdviserRepository crudRepository;
@@ -37,6 +37,6 @@ public class DataJpaAdviserRepositoryImpl implements AdviserRepository {
 
     @Override
     public List<ScientificAdviser> getAll() {
-        return crudRepository.findAll(SORT_NAME);
+        return crudRepository.findAll(SORT_ID);
     }
 }
