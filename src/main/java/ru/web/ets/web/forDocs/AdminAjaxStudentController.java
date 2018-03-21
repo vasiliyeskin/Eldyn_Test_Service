@@ -34,10 +34,12 @@ public class AdminAjaxStudentController extends AbstractStudentController {
                                @RequestParam("midlename") String middlename,
                                @RequestParam("lastname") String lastname,
                                @RequestParam("course") Integer course,
-                               @RequestParam("adviser") Integer adviserID) {
+                               @RequestParam("adviser") Integer adviserID,
+                               @RequestParam("trainingDirection") Integer tdID) {
 
         Student student = new Student(id, firstname, middlename, lastname, course, "", "");
         student.setAdviser(this.getAdviser(adviserID));
+        student.setTrainingDirection(this.getTrainingDirection(tdID));
         if (student.isNew()) {
             super.create(student);
         } else {

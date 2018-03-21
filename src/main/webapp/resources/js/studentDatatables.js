@@ -55,6 +55,9 @@ $(function () {
             {
                 "data": "course"
             },
+            {
+              "data": "trainingDirection.shortname"
+            },
 /*            {
                 "data": "email",
                 "render": function (data, type, row) {
@@ -91,7 +94,7 @@ $(function () {
                 "data": null,
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<a onclick='updateRow(" + row.id + ");fillDropdownAdviser(" + (data.adviser.id-1) + ");'>" +
+                        return "<a onclick='updateRow(" + row.id + ");fillDropdownAdviser(" + (data.adviser.id-1) + ");fillDropdownTD(" + (data.trainingDirection.id-1) + ");'>" +
                             "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
                     }
                 }
@@ -124,6 +127,18 @@ function fillDropdownAdviser(id) {
         dropdown.find("option").remove();
         $.each(data, function (key, val) {
             dropdown.append($('<option></option>').attr('value', val.id).text([val.lastname, val.firstname, val.middlename].join(" ")));
+        });
+        dropdown.prop('selectedIndex', id);
+    });
+}
+
+function fillDropdownTD(id) {
+
+    $.get("ajax/admin/td/", function (data) {
+        var dropdown = $("#trainingDirection");
+        dropdown.find("option").remove();
+        $.each(data, function (key, val) {
+            dropdown.append($('<option></option>').attr('value', val.id).text(val.shortname));
         });
         dropdown.prop('selectedIndex', id);
     });

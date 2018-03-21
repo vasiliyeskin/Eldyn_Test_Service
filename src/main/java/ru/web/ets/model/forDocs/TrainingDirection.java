@@ -48,6 +48,12 @@ public class TrainingDirection implements BaseEntity {
         this.shortname = shortname;
     }
 
+    public TrainingDirection(Integer id, @NotBlank String name) {
+        this.id = id;
+        this.name = name;
+        this.shortname = name;
+    }
+
     public String getName() {
         return name;
     }

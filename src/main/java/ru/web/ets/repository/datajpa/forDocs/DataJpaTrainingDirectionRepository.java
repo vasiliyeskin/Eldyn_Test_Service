@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public class DataJpaTrainingDirectionRepository{
-    private static final Sort SORT_NAME = new Sort("name");
+    private static final Sort SORT_NAME = new Sort("id");
 
     @Autowired
     private CrudTrainingDirectionRepository crudTrainingDirectionRepository;

@@ -23,11 +23,12 @@
             <thead class="thead-dark">
             <tr>
                 <th scope="col">Students ID</th>
-                <th scope="col">First name</th>
+                <th scope="col">First Name</th>
                 <th scope="col">Middle Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Adviser</th>
                 <th scope="col">Course</th>
+                <th scope="col">Training Direction</th>
               <%--  <th scope="col">Email</th>
                 <th scope="col">Phone</th>--%>
                 <th scope="col">Date of registration</th>
@@ -97,6 +98,14 @@
                         <div class="col-xs-9">
                             <input type="text" class="form-control" id="course" name="course"
                                    placeholder="<spring:message code="student.course"/>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="trainingDirection" class="control-label col-xs-3">T raining Direction</label>
+
+                        <div class="col-xs-9">
+                            <select type="dropdown" class="form-control" id="trainingDirection" name="trainingDirection"> </select>
                         </div>
                     </div>
 
