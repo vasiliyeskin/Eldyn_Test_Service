@@ -39,4 +39,8 @@ public class DataJpaAdviserRepositoryImpl implements AdviserRepository {
     public List<ScientificAdviser> getAll() {
         return crudRepository.findAll(SORT_ID);
     }
+
+    @Override
+    public ScientificAdviser getByLastname(String lastname) {
+        return crudRepository.getByLastname(lastname);}
 }

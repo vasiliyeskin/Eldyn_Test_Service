@@ -47,4 +47,9 @@ public class AdviserService {
         Assert.notNull(Student, "Adviser must not be null");
         checkNotFoundWithId(repository.save(Student), Student.getId());
     }
+
+    public ScientificAdviser getByLastname(String lastname)
+    {
+        return repository.getByLastname(lastname);
+    }
 }

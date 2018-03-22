@@ -18,4 +18,6 @@ public interface AdviserRepository {
     ScientificAdviser getByEmail(String email);
 
     List<ScientificAdviser> getAll();
+
+    ScientificAdviser getByLastname(String lastname);
 }
