@@ -56,20 +56,20 @@ $(function () {
                 "data": "course"
             },
             {
-              "data": "trainingDirection.shortname"
+                "data": "trainingDirection.shortname"
             },
-/*            {
-                "data": "email",
-                "render": function (data, type, row) {
-                    if (type === "display") {
-                        return "<a href='mailto:" + data + "'>" + data + "</a>";
-                    }
-                    return data;
-                }
-            },
-            {
-                "data": "phone"
-            },*/
+            /*            {
+                            "data": "email",
+                            "render": function (data, type, row) {
+                                if (type === "display") {
+                                    return "<a href='mailto:" + data + "'>" + data + "</a>";
+                                }
+                                return data;
+                            }
+                        },
+                        {
+                            "data": "phone"
+                        },*/
             {
                 "data": "registered",
                 "render": function (date, type, row) {
@@ -94,7 +94,7 @@ $(function () {
                 "data": null,
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<a onclick='updateRow(" + row.id + ");fillDropdownAdviser(" + (data.adviser.id-1) + ");fillDropdownTD(" + (data.trainingDirection.id-1) + ");'>" +
+                        return "<a onclick='updateRow(" + row.id + ");chooseDropdownAdviser(" + (data.adviser.id - 1) + ");chooseDropdownTD(" + (data.trainingDirection.id - 1) + ");'>" +
                             "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
                     }
                 }
@@ -118,28 +118,45 @@ $(function () {
         },
         "initComplete": makeEditable
     });
-});
 
-function fillDropdownAdviser(id) {
-
+    // fill dropdown Adviser
     $.get("ajax/admin/advisers/", function (data) {
         var dropdown = $("#adviser");
         dropdown.find("option").remove();
         $.each(data, function (key, val) {
             dropdown.append($('<option></option>').attr('value', val.id).text([val.lastname, val.firstname, val.middlename].join(" ")));
         });
-        dropdown.prop('selectedIndex', id);
     });
-}
 
-function fillDropdownTD(id) {
-
+    // fill dropdown Adviser
     $.get("ajax/admin/td/", function (data) {
         var dropdown = $("#trainingDirection");
         dropdown.find("option").remove();
         $.each(data, function (key, val) {
             dropdown.append($('<option></option>').attr('value', val.id).text(val.shortname));
         });
-        dropdown.prop('selectedIndex', id);
     });
+});
+
+function chooseDropdownAdviser(id) {
+    $("#adviser").prop('selectedIndex', id);
+}
+
+function chooseDropdownTD(id) {
+    $("#trainingDirection").prop('selectedIndex', id);
+}
+
+function fillFullName() {
+    var first = $("#firstname");
+    var middle = $("#midlename");
+    var last = $("#lastname");
+
+    var fio = first.val().split(" ");
+    first.val(fio[0]);
+    if (middle.val().length == 0) {
+        middle.val(fio[1]);
+    }
+    if (last.val().length == 0) {
+        last.val(fio[2]);
+    }
 }

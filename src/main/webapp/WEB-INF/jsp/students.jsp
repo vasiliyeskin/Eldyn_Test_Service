@@ -29,15 +29,15 @@
                 <th scope="col">Adviser</th>
                 <th scope="col">Course</th>
                 <th scope="col">Training Direction</th>
-              <%--  <th scope="col">Email</th>
-                <th scope="col">Phone</th>--%>
+                <%--  <th scope="col">Email</th>
+                  <th scope="col">Phone</th>--%>
                 <th scope="col">Date of registration</th>
                 <th scope="col">Active</th>
                 <th></th>
                 <th></th>
             </tr>
             </thead>
-           </table>
+        </table>
     </div>
 </div>
 
@@ -55,11 +55,14 @@
 
                     <div class="form-group">
                         <label for="firstname" class="control-label col-xs-3"><spring:message
-                                code="student.firstname"/></label>
+                                code="student.firstname"/> (or Full Name)</label>
 
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" id="firstname" name="firstname"
-                                   placeholder="<spring:message code="student.firstname"/>">
+                        <div class="col-xs-9 ">
+                                <input type="text" class="form-control" id="firstname" name="firstname"
+                                       placeholder="<spring:message code="student.firstname"/>">
+                            <button type="button" onclick="fillFullName()" class="btn btn-primary">
+                                <span aria-hidden="true">Add Full Name</span>
+                            </button>
                         </div>
                     </div>
 
@@ -74,14 +77,14 @@
                     </div>
 
                     <div class="form-group">
-                    <label for="lastname" class="control-label col-xs-3"><spring:message
-                            code="student.lastname"/></label>
+                        <label for="lastname" class="control-label col-xs-3"><spring:message
+                                code="student.lastname"/></label>
 
-                    <div class="col-xs-9">
-                        <input type="text" class="form-control" id="lastname" name="lastname"
-                               placeholder="<spring:message code="student.lastname"/>">
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="lastname" name="lastname"
+                                   placeholder="<spring:message code="student.lastname"/>">
+                        </div>
                     </div>
-                </div>
 
                     <div class="form-group">
                         <label for="adviser" class="control-label col-xs-3">Scientific Adviser</label>
@@ -105,7 +108,8 @@
                         <label for="trainingDirection" class="control-label col-xs-3">T raining Direction</label>
 
                         <div class="col-xs-9">
-                            <select type="dropdown" class="form-control" id="trainingDirection" name="trainingDirection"> </select>
+                            <select type="dropdown" class="form-control" id="trainingDirection"
+                                    name="trainingDirection"> </select>
                         </div>
                     </div>
 
