@@ -41,11 +41,11 @@ public class WordReplaceText {
             Section s = r.getSection(i);
             for (int j = 0; j < s.numParagraphs(); j++) {
                 Paragraph p = s.getParagraph(j);
+                p.replaceText(findText, replaceText);
                 for (int k = 0; k < p.numCharacterRuns(); k++) {
                     CharacterRun run = p.getCharacterRun(k);
                     String text = run.text();
-                    if (text.contains(findText)) {
-                        run.replaceText(findText, replaceText);
+                    if (text.contains(replaceText)) {
                         run.setBold(true);
                         run.setUnderlineCode(1);
                         run.setColor(HSSFColor.RED.index);
