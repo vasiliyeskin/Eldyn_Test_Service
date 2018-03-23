@@ -18,4 +18,8 @@ public interface StudentRepository {
         Student getByEmail(String email);
 
         List<Student> getAll();
+
+        List<Student> getByAdviserId(Integer id);
+
+        List<Student> getByCuratorId(Integer id);
 }

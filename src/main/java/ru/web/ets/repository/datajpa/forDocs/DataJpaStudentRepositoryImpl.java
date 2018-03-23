@@ -40,4 +40,16 @@ public class DataJpaStudentRepositoryImpl implements StudentRepository {
         return crudRepository.findAll(SORT_NAME_EMAIL);
     }
 
+    @Override
+    public List<Student> getByAdviserId(Integer id)
+    {
+        return crudRepository.getByAdviserId(id);
+    }
+
+    @Override
+    public List<Student> getByCuratorId(Integer id)
+    {
+        return crudRepository.getByCuratorId(id);
+    }
+
 }

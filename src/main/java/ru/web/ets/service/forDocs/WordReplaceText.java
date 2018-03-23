@@ -19,9 +19,6 @@ public class WordReplaceText {
 
 
     public static void main(String[] args) throws Exception {
-        String SOURCE_FILE = "lipsum.doc";
-        String OUTPUT_FILE = "new-lipsum.doc";
-
         WordReplaceText instance = new WordReplaceText(
                 "g:\\JAVA\\JAVA_EE\\Eldyn_Test_Service\\wordFiles\\appTemplate.doc",
                 "g:\\JAVA\\JAVA_EE\\Eldyn_Test_Service\\wordFiles\\appTemplate_stud.doc");

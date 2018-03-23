@@ -70,4 +70,15 @@ public class StudentServiceImpl implements StudentService {
         repository.save(student);
     }
 
+    @CacheEvict(value = "students", allEntries = true)
+    @Transactional
+    public List<Student> getByAdviserId(Integer id) {
+        return repository.getByAdviserId(id);
+    }
+
+    @CacheEvict(value = "students", allEntries = true)
+    @Transactional
+    public List<Student> getByCuratorId(Integer id) {
+        return repository.getByCuratorId(id);
+    }
 }

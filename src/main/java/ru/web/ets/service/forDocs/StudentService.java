@@ -20,4 +20,8 @@ public interface StudentService {
     List<Student> getAll();
 
     void active(int id, boolean active);
+
+    List<Student> getByAdviserId(Integer id);
+
+    List<Student> getByCuratorId(Integer id);
 }

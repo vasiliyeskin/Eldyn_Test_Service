@@ -30,4 +30,8 @@ public interface CrudStudentRepository extends JpaRepository<Student, Integer> {
     List<Student> findAll(Sort sort);
 
     Student getByEmail(String email);
+
+    List<Student> getByAdviserId(Integer id);
+
+    List<Student> getByCuratorId(Integer id);
 }
