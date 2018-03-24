@@ -20,4 +20,6 @@ public interface AdviserRepository {
     List<ScientificAdviser> getAll();
 
     ScientificAdviser getByLastname(String lastname);
+
+    List<ScientificAdviser> getByOrganizationId(Integer id);
 }

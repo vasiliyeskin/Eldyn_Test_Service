@@ -128,7 +128,7 @@ $(function () {
         });
     });
 
-    // fill dropdown Adviser
+    // fill dropdown training direction
     $.get("ajax/admin/td/", function (data) {
         var dropdown = $("#trainingDirection");
         dropdown.find("option").remove();

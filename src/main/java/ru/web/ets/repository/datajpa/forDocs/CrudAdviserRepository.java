@@ -33,4 +33,6 @@ public interface CrudAdviserRepository extends JpaRepository<ScientificAdviser, 
 
     //@Query("SELECT FROM ScientificAdviser sa WHERE sa.lastname=:lastname")
     ScientificAdviser getByLastname(String lastname);
+
+    List<ScientificAdviser> getByOrganizationId(Integer id);
 }

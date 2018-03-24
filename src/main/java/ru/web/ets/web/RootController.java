@@ -28,4 +28,11 @@ public class RootController {
     {
         return "scientificadviser";
     }
+
+    @GetMapping("/practiceDocs")
+    public String practiceDocs()
+    {
+        return "practiceDocs";
+    }
+
 }

@@ -42,5 +42,11 @@ public class DataJpaAdviserRepositoryImpl implements AdviserRepository {
 
     @Override
     public ScientificAdviser getByLastname(String lastname) {
-        return crudRepository.getByLastname(lastname);}
+        return crudRepository.getByLastname(lastname);
+    }
+
+    @Override
+    public List<ScientificAdviser> getByOrganizationId(Integer id) {
+        return crudRepository.getByOrganizationId(id);
+    }
 }

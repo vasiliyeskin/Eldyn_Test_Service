@@ -11,7 +11,7 @@ public class WordHandlerReplaceText {
     public static void ReplaceTextInWordFileAndSave(Student s) {
         WordReplaceText instance = new WordReplaceText(
                 System.getenv("ETS_ROOT") + "\\wordFiles\\appTemplate.doc",
-                "E:\\JAVA\\JAVA_EE\\TEMP\\wordfiles\\" + s.getTrainingDirection().getShortname() + "_" + s.getLastname() + ".doc");
+                "G:\\JAVA\\JAVA_EE\\TEMP\\wordfiles\\" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() +  "_" + s.getLastname() + ".doc");
 
         HWPFDocument doc = null;
         try {

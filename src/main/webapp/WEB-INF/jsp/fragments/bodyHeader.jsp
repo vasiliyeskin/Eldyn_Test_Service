@@ -11,7 +11,7 @@
                     <a href="#" class="dropdown-toggle" id="dropdown01" data-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="true">Docs<b class="caret"></b></a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                        <li><a class="dropdown-item" href="practices">Practices</a></li>
+                        <li><a class="dropdown-item" href="practiceDocs">Documents for Practice</a></li>
                         <li><a class="dropdown-item" href="students">Students</a></li>
                         <li><a class="dropdown-item" href="curators">Curators</a></li>
                         <li><a class="dropdown-item" href="scientificadviser">Scientific Adviser</a></li>

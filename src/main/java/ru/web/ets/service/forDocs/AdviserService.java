@@ -52,4 +52,9 @@ public class AdviserService {
     {
         return repository.getByLastname(lastname);
     }
+
+    public List<ScientificAdviser> getCurator()
+    {
+        return repository.getByOrganizationId(2);
+    }
 }

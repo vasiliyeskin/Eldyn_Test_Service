@@ -26,7 +26,7 @@ public class OrganizationService {
 
     @CacheEvict(value = "organizations", allEntries = true)
     public Organization create(Organization student) {
-        Assert.notNull(student, "student must not be null");
+        Assert.notNull(student, "organization must not be null");
         return repository.save(student);
     }
 
