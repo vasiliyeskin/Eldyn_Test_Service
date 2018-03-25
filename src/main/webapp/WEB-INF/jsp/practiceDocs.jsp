@@ -22,9 +22,11 @@
     <div class="row">
         <div class="col-md-3">
             <h2>Practice</h2>
-            <p><select type="dropdown" class="form-control" id="practice" name="practice"> </select></p>
+            <p><select type="dropdown" class="form-control" id="practice" name="practice" onchange="selectPractice();"> </select></p>
             <h2>Start Date</h2>
             <p><input type="text" class="form-control" id="start" name="start"/></p>
+            <h2>End Date</h2>
+            <p><input type="dropdown" class="form-control" id="end" name="end"/></p>
         </div>
 
         <div class="col-md-3">
@@ -32,14 +34,12 @@
             <p><select type="dropdown" class="form-control" id="trainingDirection"
                        name="trainingDirection"> </select></p>
 
-            <h2>End Date</h2>
-            <p><input type="dropdown" class="form-control" id="end" name="end"/></p>
         </div>
 
         <div class="col-md-3">
             <h2>Cource</h2>
-            <p><select type="dropdown" class="form-control" id="cource"
-                       name="cource"> </select></p>
+            <p><select type="dropdown" class="form-control" id="course"
+                       name="course"> </select></p>
         </div>
 
         <div class="col-md-3">
@@ -48,7 +48,8 @@
                        name="curator"> </select></p>
         </div>
     </div>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Get docs</a></p>
+    <p><a class="btn btn-primary btn-lg" role="button" onclick="getDocs();">Get docs</a></p>
+    <pre id="result"></pre>
 </div>
 
 <jsp:include page="fragments/footer.jsp"/>

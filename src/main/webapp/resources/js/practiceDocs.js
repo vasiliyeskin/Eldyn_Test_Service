@@ -10,7 +10,7 @@ $(function () {
         });
     });
 
-        var dropdown = $("#cource");
+        var dropdown = $("#course");
         dropdown.find("option").remove();
         dropdown.append($('<option></option>')
             .attr('value', 1).text("1"))
@@ -41,3 +41,43 @@ $(function () {
         });
     });
 });
+
+function selectPractice() {
+    var dropdown = $("#practice");
+    var endDate = $("#end");
+    var startDate = $("#start");
+    endDate.val(dropdown.val().enddate);
+
+    $.get("ajax/admin/practice/"+dropdown.val(), function (data) {
+        startDate.val(data.startDate.substr(0, 10));
+        endDate.val(data.endDate.substr(0, 10));
+    });
+ //   dropdown.options[dropdown.selectedIndex].value
+}
+
+function getDocs()
+{
+    $('#result').html("Sending ...");
+
+    var data =
+        "practice=" + $("#practice").val() +
+        "&curator=" + $("#curator").val() +
+        "&trainingDirection=" + $("#trainingDirection").val() +
+        "&course=" + $("#practice").val();
+
+    //        https://stackoverflow.com/a/22213543/548473
+    $.ajax({
+        url: "ajax/admin/curator/getDocsForCurator/",
+        data: data,
+        type: "POST",
+        contentType: "application/x-www-form-urlencoded",
+        processData: false
+    }).done(function (result) {
+        if (typeof result === "object") {
+            result = JSON.stringify(result)
+        }
+        $('#result').html(result);
+    }).fail(function (result) {
+        $('#result').html(result.responseText);
+    });
+}
