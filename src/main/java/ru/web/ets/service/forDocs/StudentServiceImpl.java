@@ -81,4 +81,11 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getByCuratorId(Integer id) {
         return repository.getByCuratorId(id);
     }
+
+    @CacheEvict(value = "students", allEntries = true)
+    @Transactional
+    public List<Student> getByCuratorIdTDIdCourseId(Integer curatorId, Integer trainingDirectionId, Integer courseId)
+    {
+        return repository.getByCuratorIdTDIdCourseId(curatorId, trainingDirectionId, courseId);
+    }
 }

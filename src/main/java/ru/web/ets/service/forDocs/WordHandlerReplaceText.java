@@ -1,17 +1,26 @@
 package ru.web.ets.service.forDocs;
 
 import org.apache.poi.hwpf.HWPFDocument;
+import ru.web.ets.model.forDocs.Practice;
+import ru.web.ets.model.forDocs.ScientificAdviser;
 import ru.web.ets.model.forDocs.Student;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class WordHandlerReplaceText {
 
     public static void ReplaceTextInWordFileAndSave(Student s) {
         WordReplaceText instance = new WordReplaceText(
                 System.getenv("ETS_ROOT") + "\\wordFiles\\appTemplate.doc",
-                "G:\\JAVA\\JAVA_EE\\TEMP\\wordfiles\\" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() +  "_" + s.getLastname() + ".doc");
+                "G:\\JAVA\\JAVA_EE\\TEMP\\wordfiles\\" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() + "_" + s.getLastname() + ".doc");
 
         HWPFDocument doc = null;
         try {
@@ -19,6 +28,28 @@ public class WordHandlerReplaceText {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        doc = replaceTextInDoc(doc, instance, s);
+        instance.saveDocument(doc);
+    }
+
+    public static void ReplaceAndSaveTextInWordWithPractice(Student s, Practice practice) {
+        WordReplaceText instance = new WordReplaceText(
+                System.getenv("ETS_ROOT") + "\\wordFiles\\appTemplate.doc",
+                "G:\\JAVA\\JAVA_EE\\TEMP\\wordfiles\\" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() + "_" + s.getLastname() + ".doc");
+
+        HWPFDocument doc = null;
+        try {
+            doc = instance.openDocument();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        doc = replaceTextInDoc(doc, instance, s);
+        doc = instance.replaceText(doc, "practice", practice.getNameDirection());
+
+        instance.saveDocument(doc);
+    }
+
+    private static HWPFDocument replaceTextInDoc(HWPFDocument doc, WordReplaceText instance, Student s) {
         if (doc != null) {
             StringBuilder builder = new StringBuilder();
             builder.append(s.getLastname()).append(" ")
@@ -65,8 +96,32 @@ public class WordHandlerReplaceText {
             doc = instance.replaceText(doc, "place", s.getAdviser().getOrganization().getName());
             doc = instance.replaceText(doc, "startDate", (dateFormat.format(new Date())).toString());
             doc = instance.replaceText(doc, "endDate", (dateFormat.format(new Date())).toString());
-
-            instance.saveDocument(doc);
         }
+
+        return doc;
+    }
+
+    public static String createStudentDocsAndZipper(List<Student> students, Practice practice, ScientificAdviser curator) throws IOException {
+        String filename = curator.getLastname() + ".zip";
+        FileOutputStream fos = new FileOutputStream("G:\\JAVA\\JAVA_EE\\TEMP\\wordfiles\\" + filename);
+        ZipOutputStream zipOut = new ZipOutputStream(fos);
+        for (Student s : students) {
+            ReplaceAndSaveTextInWordWithPractice(s, practice);
+            File fileToZip = new File("G:\\JAVA\\JAVA_EE\\TEMP\\wordfiles\\" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() + "_" + s.getLastname() + ".doc");
+            FileInputStream fis = new FileInputStream(fileToZip);
+            ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
+            zipOut.putNextEntry(zipEntry);
+
+            byte[] bytes = new byte[1024];
+            int length;
+            while ((length = fis.read(bytes)) >= 0) {
+                zipOut.write(bytes, 0, length);
+            }
+            fis.close();
+        }
+        zipOut.close();
+        fos.close();
+
+        return filename;
     }
 }

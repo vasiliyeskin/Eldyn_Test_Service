@@ -22,4 +22,6 @@ public interface StudentRepository {
         List<Student> getByAdviserId(Integer id);
 
         List<Student> getByCuratorId(Integer id);
+
+    List<Student> getByCuratorIdTDIdCourseId(Integer curatorId, Integer trainingDirectionId, Integer courseId);
 }

@@ -52,4 +52,9 @@ public class DataJpaStudentRepositoryImpl implements StudentRepository {
         return crudRepository.getByCuratorId(id);
     }
 
+    @Override
+    public List<Student> getByCuratorIdTDIdCourseId(Integer curatorId, Integer trainingDirectionId, Integer courseId)
+    {
+        return crudRepository.getByCuratorIdAndTrainingDirectionIdAndCourseId(curatorId, trainingDirectionId, courseId);
+    }
 }

@@ -34,4 +34,8 @@ public interface CrudStudentRepository extends JpaRepository<Student, Integer> {
     List<Student> getByAdviserId(Integer id);
 
     List<Student> getByCuratorId(Integer id);
+
+    @SuppressWarnings("JpaQlInspection")
+    @Query("SELECT s FROM Student s WHERE s.curator.id=:curatorId AND s.trainingDirection.id=:trainingDirectionId AND s.course=:courseId")
+    List<Student> getByCuratorIdAndTrainingDirectionIdAndCourseId(@Param("curatorId")Integer curatorId, @Param("trainingDirectionId") Integer trainingDirectionId, @Param("courseId") Integer courseId);
 }

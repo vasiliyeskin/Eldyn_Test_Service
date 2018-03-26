@@ -10,18 +10,18 @@ $(function () {
         });
     });
 
-        var dropdown = $("#course");
-        dropdown.find("option").remove();
-        dropdown.append($('<option></option>')
-            .attr('value', 1).text("1"))
-            .append($('<option></option>')
-                .attr('value', 2).text("2"))
-            .append($('<option></option>')
-                .attr('value', 3).text("3"))
-            .append($('<option></option>')
-                .attr('value', 4).text("4"))
-            .append($('<option></option>')
-                .attr('value', 5).text("5"));
+    var dropdown = $("#course");
+    dropdown.find("option").remove();
+    dropdown.append($('<option></option>')
+        .attr('value', 1).text("1"))
+        .append($('<option></option>')
+            .attr('value', 2).text("2"))
+        .append($('<option></option>')
+            .attr('value', 3).text("3"))
+        .append($('<option></option>')
+            .attr('value', 4).text("4"))
+        .append($('<option></option>')
+            .attr('value', 5).text("5"));
 
     // fill dropdown curator
     $.get("ajax/admin/curator/", function (data) {
@@ -48,22 +48,21 @@ function selectPractice() {
     var startDate = $("#start");
     endDate.val(dropdown.val().enddate);
 
-    $.get("ajax/admin/practice/"+dropdown.val(), function (data) {
+    $.get("ajax/admin/practice/" + dropdown.val(), function (data) {
         startDate.val(data.startDate.substr(0, 10));
         endDate.val(data.endDate.substr(0, 10));
     });
- //   dropdown.options[dropdown.selectedIndex].value
+    //   dropdown.options[dropdown.selectedIndex].value
 }
 
-function getDocs()
-{
+function getDocs() {
     $('#result').html("Sending ...");
 
     var data =
         "practice=" + $("#practice").val() +
         "&curator=" + $("#curator").val() +
         "&trainingDirection=" + $("#trainingDirection").val() +
-        "&course=" + $("#practice").val();
+        "&course=" + $("#course").val();
 
     //        https://stackoverflow.com/a/22213543/548473
     $.ajax({
@@ -77,6 +76,10 @@ function getDocs()
             result = JSON.stringify(result)
         }
         $('#result').html(result);
+
+        $('#downloadFrame').remove();
+        $('body').append('<iframe id="downloadFrame" style="display:none"></iframe>');
+        $('#downloadFrame').attr('src',['ajax/admin/curator/download/',result].join(""));
     }).fail(function (result) {
         $('#result').html(result.responseText);
     });

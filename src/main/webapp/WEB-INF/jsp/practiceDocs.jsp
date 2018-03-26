@@ -50,6 +50,7 @@
     </div>
     <p><a class="btn btn-primary btn-lg" role="button" onclick="getDocs();">Get docs</a></p>
     <pre id="result"></pre>
+    <iframe id="downloadFrame" style="display:none"></iframe>
 </div>
 
 <jsp:include page="fragments/footer.jsp"/>
