@@ -8,12 +8,14 @@
     <title><spring:message code="app.title"/></title>
 
     <link rel="stylesheet" href="resources/css/style.css">
+    <link href="pricing.css" rel="resources/css/stylesheet">
     <link rel="stylesheet" href="webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
     <%--<link rel="stylesheet" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css">--%>
     <link rel="stylesheet" href="webjars/datatables/1.10.16/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="webjars/noty/3.1.0/lib/noty.css"/>
     <link rel="stylesheet" href="webjars/datetimepicker/2.5.11/jquery.datetimepicker.css">
     <%--<link rel="shortcut icon" href="resources/images/icon-meal.png">--%>
+    <!-- Custom styles for this template -->
 
     <%--http://stackoverflow.com/a/24070373/548473--%>
     <script type="text/javascript" src="webjars/jquery/3.2.1/dist/jquery.min.js" defer></script>
