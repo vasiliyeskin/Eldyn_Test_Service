@@ -12,20 +12,17 @@
 
 <div class="container">
     <div class="header clearfix">
-        <h3 class="text-muted">Students</h3>
+        <h3 class="text-muted">Scientific Adviser</h3>
     </div>
     <a class="btn btn-primary" onclick="add()">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        <span class="fa fa-plus" aria-hidden="true"></span>
         <spring:message code="common.add"/>
     </a>
     <div class="jumbotron">
         <table class="table table-striped display" id="datatable">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">Adviser ID</th>
-                <th scope="col">First name</th>
-                <th scope="col">Middle Name</th>
-                <th scope="col">Last Name</th>
+                <th scope="col">Scientific Adviser</th>
                 <th scope="col">Organization</th>
                 <th scope="col">Position</th>
                 <th scope="col">Email</th>
@@ -118,7 +115,7 @@
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
                             <button type="button" onclick="save()" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                <span class="fa fa-check" aria-hidden="true"></span>
                             </button>
                         </div>
                     </div>

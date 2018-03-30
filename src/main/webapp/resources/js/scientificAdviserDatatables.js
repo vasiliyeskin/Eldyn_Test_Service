@@ -31,16 +31,10 @@ $(function () {
         "info": true,
         "columns": [
             {
-                "data": "id"
-            },
-            {
-                "data": "firstname"
-            },
-            {
-                "data": "middlename"
-            },
-            {
-                "data": "lastname"
+                "data": "data",
+                "render": function (data, type, row) {
+                    return [row.lastname, row.firstname, row.middlename].join(" ");
+                }
             },
             {
                 "data": "organization.name"
@@ -76,7 +70,7 @@ $(function () {
                 "render": function (data, type, row) {
                     if (type === "display") {
                         return "<a onclick='updateRow(" + row.id + ");fillDropdownOrg(" + (data.organization.id-1) + ");fillDropdownPosition(" + (data.position.id - 1) + ");'>" +
-                            "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
+                            "<span class='fa fa-pencil' aria-hidden='true'></span></a>";
                     }
                 }
             },

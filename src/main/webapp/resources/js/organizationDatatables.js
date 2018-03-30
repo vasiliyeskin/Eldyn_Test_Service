@@ -31,9 +31,6 @@ $(function () {
         "info": true,
         "columns": [
             {
-                "data": "id"
-            },
-            {
                 "data": "name"
             },
             {

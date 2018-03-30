@@ -21,29 +21,29 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <h2>Practice</h2>
+            <h4 class="mb-3">Practice</h4>
             <p><select type="dropdown" class="form-control" id="practice" name="practice" onchange="selectPractice();"> </select></p>
-            <h2>Start Date</h2>
+            <h4 class="mb-3">Start Date</h4>
             <p><input type="text" class="form-control" id="start" name="start"/></p>
-            <h2>End Date</h2>
+            <h4 class="mb-3">End Date</h4>
             <p><input type="dropdown" class="form-control" id="end" name="end"/></p>
         </div>
 
         <div class="col-md-3">
-            <h2>Training Direction</h2>
+            <h4 class="mb-3">Training Direction</h4>
             <p><select type="dropdown" class="form-control" id="trainingDirection"
                        name="trainingDirection"> </select></p>
 
         </div>
 
         <div class="col-md-3">
-            <h2>Cource</h2>
+            <h4 class="mb-3">Cource</h4>
             <p><select type="dropdown" class="form-control" id="course"
                        name="course"> </select></p>
         </div>
 
         <div class="col-md-3">
-            <h2>Curator</h2>
+            <h4 class="mb-3">Curator</h4>
             <p><select type="dropdown" class="form-control" id="curator"
                        name="curator"> </select></p>
         </div>

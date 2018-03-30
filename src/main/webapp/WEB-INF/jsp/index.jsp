@@ -13,34 +13,55 @@
     </div>
 </div>
 
+
 <div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <h2 style="background: #FAFAFA" >Docs</h2>
-            <ul aria-labelledby="dropdown01">
-                <li><a href="practiceDocs">Documents for Practice</a></li>
-                <li><a href="students">Students</a></li>
-                <li><a href="curators">Curators</a></li>
-                <li><a href="scientificadviser">Scientific Adviser</a></li>
-                <li><a href="organizations">Organizations</a></li>
-            </ul>
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Docs</h4>
+            </div>
+            <div class="card-body text-left">
+                <ul aria-labelledby="dropdown01">
+                    <li><a href="practiceDocs">Documents for Practice</a></li>
+                    <li><a href="students">Students</a></li>
+                    <li><a href="curators">Curators</a></li>
+                    <li><a href="scientificadviser">Scientific Adviser</a></li>
+                    <li><a href="organizations">Organizations</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="col-md-3">
-            <h2 style="background: #FAFAFA">Tests</h2>
-            <p/>
-            <ul>
-            <li><a href="students">Students</a></li>
-            <li><a href="users">Users</a></li>
-            <li><a href="questions">Questions</a></li>
-            <li><a href="tests">Tests</a></li>
-            <li><a href="statistics">Statistics</a></li>
-        </ul>
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Tests</h4>
+            </div>
+            <div class="card-body text-left">
+                <ul>
+                    <li><a href="students">Students</a></li>
+                    <li><a href="users">Users</a></li>
+                    <li><a href="questions">Questions</a></li>
+                    <li><a href="tests">Tests</a></li>
+                    <li><a href="statistics">Statistics</a></li>
+                </ul>
+            </div>
         </div>
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal"></h4>
+            </div>
+            <div class="card-body">
+            </div>
+        </div><div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal"></h4>
+        </div>
+        <div class="card-body">
+
+        </div>
+    </div>
     </div>
 </div>
 
 
-
-<jsp:include page="fragments/footer.jsp"/>
+    <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

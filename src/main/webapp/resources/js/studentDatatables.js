@@ -31,26 +31,16 @@ $(function () {
         "info": true,
         "columns": [
             {
-                "data": "id"
-            },
-            {
-                "data": "firstname"
-            },
-            {
-                "data": "midlename"
-            },
-            {
-                "data": "lastname"
-            },
-            {
-                "orderable": false,
-                "defaultContent": "",
-                "data": null,
+                "data": "data",
                 "render": function (data, type, row) {
-                    if (type === "display") {
-                        return [data.adviser.lastname, data.adviser.firstname, data.adviser.middlename].join(" ");
-                    }
+                        return [row.lastname, row.firstname, row.midlename].join(" ");
                 }
+            },
+            {
+                "data": "data",
+                "render": function (data, type, row) {
+                        return [row.adviser.lastname, row.adviser.firstname, row.adviser.middlename].join(" ");
+                    }
             },
             {
                 "data": "course"
@@ -58,18 +48,6 @@ $(function () {
             {
                 "data": "trainingDirection.shortname"
             },
-            /*            {
-                            "data": "email",
-                            "render": function (data, type, row) {
-                                if (type === "display") {
-                                    return "<a href='mailto:" + data + "'>" + data + "</a>";
-                                }
-                                return data;
-                            }
-                        },
-                        {
-                            "data": "phone"
-                        },*/
             {
                 "data": "registered",
                 "render": function (date, type, row) {
@@ -95,7 +73,7 @@ $(function () {
                 "render": function (data, type, row) {
                     if (type === "display") {
                         return "<a onclick='updateRow(" + row.id + ");chooseDropdownAdviser(" + (data.adviser.id - 1) + ");chooseDropdownTD(" + (data.trainingDirection.id - 1) + ");'>" +
-                            "<span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></a>";
+                            "<span class='fa fa-pencil' aria-hidden='true'></span></a>";
                     }
                 }
             },

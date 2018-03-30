@@ -15,22 +15,17 @@
         <h3 class="text-muted">Students</h3>
     </div>
     <a class="btn btn-primary" onclick="add()">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        <span class="fa fa-plus" aria-hidden="true"></span>
         <spring:message code="common.add"/>
     </a>
     <div class="jumbotron">
-        <table class="table table-striped display" id="datatable">
-            <thead class="thead-dark">
+        <table class="table table-striped" id="datatable">
+            <thead>
             <tr>
-                <th scope="col">Students ID</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Middle Name</th>
-                <th scope="col">Last Name</th>
+                <th scope="col">Student</th>
                 <th scope="col">Adviser</th>
                 <th scope="col">Course</th>
                 <th scope="col">Training Direction</th>
-                <%--  <th scope="col">Email</th>
-                  <th scope="col">Phone</th>--%>
                 <th scope="col">Date of registration</th>
                 <th scope="col">Active</th>
                 <th></th>
@@ -105,7 +100,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="trainingDirection" class="control-label col-xs-3">T raining Direction</label>
+                        <label for="trainingDirection" class="control-label col-xs-3">Training Direction</label>
 
                         <div class="col-xs-9">
                             <select type="dropdown" class="form-control" id="trainingDirection"
@@ -134,7 +129,7 @@
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
                             <button type="button" onclick="save()" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                <span class="fa fa-check" aria-hidden="true"></span>
                             </button>
                         </div>
                     </div>

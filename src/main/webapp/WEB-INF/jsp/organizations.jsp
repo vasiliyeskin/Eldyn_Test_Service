@@ -16,14 +16,13 @@
         <h3 class="text-muted">Organizations</h3>
     </div>
     <a class="btn btn-primary" onclick="add()">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        <span class="fa fa-plus" aria-hidden="true"></span>
         <spring:message code="common.add"/>
     </a>
     <div class="jumbotron">
         <table class="table table-striped display" id="datatable">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">Organization ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Genitive Name</th>
                 <th scope="col">Short Name</th>
@@ -80,7 +79,7 @@
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
                             <button type="button" onclick="save()" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                <span class="fa fa-check" aria-hidden="true"></span>
                             </button>
                         </div>
                     </div>
