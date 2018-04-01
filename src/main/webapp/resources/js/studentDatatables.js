@@ -39,7 +39,10 @@ $(function () {
             {
                 "data": "data",
                 "render": function (data, type, row) {
+                    if(row.adviser!=null)
                         return [row.adviser.lastname, row.adviser.firstname, row.adviser.middlename].join(" ");
+                    else
+                        return "";
                     }
             },
             {
@@ -72,7 +75,7 @@ $(function () {
                 "data": null,
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<a onclick='updateRow(" + row.id + ");chooseDropdownAdviser(" + (data.adviser.id - 1) + ");chooseDropdownTD(" + (data.trainingDirection.id - 1) + ");'>" +
+                        return "<a onclick='updateRow(" + row.id + ");chooseDropdownAdviser(" + ((data.adviser!=null)?(data.adviser.id - 1):0) + ");chooseDropdownTD(" + (data.trainingDirection.id - 1) + ");'>" +
                             "<span class='fa fa-pencil' aria-hidden='true'></span></a>";
                     }
                 }
@@ -129,12 +132,12 @@ function fillFullName() {
     var middle = $("#midlename");
     var last = $("#lastname");
 
-    var fio = first.val().split(" ");
-    first.val(fio[0]);
+    var fio = last.val().split(" ");
+    last.val(fio[0]);
     if (middle.val().length == 0) {
-        middle.val(fio[1]);
+        middle.val(fio[2]);
     }
-    if (last.val().length == 0) {
-        last.val(fio[2]);
+    if (first.val().length == 0) {
+        first.val(fio[1]);
     }
 }

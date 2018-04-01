@@ -22,12 +22,18 @@
         <table class="table table-striped" id="datatable">
             <thead>
             <tr>
-                <th scope="col">Student</th>
-                <th scope="col">Adviser</th>
-                <th scope="col">Course</th>
-                <th scope="col">Training Direction</th>
-                <th scope="col">Date of registration</th>
-                <th scope="col">Active</th>
+                <th scope="col"><spring:message
+                        code="docs.student"/></th>
+                <th scope="col"><spring:message
+                        code="docs.adviser"/></th>
+                <th scope="col"><spring:message
+                        code="docs.course"/></th>
+                <th scope="col"><spring:message
+                        code="docs.trainingdir"/></th>
+                <th scope="col"><spring:message
+                        code="docs.registration"/></th>
+                <th scope="col"><spring:message
+                        code="user.active"/></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -49,15 +55,25 @@
                     <input type="hidden" id="id" name="id">
 
                     <div class="form-group">
+                        <label for="lastname" class="control-label col-xs-3"><spring:message
+                                code="student.lastname"/></label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="lastname" name="lastname"
+                                   placeholder="<spring:message code="student.lastname"/>">
+                        </div>
+                        <button type="button" onclick="fillFullName()" class="btn btn-primary">
+                            <span aria-hidden="true"><spring:message code="student.addfullname"/></span>
+                        </button>
+                    </div>
+
+                    <div class="form-group">
                         <label for="firstname" class="control-label col-xs-3"><spring:message
-                                code="student.firstname"/> (or Full Name)</label>
+                                code="student.firstname"/></label>
 
                         <div class="col-xs-9 ">
                                 <input type="text" class="form-control" id="firstname" name="firstname"
                                        placeholder="<spring:message code="student.firstname"/>">
-                            <button type="button" onclick="fillFullName()" class="btn btn-primary">
-                                <span aria-hidden="true">Add Full Name</span>
-                            </button>
                         </div>
                     </div>
 
@@ -72,17 +88,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="lastname" class="control-label col-xs-3"><spring:message
-                                code="student.lastname"/></label>
-
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" id="lastname" name="lastname"
-                                   placeholder="<spring:message code="student.lastname"/>">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="adviser" class="control-label col-xs-3">Scientific Adviser</label>
+                        <label for="adviser" class="control-label col-xs-3"><spring:message code="docs.adviser"/></label>
 
                         <div class="col-xs-9">
                             <select type="dropdown" class="form-control" id="adviser" name="adviser"> </select>
@@ -100,7 +106,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="trainingDirection" class="control-label col-xs-3">Training Direction</label>
+                        <label for="trainingDirection" class="control-label col-xs-3"><spring:message code="docs.trainingdir"/></label>
 
                         <div class="col-xs-9">
                             <select type="dropdown" class="form-control" id="trainingDirection"

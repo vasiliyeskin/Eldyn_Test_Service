@@ -69,7 +69,7 @@ $(function () {
                 "data": null,
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<a onclick='updateRow(" + row.id + ");fillDropdownOrg(" + (data.organization.id-1) + ");fillDropdownPosition(" + (data.position.id - 1) + ");'>" +
+                        return "<a onclick='updateRow(" + row.id + ");fillDropdownOrg(" + (data.organization.id - 1) + ");fillDropdownPosition(" + (data.position.id - 1) + ");'>" +
                             "<span class='fa fa-pencil' aria-hidden='true'></span></a>";
                     }
                 }
@@ -90,21 +90,6 @@ $(function () {
         },
         "initComplete": makeEditable
     });
-});
-
-function fillDropdownOrg(id) {
-
-    $.get("ajax/admin/organizations/", function (data) {
-        var dropdown = $("#org");
-        dropdown.find("option").remove();
-        $.each(data, function (key, val) {
-            dropdown.append($('<option></option>').attr('value', val.id).text(val.name));
-        });
-        dropdown.prop('selectedIndex', id);
-    });
-}
-
-function fillDropdownPosition(id) {
 
     $.get("ajax/admin/position/", function (data) {
         var dropdown = $("#position");
@@ -112,6 +97,41 @@ function fillDropdownPosition(id) {
         $.each(data, function (key, val) {
             dropdown.append($('<option></option>').attr('value', val.id).text(val.positionIO));
         });
-        dropdown.prop('selectedIndex', id);
     });
+
+    $.get("ajax/admin/organizations/", function (data) {
+        var dropdown = $("#org");
+        dropdown.find("option").remove();
+        $.each(data, function (key, val) {
+            dropdown.append($('<option></option>').attr('value', val.id).text(val.name));
+        });
+    });
+
+
+});
+
+function fillDropdownOrg(id) {
+
+    var dropdown = $("#org");
+    dropdown.prop('selectedIndex', id);
+}
+
+function fillDropdownPosition(id) {
+    var dropdown = $("#position");
+    dropdown.prop('selectedIndex', id);
+}
+
+function fillFullName() {
+    var first = $("#firstname");
+    var middle = $("#middlename");
+    var last = $("#lastname");
+
+    var fio = last.val().split(" ");
+    last.val(fio[0]);
+    if (middle.val().length == 0) {
+        middle.val(fio[2]);
+    }
+    if (first.val().length == 0) {
+        first.val(fio[1]);
+    }
 }

@@ -13,7 +13,8 @@
 
 <div class="container">
     <div class="header clearfix">
-        <h3 class="text-muted">Organizations</h3>
+        <h3 class="text-muted"><spring:message
+                code="docs.orgs"/></h3>
     </div>
     <a class="btn btn-primary" onclick="add()">
         <span class="fa fa-plus" aria-hidden="true"></span>
@@ -23,9 +24,9 @@
         <table class="table table-striped display" id="datatable">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Genitive Name</th>
-                <th scope="col">Short Name</th>
+                <th scope="col"><spring:message code="org.name"/></th>
+                <th scope="col"><spring:message code="org.nameGenitive"/></th>
+                <th scope="col"><spring:message code="org.shortname"/></th>
                 <th></th>
                 <th></th>
             </tr>

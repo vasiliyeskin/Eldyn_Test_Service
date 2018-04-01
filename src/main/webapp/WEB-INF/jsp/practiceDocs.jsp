@@ -13,7 +13,7 @@
 
 <div class="jumbotron">
     <div class="container">
-        <h1 class="display-3">Get documents for practice</h1>
+        <h1 class="display-3"><spring:message code="docs.getpractice"/></h1>
         <p>Form documents.</p>
     </div>
 </div>
@@ -21,29 +21,29 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <h4 class="mb-3">Practice</h4>
+            <h4 class="mb-3"><spring:message code="docs.pract"/></h4>
             <p><select type="dropdown" class="form-control" id="practice" name="practice" onchange="selectPractice();"> </select></p>
-            <h4 class="mb-3">Start Date</h4>
+            <h4 class="mb-3"><spring:message code="docs.startdate"/></h4>
             <p><input type="text" class="form-control" id="start" name="start"/></p>
-            <h4 class="mb-3">End Date</h4>
+            <h4 class="mb-3"><spring:message code="docs.endtdate"/></h4>
             <p><input type="dropdown" class="form-control" id="end" name="end"/></p>
         </div>
 
         <div class="col-md-3">
-            <h4 class="mb-3">Training Direction</h4>
+            <h4 class="mb-3"><spring:message code="docs.trainingdir"/></h4>
             <p><select type="dropdown" class="form-control" id="trainingDirection"
                        name="trainingDirection"> </select></p>
 
         </div>
 
         <div class="col-md-3">
-            <h4 class="mb-3">Cource</h4>
+            <h4 class="mb-3"><spring:message code="docs.course"/></h4>
             <p><select type="dropdown" class="form-control" id="course"
                        name="course"> </select></p>
         </div>
 
         <div class="col-md-3">
-            <h4 class="mb-3">Curator</h4>
+            <h4 class="mb-3"><spring:message code="docs.curator"/></h4>
             <p><select type="dropdown" class="form-control" id="curator"
                        name="curator"> </select></p>
         </div>

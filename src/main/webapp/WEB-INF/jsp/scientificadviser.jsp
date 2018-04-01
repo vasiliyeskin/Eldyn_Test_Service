@@ -22,12 +22,12 @@
         <table class="table table-striped display" id="datatable">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">Scientific Adviser</th>
-                <th scope="col">Organization</th>
-                <th scope="col">Position</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Date of registration</th>
+                <th scope="col"><spring:message code="docs.adviser"/></th>
+                <th scope="col"><spring:message code="docs.org"/></th>
+                <th scope="col"><spring:message code="docs.position"/></th>
+                <th scope="col"><spring:message code="user.email"/></th>
+                <th scope="col"><spring:message code="user.phone"/></th>
+                <th scope="col"><spring:message code="docs.registration"/></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -47,6 +47,19 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="detailsForm">
                     <input type="hidden" id="id" name="id">
+
+                    <div class="form-group">
+                        <label for="lastname" class="control-label col-xs-3"><spring:message
+                                code="student.lastname"/></label>
+
+                        <div class="col-xs-9">
+                            <input type="text" class="form-control" id="lastname" name="lastname"
+                                   placeholder="<spring:message code="student.lastname"/>">
+                        </div>
+                        <button type="button" onclick="fillFullName()" class="btn btn-primary">
+                            <span aria-hidden="true"><spring:message code="student.addfullname"/></span>
+                        </button>
+                    </div>
 
                     <div class="form-group">
                         <label for="firstname" class="control-label col-xs-3"><spring:message
@@ -69,25 +82,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="lastname" class="control-label col-xs-3"><spring:message
-                                code="student.lastname"/></label>
 
-                        <div class="col-xs-9">
-                            <input type="text" class="form-control" id="lastname" name="lastname"
-                                   placeholder="<spring:message code="student.lastname"/>">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="org" class="control-label col-xs-3">Organization</label>
-
+                        <label for="org" class="control-label col-xs-3"><spring:message code="docs.org"/></label>
                         <div class="col-xs-9">
                             <select type="dropdown" class="form-control" id="org" name="org"> </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="position" class="control-label col-xs-3">Position</label>
+                        <label for="position" class="control-label col-xs-3"><spring:message code="docs.position"/></label>
 
                         <div class="col-xs-9">
                             <select type="dropdown" class="form-control" id="position" name="position"> </select>

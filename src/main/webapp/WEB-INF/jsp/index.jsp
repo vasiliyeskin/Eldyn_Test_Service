@@ -18,15 +18,21 @@
     <div class="card-deck mb-3 text-center">
         <div class="card mb-4 box-shadow">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal">Docs</h4>
+                <h4 class="my-0 font-weight-normal"><spring:message
+                        code="common.docs"/></h4>
             </div>
             <div class="card-body text-left">
                 <ul aria-labelledby="dropdown01">
-                    <li><a href="practiceDocs">Documents for Practice</a></li>
-                    <li><a href="students">Students</a></li>
-                    <li><a href="curators">Curators</a></li>
-                    <li><a href="scientificadviser">Scientific Adviser</a></li>
-                    <li><a href="organizations">Organizations</a></li>
+                    <li><a href="practiceDocs"><spring:message
+                            code="docs.practice"/></a></li>
+                    <li><a href="students"><spring:message
+                            code="docs.students"/></a></li>
+                    <li><a href="curators"><spring:message
+                            code="docs.curators"/></a></li>
+                    <li><a href="scientificadviser"><spring:message
+                            code="docs.advisers"/></a></li>
+                    <li><a href="organizations"><spring:message
+                            code="docs.orgs"/></a></li>
                 </ul>
             </div>
         </div>

@@ -16,13 +16,19 @@
             </li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="true">Docs<b class="caret"></b></a>
+                   aria-haspopup="true" aria-expanded="true"><spring:message
+                        code="common.docs"/><b class="caret"></b></a>
                 <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                    <li><a class="dropdown-item" href="practiceDocs">Documents for Practice</a></li>
-                    <li><a class="dropdown-item" href="students">Students</a></li>
-                    <li><a class="dropdown-item" href="curators">Curators</a></li>
-                    <li><a class="dropdown-item" href="scientificadviser">Scientific Adviser</a></li>
-                    <li><a class="dropdown-item" href="organizations">Organizations</a></li>
+                    <li><a class="dropdown-item" href="practiceDocs"><spring:message
+                            code="docs.practice"/></a></li>
+                    <li><a class="dropdown-item" href="students"><spring:message
+                            code="docs.students"/></a></li>
+                    <li><a class="dropdown-item" href="curators"><spring:message
+                            code="docs.curators"/></a></li>
+                    <li><a class="dropdown-item" href="scientificadviser"><spring:message
+                            code="docs.advisers"/></a></li>
+                    <li><a class="dropdown-item" href="organizations"><spring:message
+                            code="docs.orgs"/></a></li>
                 </ul>
             </li>
         </ul>
