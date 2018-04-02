@@ -54,6 +54,10 @@
                 </ul>
             </li>
         </ul>
+
+        <a class="btn btn-primary" href="logout">
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+        </a>
     </div>
 </nav>
 <br/>
