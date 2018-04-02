@@ -35,4 +35,11 @@ public class RootController {
         return "practiceDocs";
     }
 
+    @GetMapping("/users")
+    public String users()
+    {
+        return "users";
+    }
+
+
 }

@@ -52,9 +52,12 @@
         </div>
         <div class="card mb-4 box-shadow">
             <div class="card-header">
-                <h4 class="my-0 font-weight-normal"></h4>
+                <h4 class="my-0 font-weight-normal">Admin</h4>
             </div>
-            <div class="card-body">
+            <div class="card-body text-left">
+                <ul>
+                    <li><a href="users">Users</a></li>
+                </ul>
             </div>
         </div><div class="card mb-4 box-shadow">
         <div class="card-header">

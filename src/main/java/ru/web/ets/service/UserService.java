@@ -1,5 +1,6 @@
 package ru.web.ets.service;
 
+import ru.web.ets.dto.UserTo;
 import ru.web.ets.model.User;
 import ru.web.ets.util.exception.NotFoundException;
 
@@ -17,5 +18,9 @@ public interface UserService {
 
     void update(User user);
 
+    void update(UserTo user);
+
     List<User> getAll();
+
+    void enable(int id, boolean enable);
 }

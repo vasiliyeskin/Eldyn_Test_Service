@@ -3,6 +3,7 @@ package ru.web.ets.web.user;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import ru.web.ets.dto.UserTo;
 import ru.web.ets.model.User;
 import ru.web.ets.service.UserService;
 
@@ -44,8 +45,19 @@ public abstract class AbstractUserController {
         service.update(user);
     }
 
+    public void update(UserTo userTo, int id) {
+        log.info("update {} with id={}", userTo, id);
+        assureIdConsistent(userTo, id);
+        service.update(userTo);
+    }
+
     public User getByMail(String email) {
         log.info("getByEmail {}", email);
         return service.getByEmail(email);
+    }
+
+    public void enable(int id, boolean enabled) {
+        log.info((enabled ? "enable " : "disable ") + id);
+        service.enable(id, enabled);
     }
 }

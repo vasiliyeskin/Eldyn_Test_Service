@@ -31,6 +31,13 @@
                             code="docs.orgs"/></a></li>
                 </ul>
             </li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="dropdown02" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="true">Admin<b class="caret"></b></a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                    <li><a class="dropdown-item" href="users">Users</a></li>
+                </ul>
+            </li>
         </ul>
         <ul class="nav navbar-nav mr-auto">
             <li class="nav-item dropdown">
