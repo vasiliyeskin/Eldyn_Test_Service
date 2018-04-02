@@ -3,9 +3,12 @@ package ru.web.ets.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+import ru.web.ets.AuthorizedUser;
 import ru.web.ets.dto.UserTo;
 import ru.web.ets.model.User;
 import ru.web.ets.repository.UserRepository;
@@ -18,8 +21,8 @@ import java.util.List;
 import static ru.web.ets.util.ValidationUtil.checkNotFound;
 import static ru.web.ets.util.ValidationUtil.checkNotFoundWithId;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service("userService")
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository repository;
@@ -81,5 +84,15 @@ public class UserServiceImpl implements UserService {
         user.setActive(enabled);
         repository.save(user);
     }
+
+    @Override
+    public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = repository.getByEmail(email.toLowerCase());
+        if (user == null) {
+            throw new UsernameNotFoundException("User " + email + " is not found");
+        }
+        return new AuthorizedUser(user);
+    }
+
 
 }

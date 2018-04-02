@@ -8,7 +8,17 @@ public class RootController {
 
     @GetMapping("/")
     public String root() {
-        return "index";
+        return "redirect:index2";
+    }
+
+    @GetMapping("/index2")
+    public String getIndex2() {
+        return "index2";
+    }
+
+    @GetMapping(value = "/login")
+    public String login() {
+        return "login";
     }
 
     @GetMapping("/students")
