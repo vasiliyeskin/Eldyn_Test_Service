@@ -14,7 +14,7 @@
     <div class="header clearfix">
         <h3 class="text-muted">Scientific Adviser</h3>
     </div>
-    <a class="btn btn-primary" onclick="add()">
+    <a class="btn btn-primary" onclick="add();chooseDefault();">
         <span class="fa fa-plus" aria-hidden="true"></span>
         <spring:message code="common.add"/>
     </a>
@@ -117,7 +117,7 @@
 
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button type="button" onclick="save()" class="btn btn-primary">
+                            <button type="button" onclick="save();saveDefault();" class="btn btn-primary">
                                 <span class="fa fa-check" aria-hidden="true"></span>
                             </button>
                         </div>

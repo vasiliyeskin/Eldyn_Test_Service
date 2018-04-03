@@ -1,6 +1,9 @@
 var ajaxUrl = "ajax/admin/advisers/";
 var datatableApi;
 
+defaulOrg = 0;
+defaulPosition = 0;
+
 function updateTable() {
     $.get(ajaxUrl, updateTableByData);
 }
@@ -106,8 +109,6 @@ $(function () {
             dropdown.append($('<option></option>').attr('value', val.id).text(val.name));
         });
     });
-
-
 });
 
 function fillDropdownOrg(id) {
@@ -134,4 +135,14 @@ function fillFullName() {
     if (first.val().length == 0) {
         first.val(fio[1]);
     }
+}
+function chooseDefault()
+{
+    $("#org").prop('selectedIndex', defaulOrg);
+    $("#position").prop('selectedIndex', defaulPosition);
+}
+
+function saveDefault(){
+    defaulOrg = $("#org").val() - 1;
+    defaulPosition = $("#position").val() - 1;
 }

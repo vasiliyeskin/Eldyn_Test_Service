@@ -14,7 +14,7 @@
     <div class="header clearfix">
         <h3 class="text-muted">Students</h3>
     </div>
-    <a class="btn btn-primary" onclick="add()">
+    <a class="btn btn-primary" onclick="add();chooseDefault();">
         <span class="fa fa-plus" aria-hidden="true"></span>
         <spring:message code="common.add"/>
     </a>
@@ -113,28 +113,9 @@
                                     name="trainingDirection"> </select>
                         </div>
                     </div>
-
-                    <%--<div class="form-group">
-                        <label for="email" class="control-label col-xs-3"><spring:message code="student.email"/></label>
-
-                        <div class="col-xs-9">
-                            <input type="email" class="form-control" id="email" name="email"
-                                   placeholder="<spring:message code="student.email"/>">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone" class="control-label col-xs-3"><spring:message code="student.phone"/></label>
-
-                        <div class="col-xs-9">
-                            <input type="phone" class="form-control" id="phone" name="phone"
-                                   placeholder="<spring:message code="student.phone"/>">
-                        </div>
-                    </div>--%>
-
                     <div class="form-group">
                         <div class="col-xs-offset-3 col-xs-9">
-                            <button type="button" onclick="save()" class="btn btn-primary">
+                            <button type="button" onclick="save();saveDefault();" class="btn btn-primary">
                                 <span class="fa fa-check" aria-hidden="true"></span>
                             </button>
                         </div>

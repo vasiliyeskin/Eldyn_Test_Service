@@ -1,6 +1,10 @@
 var ajaxUrl = "ajax/admin/students/";
 var datatableApi;
 
+defaulTraining = 0;
+defaulCourse = 0;
+defaulAdviser = 0;
+
 function updateTable() {
     $.get(ajaxUrl, updateTableByData);
 }
@@ -140,4 +144,17 @@ function fillFullName() {
     if (first.val().length == 0) {
         first.val(fio[1]);
     }
+}
+
+function chooseDefault()
+{
+    $("#trainingDirection").prop('selectedIndex', defaulTraining);
+    $("#adviser").prop('selectedIndex', defaulAdviser);
+    $("#course").val(defaulCourse);
+}
+
+function saveDefault(){
+    defaulTraining = $("#trainingDirection").val() - 1;
+    defaulAdviser = $("#adviser").val() - 1;
+    defaulCourse = $("#course").val();
 }
