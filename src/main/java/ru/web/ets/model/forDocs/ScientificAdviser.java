@@ -45,6 +45,9 @@ public class ScientificAdviser implements BaseEntity {
     @NotNull
     private Date registered = new Date();
 
+    @Column(name = "iscurator", nullable = false, columnDefinition = "bool default false")
+    private boolean iscurator = false;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinTable(name="adviser_position",
             joinColumns = @JoinColumn(name = "adiver_id",
@@ -123,6 +126,14 @@ public class ScientificAdviser implements BaseEntity {
 
     public void setOrganization(Organization organization) {
         this.organization = organization;
+    }
+
+    public boolean isIscurator() {
+        return iscurator;
+    }
+
+    public void setIscurator(boolean iscurator) {
+        this.iscurator = iscurator;
     }
 
     public ScientificAdviser() {

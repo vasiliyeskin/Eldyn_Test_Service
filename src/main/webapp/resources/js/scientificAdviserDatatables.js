@@ -14,9 +14,9 @@ function enable(chkbox, id) {
     $.ajax({
         url: ajaxUrl + id,
         type: "POST",
-        data: "enabled=" + enabled
+        data: "iscurator=" + enabled
     }).done(function () {
-        chkbox.closest("tr").toggleClass("disabled");
+        /*chkbox.closest("tr").toggleClass("disabled");*/
         successNoty(enabled ? "common.enabled" : "common.disabled");
     }).fail(function () {
         $(chkbox).prop("checked", !enabled);
@@ -67,12 +67,21 @@ $(function () {
                 }
             },
             {
+                "data": "iscurator",
+                "render": function (data, type, row) {
+                    if (type === "display") {
+                        return "<input type='checkbox' " + (data ? "checked" : "") + " onclick='enable($(this)," + row.id + ");'/>";
+                    }
+                    return data;
+                }
+            },
+            {
                 "orderable": false,
                 "defaultContent": "",
                 "data": null,
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<a onclick='updateRow(" + row.id + ");fillDropdownOrg(" + (data.organization.id - 1) + ");fillDropdownPosition(" + (data.position.id - 1) + ");'>" +
+                        return "<a onclick='updateRow(" + row.id + ");fillDropdownOrg(" + (data.organization.id) + ");fillDropdownPosition(" + (data.position.id) + ");'>" +
                             "<span class='fa fa-pencil' aria-hidden='true'></span></a>";
                     }
                 }
@@ -113,13 +122,15 @@ $(function () {
 
 function fillDropdownOrg(id) {
 
-    var dropdown = $("#org");
-    dropdown.prop('selectedIndex', id);
+/*    var dropdown = $("#org");
+    dropdown.prop('selectedIndex', id);*/
+    document.getElementById('org').value = id;
 }
 
 function fillDropdownPosition(id) {
-    var dropdown = $("#position");
-    dropdown.prop('selectedIndex', id);
+    /*var dropdown = $("#position");
+    dropdown.prop('selectedIndex', id);*/
+    document.getElementById('position').value = id;
 }
 
 function fillFullName() {

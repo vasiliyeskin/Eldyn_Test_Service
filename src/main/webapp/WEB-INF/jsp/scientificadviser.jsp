@@ -28,6 +28,8 @@
                 <th scope="col"><spring:message code="user.email"/></th>
                 <th scope="col"><spring:message code="user.phone"/></th>
                 <th scope="col"><spring:message code="docs.registration"/></th>
+                <th scope="col"><spring:message
+                        code="docs.curator"/></th>
                 <th></th>
                 <th></th>
             </tr>

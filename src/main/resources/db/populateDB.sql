@@ -227,14 +227,14 @@ VALUES ('Порфирьев', 'Павел', 'Сергеевич', 3, TRUE, 'test
 
 DELETE FROM scientific_adviser;
 ALTER SEQUENCE global_seq_sa RESTART WITH 1;
-INSERT INTO scientific_adviser (lastname, firstname, middlename, email, phone)
+INSERT INTO scientific_adviser (lastname, firstname, middlename, email, phone, iscurator)
 VALUES
-  ('Гущин', 'Михаил', 'Евгеньевич', '', ''),
-  ('Волков', 'Петр', 'Витальевич', '', ''),
-  ('Умнов', 'Алексей', 'Львович', '', ''),
-  ('Кирсанов', 'Алексей', 'Владимирович', '', ''),
-  ('Зиновьев', 'Андрей', 'Петрович', '', ''),
-  ('Еськин', 'Василий', 'Алексеевич', '', '');
+  ('Гущин', 'Михаил', 'Евгеньевич', '', '', false),
+  ('Волков', 'Петр', 'Витальевич', '', '', false),
+  ('Умнов', 'Алексей', 'Львович', '', '', true),
+  ('Кирсанов', 'Алексей', 'Владимирович', '', '', false),
+  ('Зиновьев', 'Андрей', 'Петрович', '', '', false),
+  ('Еськин', 'Василий', 'Алексеевич', '', '', true);
 
 
 DELETE FROM position_in_the_organization;

@@ -23,8 +23,6 @@
                             code="docs.practice"/></a></li>
                     <li><a class="dropdown-item" href="students"><spring:message
                             code="docs.students"/></a></li>
-                    <li><a class="dropdown-item" href="curators"><spring:message
-                            code="docs.curators"/></a></li>
                     <li><a class="dropdown-item" href="scientificadviser"><spring:message
                             code="docs.advisers"/></a></li>
                     <li><a class="dropdown-item" href="organizations"><spring:message

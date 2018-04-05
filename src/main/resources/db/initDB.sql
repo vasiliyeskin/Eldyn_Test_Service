@@ -193,7 +193,8 @@ CREATE TABLE scientific_adviser
   lastname         VARCHAR(255)            NOT NULL,
   email            VARCHAR(255)                NULL,
   phone            VARCHAR(255)                NULL,
-  registered       TIMESTAMP DEFAULT now() NOT NULL
+  registered       TIMESTAMP DEFAULT now() NOT NULL,
+  iscurator        BOOLEAN DEFAULT FALSE   NOT NULL
 );
 CREATE UNIQUE INDEX sa_unique_firstname_lastname_idx ON scientific_adviser (firstname,lastname,middlename);
 

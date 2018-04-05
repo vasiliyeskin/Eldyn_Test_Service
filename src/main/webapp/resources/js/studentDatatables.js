@@ -4,6 +4,7 @@ var datatableApi;
 defaulTraining = 0;
 defaulCourse = 0;
 defaulAdviser = 0;
+defaulCurator = 0;
 
 function updateTable() {
     $.get(ajaxUrl, updateTableByData);
@@ -50,6 +51,15 @@ $(function () {
                     }
             },
             {
+                "data": "data",
+                "render": function (data, type, row) {
+                    if(row.curator!=null)
+                        return [row.curator.lastname, row.curator.firstname, row.curator.middlename].join(" ");
+                    else
+                        return "";
+                }
+            },
+            {
                 "data": "course"
             },
             {
@@ -79,7 +89,7 @@ $(function () {
                 "data": null,
                 "render": function (data, type, row) {
                     if (type === "display") {
-                        return "<a onclick='updateRow(" + row.id + ");chooseDropdownAdviser(" + ((data.adviser!=null)?(data.adviser.id - 1):0) + ");chooseDropdownTD(" + (data.trainingDirection.id - 1) + ");'>" +
+                        return "<a onclick='updateRow(" + row.id + ");chooseDropdownAdviser(" + ((data.adviser!=null)?(data.adviser.id):0) + ");chooseDropdownCurator(" + ((data.curator!=null)?(data.curator.id):0) + ");chooseDropdownTD(" + (data.trainingDirection.id) + ");'>" +
                             "<span class='fa fa-pencil' aria-hidden='true'></span></a>";
                     }
                 }
@@ -113,6 +123,15 @@ $(function () {
         });
     });
 
+    // fill dropdown Curator
+    $.get("ajax/admin/curator/", function (data) {
+        var dropdown = $("#curator");
+        dropdown.find("option").remove();
+        $.each(data, function (key, val) {
+            dropdown.append($('<option></option>').attr('value', val.id).text([val.lastname, val.firstname, val.middlename].join(" ")));
+        });
+    });
+
     // fill dropdown training direction
     $.get("ajax/admin/td/", function (data) {
         var dropdown = $("#trainingDirection");
@@ -124,11 +143,17 @@ $(function () {
 });
 
 function chooseDropdownAdviser(id) {
-    $("#adviser").prop('selectedIndex', id);
+  //  $("#adviser").prop('selectedIndex', id);
+    document.getElementById('adviser').value = id;
+}
+
+function chooseDropdownCurator(id) {
+    document.getElementById('curator').value = id;
 }
 
 function chooseDropdownTD(id) {
-    $("#trainingDirection").prop('selectedIndex', id);
+    //$("#trainingDirection").prop('selectedIndex', id);
+    document.getElementById('trainingDirection').value = id;
 }
 
 function fillFullName() {
@@ -148,13 +173,15 @@ function fillFullName() {
 
 function chooseDefault()
 {
-    $("#trainingDirection").prop('selectedIndex', defaulTraining);
-    $("#adviser").prop('selectedIndex', defaulAdviser);
+    document.getElementById('adviser').value = defaulAdviser;
+    document.getElementById('curator').value = defaulCurator;
+    document.getElementById('trainingDirection').value = defaulTraining;
     $("#course").val(defaulCourse);
 }
 
 function saveDefault(){
-    defaulTraining = $("#trainingDirection").val() - 1;
-    defaulAdviser = $("#adviser").val() - 1;
+    defaulTraining = $("#trainingDirection").val();
+    defaulAdviser = $("#adviser").val();
+    defaulCurator = $("#curator").val();
     defaulCourse = $("#course").val();
 }

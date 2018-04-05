@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import ru.web.ets.model.forDocs.ScientificAdviser;
 import ru.web.ets.repository.datajpa.AdviserRepository;
@@ -48,13 +49,19 @@ public class AdviserService {
         checkNotFoundWithId(repository.save(Student), Student.getId());
     }
 
-    public ScientificAdviser getByLastname(String lastname)
-    {
+    public ScientificAdviser getByLastname(String lastname) {
         return repository.getByLastname(lastname);
     }
 
-    public List<ScientificAdviser> getCurator()
-    {
-        return repository.getByOrganizationId(2);
+    public List<ScientificAdviser> getCurator() {
+        return repository.getCurators();
+    }
+
+    @CacheEvict(value = "advisers", allEntries = true)
+    @Transactional
+    public void setCurator(int id, boolean iscurator) {
+        ScientificAdviser adviser = get(id);
+        adviser.setIscurator(iscurator);
+        repository.save(adviser);
     }
 }

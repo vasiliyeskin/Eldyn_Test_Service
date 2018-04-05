@@ -49,4 +49,7 @@ public class DataJpaAdviserRepositoryImpl implements AdviserRepository {
     public List<ScientificAdviser> getByOrganizationId(Integer id) {
         return crudRepository.getByOrganizationId(id);
     }
+
+    @Override
+    public List<ScientificAdviser> getCurators(){return crudRepository.getCurators();}
 }

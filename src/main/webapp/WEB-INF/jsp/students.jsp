@@ -27,6 +27,8 @@
                 <th scope="col"><spring:message
                         code="docs.adviser"/></th>
                 <th scope="col"><spring:message
+                        code="docs.curator"/></th>
+                <th scope="col"><spring:message
                         code="docs.course"/></th>
                 <th scope="col"><spring:message
                         code="docs.trainingdir"/></th>
@@ -92,6 +94,14 @@
 
                         <div class="col-xs-9">
                             <select type="dropdown" class="form-control" id="adviser" name="adviser"> </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="curator" class="control-label col-xs-3"><spring:message code="docs.curator"/></label>
+
+                        <div class="col-xs-9">
+                            <select type="dropdown" class="form-control" id="curator" name="curator"> </select>
                         </div>
                     </div>
 
