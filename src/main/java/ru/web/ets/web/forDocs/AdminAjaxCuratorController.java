@@ -65,7 +65,7 @@ public class AdminAjaxCuratorController {
     @GetMapping("/download/{filename:.+}")
     public ResponseEntity<InputStreamResource> download(@PathVariable String filename) throws IOException {
 
-        File file = new File("G:\\JAVA\\JAVA_EE\\TEMP\\wordfiles\\" + filename);
+        File file = new File(System.getenv("ETS_ROOT") + "/TEMP/wordfiles/" + filename);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType("application/force-download"));

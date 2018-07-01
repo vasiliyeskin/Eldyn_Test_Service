@@ -20,8 +20,8 @@ public class WordReplaceText {
 
     public static void main(String[] args) throws Exception {
         WordReplaceText instance = new WordReplaceText(
-                "g:\\JAVA\\JAVA_EE\\Eldyn_Test_Service\\wordFiles\\appTemplate.doc",
-                "g:\\JAVA\\JAVA_EE\\Eldyn_Test_Service\\wordFiles\\appTemplate_stud.doc");
+                System.getenv("ETS_ROOT") + "/wordFiles/appTemplate.doc",
+                System.getenv("ETS_ROOT") + "/wordFiles/appTemplate_stud.doc");
         HWPFDocument doc = instance.openDocument();
         if (doc != null) {
             doc = instance.replaceText(doc, "$student$", "Фамилия Имя Отчество");

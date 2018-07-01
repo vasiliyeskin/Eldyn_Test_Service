@@ -19,8 +19,8 @@ public class WordHandlerReplaceText {
 
     public static void ReplaceTextInWordFileAndSave(Student s) {
         WordReplaceText instance = new WordReplaceText(
-                System.getenv("ETS_ROOT") + "\\wordFiles\\appTemplate.doc",
-                "G:\\JAVA\\JAVA_EE\\TEMP\\wordfiles\\" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() + "_" + s.getLastname() + ".doc");
+                System.getenv("ETS_ROOT") + "/wordFiles/appTemplate.doc",
+                System.getenv("ETS_ROOT") + "/TEMP/wordfiles/" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() + "_" + s.getLastname() + ".doc");
 
         HWPFDocument doc = null;
         try {
@@ -34,8 +34,8 @@ public class WordHandlerReplaceText {
 
     public static void ReplaceAndSaveTextInWordWithPractice(Student s, Practice practice) {
         WordReplaceText instance = new WordReplaceText(
-                System.getenv("ETS_ROOT") + "\\wordFiles\\appTemplate.doc",
-                "G:\\JAVA\\JAVA_EE\\TEMP\\wordfiles\\" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() + "_" + s.getLastname() + ".doc");
+                System.getenv("ETS_ROOT") + "/wordFiles/appTemplate.doc",
+                System.getenv("ETS_ROOT") + "/TEMP/wordfiles/" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() + "_" + s.getLastname() + ".doc");
 
         HWPFDocument doc = null;
         try {
@@ -103,11 +103,11 @@ public class WordHandlerReplaceText {
 
     public static String createStudentDocsAndZipper(List<Student> students, Practice practice, ScientificAdviser curator) throws IOException {
         String filename = curator.getLastname() + ".zip";
-        FileOutputStream fos = new FileOutputStream("G:\\JAVA\\JAVA_EE\\TEMP\\wordfiles\\" + filename);
+        FileOutputStream fos = new FileOutputStream(System.getenv("ETS_ROOT") + "/TEMP/wordfiles/" + filename);
         ZipOutputStream zipOut = new ZipOutputStream(fos);
         for (Student s : students) {
             ReplaceAndSaveTextInWordWithPractice(s, practice);
-            File fileToZip = new File("G:\\JAVA\\JAVA_EE\\TEMP\\wordfiles\\" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() + "_" + s.getLastname() + ".doc");
+            File fileToZip = new File(System.getenv("ETS_ROOT") + "/TEMP/wordfiles/" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() + "_" + s.getLastname() + ".doc");
             FileInputStream fis = new FileInputStream(fileToZip);
             ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
             zipOut.putNextEntry(zipEntry);
