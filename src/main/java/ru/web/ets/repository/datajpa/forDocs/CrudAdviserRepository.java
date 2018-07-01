@@ -35,4 +35,7 @@ public interface CrudAdviserRepository extends JpaRepository<ScientificAdviser, 
     ScientificAdviser getByLastname(String lastname);
 
     List<ScientificAdviser> getByOrganizationId(Integer id);
+
+    @Query("SELECT sa FROM ScientificAdviser sa WHERE sa.iscurator=TRUE")
+    List<ScientificAdviser> getCurators();
 }

@@ -27,8 +27,6 @@
                             code="docs.practice"/></a></li>
                     <li><a href="students"><spring:message
                             code="docs.students"/></a></li>
-                    <li><a href="curators"><spring:message
-                            code="docs.curators"/></a></li>
                     <li><a href="scientificadviser"><spring:message
                             code="docs.advisers"/></a></li>
                     <li><a href="organizations"><spring:message

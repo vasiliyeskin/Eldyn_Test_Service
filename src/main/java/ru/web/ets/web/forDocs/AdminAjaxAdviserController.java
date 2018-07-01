@@ -47,4 +47,10 @@ public class AdminAjaxAdviserController extends AbstractAdviserController {
             super.update(adviser, adviser.getId());
         }
     }
+
+
+    @PostMapping(value = "/{id}")
+    public void setCurator(@PathVariable("id") int id, @RequestParam("iscurator") boolean iscurator) {
+        super.setCurator(id, iscurator);
+    }
 }

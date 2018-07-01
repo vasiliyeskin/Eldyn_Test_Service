@@ -3,6 +3,9 @@ package ru.web.ets.web.forDocs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.web.ets.model.forDocs.Organization;
 import ru.web.ets.model.forDocs.PositionInTheOrganization;
 import ru.web.ets.model.forDocs.ScientificAdviser;
@@ -56,5 +59,10 @@ public abstract class AbstractAdviserController {
 
     public PositionInTheOrganization getPosition(Integer posID) {
         return positionService.get(posID);
+    }
+
+
+    public void setCurator(int id, boolean iscurator) {
+        service.setCurator(id, iscurator);
     }
 }
