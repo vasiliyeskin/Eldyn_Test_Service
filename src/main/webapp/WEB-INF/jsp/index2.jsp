@@ -31,6 +31,8 @@
                             code="docs.advisers"/></a></li>
                     <li><a href="organizations"><spring:message
                             code="docs.orgs"/></a></li>
+                    <li><a href="practices"><spring:message
+                            code="docs.practs"/></a></li>
                 </ul>
             </div>
         </div>

@@ -51,5 +51,11 @@ public class RootController {
         return "users";
     }
 
+    @GetMapping("/practices")
+    public String practices()
+    {
+        return "practices";
+    }
+
 
 }

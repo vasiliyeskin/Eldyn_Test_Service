@@ -1,9 +1,13 @@
 package ru.web.ets.model.forDocs;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import ru.web.ets.model.BaseEntity;
+import ru.web.ets.util.DateTimeUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -43,15 +47,25 @@ public class Practice  implements BaseEntity {
     @Column(name = "nameDirection")
     protected String nameDirection;
 
-    @NotBlank
+    @NotNull
     @Column(name = "startDate", nullable = false)
-    protected Date startDate;
+    @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
+    private LocalDateTime startDate;
 
-    @NotBlank
+    @NotNull
     @Column(name = "endDate", nullable = false)
-    protected Date endDate;
+    @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
+    private LocalDateTime endDate;
 
     public Practice() {
+    }
+
+    public Practice(Integer id, @NotBlank String name, @NotBlank String nameDirection, @NotBlank LocalDateTime startDate, @NotBlank LocalDateTime endDate) {
+        this.id = id;
+        this.name = name;
+        this.nameDirection = nameDirection;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public String getName() {
@@ -70,19 +84,19 @@ public class Practice  implements BaseEntity {
         this.nameDirection = nameDirection;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 

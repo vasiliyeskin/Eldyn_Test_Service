@@ -1,13 +1,19 @@
 package ru.web.ets.web.forDocs;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.web.ets.model.forDocs.Practice;
 import ru.web.ets.service.forDocs.PracticeService;
+import ru.web.ets.util.DateTimeUtil;
 
+import java.time.LocalDate;
+
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -36,26 +42,22 @@ public class AdminAjaxPracticeController {
         service.delete(id);
     }
 
-/*    @PostMapping
+    @PostMapping
     public void createOrUpdate(@RequestParam("id") Integer id,
-                               @RequestParam("position") String positionIO) {
+                               @RequestParam("name") String name,
+                               @RequestParam("nameDirection") String nameDirection,
+                               @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate
+            ,
+                               @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
-        PositionInTheOrganization position = new PositionInTheOrganization(id, positionIO);
+        Practice practice = new Practice(id, name, nameDirection, startDate.atStartOfDay(), endDate.atStartOfDay());
 
-        if (position.isNew()) {
-            create(position);
+        if (practice.isNew()) {
+            log.info("create {}", practice);
+            service.create(practice);
         } else {
-            update(position, position.getId());
+            log.info("update {} with id={}", practice, practice.getId());
+            service.update(practice);
         }
     }
-
-    public PositionInTheOrganization create(PositionInTheOrganization position) {
-        log.info("create {}", position);
-        return service.create(position);
-    }
-
-    public void update(PositionInTheOrganization position, int id) {
-        log.info("update {} with id={}", position, id);
-        service.update(position);
-    }*/
 }

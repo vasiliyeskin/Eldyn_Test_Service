@@ -27,6 +27,8 @@
                             code="docs.advisers"/></a></li>
                     <li><a class="dropdown-item" href="organizations"><spring:message
                             code="docs.orgs"/></a></li>
+                    <li><a class="dropdown-item" href="practices"><spring:message
+                            code="docs.practs"/></a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -62,3 +64,6 @@
 <br/>
 <br/>
 <br/>
+<script type="text/javascript">
+    var localeCode = "${pageContext.response.locale}";
+</script>
