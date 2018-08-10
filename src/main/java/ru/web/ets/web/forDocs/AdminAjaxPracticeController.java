@@ -8,7 +8,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.web.ets.model.forDocs.Practice;
+import ru.web.ets.model.forDocs.Student;
 import ru.web.ets.service.forDocs.PracticeService;
+import ru.web.ets.service.forDocs.StudentServiceImpl;
 import ru.web.ets.util.DateTimeUtil;
 
 import java.time.LocalDate;
@@ -23,6 +25,9 @@ public class AdminAjaxPracticeController {
 
     @Autowired
     private PracticeService service;
+
+    @Autowired
+    private StudentServiceImpl studentService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Practice> getAll() {
@@ -59,5 +64,13 @@ public class AdminAjaxPracticeController {
             log.info("update {} with id={}", practice, practice.getId());
             service.update(practice);
         }
+    }
+
+    @PostMapping(value = "/studentsByCuratorIdCourseAndTD", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Student> getStudentsByCuratorIdCourseAndTD(@RequestParam("curatorId") Integer curatorID,
+                                                           @RequestParam("course") Integer course,
+                                                           @RequestParam("trainingDirectionID") Integer trainingDirectionID)
+    {
+        return studentService.getByCuratorIdTDIdCourseId(curatorID, course, trainingDirectionID);
     }
 }
