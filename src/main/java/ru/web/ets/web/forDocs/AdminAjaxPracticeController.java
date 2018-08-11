@@ -71,6 +71,6 @@ public class AdminAjaxPracticeController {
                                                            @RequestParam("course") Integer course,
                                                            @RequestParam("trainingDirectionID") Integer trainingDirectionID)
     {
-        return studentService.getByCuratorIdTDIdCourseId(curatorID, course, trainingDirectionID);
+        return studentService.getByCuratorIdTDIdCourseId(curatorID, trainingDirectionID, course);
     }
 }

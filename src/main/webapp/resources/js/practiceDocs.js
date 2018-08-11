@@ -1,3 +1,5 @@
+var urlForCurator = "ajax/admin/practice/studentsByCuratorIdCourseAndTD/";
+
 //$(document).ready(function () {
 $(function () {
 
@@ -44,8 +46,54 @@ $(function () {
         });
     });
 
-    updateStudentsListByString("curatorId=0&trainingDirectionID&course=1");
-});
+    //fill table
+    datatableApi = $('#datatable').DataTable({
+        /*"ajax": {
+            "url": urlForCurator,
+            "dataSrc": ""
+        },*/
+        "paging": false,
+        "info": true,
+        "columns": [
+            {
+                "data": "data",
+                "render": function (data, type, row) {
+                    return [row.lastname, row.firstname, row.midlename].join(" ");
+                }
+            },
+            {
+                "data": "course"
+            },
+            {
+                "data": "trainingDirection.shortname"
+            },
+            {
+                "data": "registered",
+                "render": function (date, type, row) {
+                    if (type === "display") {
+                        return date.substring(0, 10);
+                    }
+                    return date;
+                }
+            },
+        ],
+        "order": [
+            [
+                0,
+                "asc"
+            ]
+        ],
+        "createdRow": function (row, data, dataIndex) {
+            if (!data.active) {
+                $(row).addClass("disabled");
+            }
+        }
+    }
+);
+
+updateStudentsListByString("curatorId=6&trainingDirectionID=3&course=3");
+})
+;
 
 function selectPractice() {
     var dropdown = $("#practice");
@@ -84,17 +132,14 @@ function getDocs() {
 
         $('#downloadFrame').remove();
         $('body').append('<iframe id="downloadFrame" style="display:none"></iframe>');
-        $('#downloadFrame').attr('src',['ajax/admin/curator/download/',result].join(""));
+        $('#downloadFrame').attr('src', ['ajax/admin/curator/download/', result].join(""));
     }).fail(function (result) {
         $('#result').html(result.responseText);
     });
 }
 
 
-
-
-function updateStudentsList()
-{
+function updateStudentsList() {
     var data =
         "curatorId=" + $("#curator").val() +
         "&trainingDirectionID=" + $("#trainingDirection").val() +
@@ -103,76 +148,26 @@ function updateStudentsList()
     updateStudentsListByString(data);
 }
 
-function updateStudentsListByString(data)
-{
-    var resutlts = "";
+function updateStudentsListByString(data2) {
+    /* //        https://stackoverflow.com/a/22213543/548473
+     $.ajax({
+         url: "ajax/admin/practice/studentsByCuratorIdCourseAndTD/",
+         data: data2,
+         type: "POST",
+         contentType: "application/x-www-form-urlencoded",
+         processData: false
+     }).done(function (result) {
+         if (typeof result === "object") {
+             result = JSON.stringify(result);
+          }
+         $('#result').html(result);
+     }).fail(function (result) {
+         $('#result').html(result.responseText);
+     });*/
 
-    //        https://stackoverflow.com/a/22213543/548473
     $.ajax({
-        url: "ajax/admin/practice/studentsByCuratorIdCourseAndTD/",
-        data: data,
         type: "POST",
-        contentType: "application/x-www-form-urlencoded",
-        processData: false
-    }).done(function (result) {
-        if (typeof result === "object") {
-            resutlts = result;
-            result = JSON.stringify(result);
-        }
-        $('#result').html(result);
-    }).fail(function (result) {
-        $('#result').html(result.responseText);
-    });
-
-
-    var table = $('#datatable').DataTable();
-    table.destroy();
-/*
-    //fill table
-    datatableApi = $("#datatable").DataTable({
-        "ajax": {
-            "url": "ajax/admin/practice/studentsByCuratorIdCourseAndTD/",
-            "type": "POST",
-            "dataType": 'json',
-            "data": data,
-            "dataSrc": ""
-        },
-        "paging": true,
-        "info": true,
-        "columns": [
-            {
-                "data": "data",
-                "render": function (data, type, row) {
-                    return [row.lastname, row.firstname, row.midlename].join(" ");
-                }
-            },
-            {
-                "data": "course"
-            },
-            {
-                "data": "trainingDirection.shortname"
-            },
-            {
-                "data": "registered",
-                "render": function (date, type, row) {
-                    if (type === "display") {
-                        return date.substring(0, 10);
-                    }
-                    return date;
-                }
-            },
-        ],
-        "order": [
-            [
-                0,
-                "asc"
-            ]
-        ],
-        "createdRow": function (row, data, dataIndex) {
-            if (!data.active) {
-                $(row).addClass("disabled");
-            }
-        },
-        "initComplete": makeEditable
-    });*/
+        url: urlForCurator,
+        data: data2
+    }).done(updateTableByData);
 }
