@@ -52,7 +52,7 @@ public class WordHandlerReplaceText {
         instance.saveDocument(doc);
     }
 
-    public static String getTemplateForStudentAdviserFromUNN(Student s)
+    private static String getTemplateForStudentAdviserFromUNN(Student s)
     {
         if(isStudentAdviserFromUNN(s))
             return "/wordFiles/appTemplate_adviser_unn.doc";
@@ -60,7 +60,7 @@ public class WordHandlerReplaceText {
         return "/wordFiles/appTemplate.doc";
     }
 
-    public static boolean isStudentAdviserFromUNN(Student s)
+    private static boolean isStudentAdviserFromUNN(Student s)
     {
         return s.getAdviser().getOrganization().getShortname().toUpperCase().contains("ННГУ");
     }
