@@ -18,7 +18,7 @@ public class WordHandlerReplaceText {
 
     public static void ReplaceTextInWordFileAndSave(Student s) {
         WordReplaceText instance = new WordReplaceText(
-                System.getenv("ETS_ROOT") + "/wordFiles/appTemplate.doc",
+                System.getenv("ETS_ROOT") + getTemplateForStudentAdviserFromUNN(s),
                 System.getenv("ETS_ROOT") + "/TEMP/wordfiles/" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() + "_" + s.getLastname() + ".doc");
 
         HWPFDocument doc = null;
@@ -33,7 +33,7 @@ public class WordHandlerReplaceText {
 
     public static void ReplaceAndSaveTextInWordWithPractice(Student s, Practice practice) {
         WordReplaceText instance = new WordReplaceText(
-                System.getenv("ETS_ROOT") + "/wordFiles/appTemplate.doc",
+                System.getenv("ETS_ROOT") + getTemplateForStudentAdviserFromUNN(s),
                 System.getenv("ETS_ROOT") + "/TEMP/wordfiles/" + s.getTrainingDirection().getShortname() + "_" + s.getCourse() + "_" + s.getLastname() + ".doc");
 
         HWPFDocument doc = null;
@@ -44,12 +44,27 @@ public class WordHandlerReplaceText {
         }
         doc = replaceTextInDoc(doc, instance, s);
         doc = instance.replaceText(doc, "practice", practice.getNameDirection());
+        doc = instance.replaceText(doc, "PRACTICENAME", practice.getName().toLowerCase());
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd.MM.YYYY");
         doc = instance.replaceText(doc, "startDate", (dateFormat.format(practice.getStartDate())).toString());
         doc = instance.replaceText(doc, "endDate", (dateFormat.format(practice.getEndDate())).toString());
 
         instance.saveDocument(doc);
     }
+
+    public static String getTemplateForStudentAdviserFromUNN(Student s)
+    {
+        if(isStudentAdviserFromUNN(s))
+            return "/wordFiles/appTemplate_adviser_unn.doc";
+
+        return "/wordFiles/appTemplate.doc";
+    }
+
+    public static boolean isStudentAdviserFromUNN(Student s)
+    {
+        return s.getAdviser().getOrganization().getShortname().toUpperCase().contains("ННГУ");
+    }
+
 
     private static HWPFDocument replaceTextInDoc(HWPFDocument doc, WordReplaceText instance, Student s) {
         if (doc != null) {
