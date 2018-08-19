@@ -9,8 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -45,6 +44,9 @@ public class WordHandlerReplaceText {
         }
         doc = replaceTextInDoc(doc, instance, s);
         doc = instance.replaceText(doc, "practice", practice.getNameDirection());
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd.MM.YYYY");
+        doc = instance.replaceText(doc, "startDate", (dateFormat.format(practice.getStartDate())).toString());
+        doc = instance.replaceText(doc, "endDate", (dateFormat.format(practice.getEndDate())).toString());
 
         instance.saveDocument(doc);
     }
@@ -92,10 +94,10 @@ public class WordHandlerReplaceText {
             doc = instance.replaceText(doc, "adviserfio", builder.toString());
             doc = instance.replaceText(doc, "adviserPosition ", s.getAdviser().getPosition().getPositionIO());
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY");
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY");
             doc = instance.replaceText(doc, "place", s.getAdviser().getOrganization().getName());
-            doc = instance.replaceText(doc, "startDate", (dateFormat.format(new Date())).toString());
-            doc = instance.replaceText(doc, "endDate", (dateFormat.format(new Date())).toString());
+//            doc = instance.replaceText(doc, "startDate", (dateFormat.format(new Date())).toString());
+//            doc = instance.replaceText(doc, "endDate", (dateFormat.format(new Date())).toString());
         }
 
         return doc;

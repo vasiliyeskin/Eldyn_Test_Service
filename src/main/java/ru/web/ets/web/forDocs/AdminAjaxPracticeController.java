@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.web.ets.model.forDocs.Practice;
 import ru.web.ets.model.forDocs.Student;
 import ru.web.ets.service.forDocs.PracticeService;
-import ru.web.ets.service.forDocs.StudentServiceImpl;
-import ru.web.ets.util.DateTimeUtil;
+import ru.web.ets.service.forDocs.StudentService;
 
 import java.time.LocalDate;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,7 +25,7 @@ public class AdminAjaxPracticeController {
     private PracticeService service;
 
     @Autowired
-    private StudentServiceImpl studentService;
+    private StudentService studentService;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Practice> getAll() {
