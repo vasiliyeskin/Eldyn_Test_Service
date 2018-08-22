@@ -230,6 +230,7 @@ CREATE TABLE practice
   id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq_practice'),
   name             text                    NOT NULL,
   nameDirection    text                    NOT NULL,
+  nameRod          text                    NOT NULL,
   startDate        TIMESTAMP               NOT NULL,
   endDate          TIMESTAMP               NOT NULL
 );

@@ -27,6 +27,9 @@ $(function () {
                 "data": "nameDirection"
             },
             {
+                "data": "nameRod"
+            },
+            {
                 "data": "startDate",
                 "render": function (date, type, row) {
                     if (type === "display") {

@@ -49,11 +49,12 @@ public class AdminAjaxPracticeController {
     public void createOrUpdate(@RequestParam("id") Integer id,
                                @RequestParam("name") String name,
                                @RequestParam("nameDirection") String nameDirection,
+                               @RequestParam("nameRod") String nameRod,
                                @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate
             ,
                                @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
-        Practice practice = new Practice(id, name, nameDirection, startDate.atStartOfDay(), endDate.atStartOfDay());
+        Practice practice = new Practice(id, name, nameDirection, nameRod, startDate.atStartOfDay(), endDate.atStartOfDay());
 
         if (practice.isNew()) {
             log.info("create {}", practice);

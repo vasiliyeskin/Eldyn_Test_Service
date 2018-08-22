@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 
 @Entity
@@ -47,6 +46,10 @@ public class Practice  implements BaseEntity {
     @Column(name = "nameDirection")
     protected String nameDirection;
 
+    @NotBlank
+    @Column(name = "nameRod")
+    protected String nameRod;
+
     @NotNull
     @Column(name = "startDate", nullable = false)
     @DateTimeFormat(pattern = DateTimeUtil.DATE_TIME_PATTERN)
@@ -60,10 +63,11 @@ public class Practice  implements BaseEntity {
     public Practice() {
     }
 
-    public Practice(Integer id, @NotBlank String name, @NotBlank String nameDirection, @NotBlank LocalDateTime startDate, @NotBlank LocalDateTime endDate) {
+    public Practice(Integer id, @NotBlank String name, @NotBlank String nameDirection, @NotBlank String nameRod, @NotBlank LocalDateTime startDate, @NotBlank LocalDateTime endDate) {
         this.id = id;
         this.name = name;
         this.nameDirection = nameDirection;
+        this.nameRod = nameRod;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -100,12 +104,21 @@ public class Practice  implements BaseEntity {
         this.endDate = endDate;
     }
 
+    public String getNameRod() {
+        return nameRod;
+    }
+
+    public void setNameRod(String nameRod) {
+        this.nameRod = nameRod;
+    }
+
     @Override
     public String toString() {
         return "Practice{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", nameDirection='" + nameDirection + '\'' +
+                ", nameRod='" + nameRod + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 '}';

@@ -45,6 +45,7 @@ public class WordHandlerReplaceText {
         doc = replaceTextInDoc(doc, instance, s);
         doc = instance.replaceText(doc, "practice", practice.getNameDirection());
         doc = instance.replaceText(doc, "PRACTICENAME", practice.getName().toLowerCase());
+        doc = instance.replaceText(doc, "PRACTICEROD", practice.getNameRod().toLowerCase());
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd.MM.YYYY");
         doc = instance.replaceText(doc, "startDate", (dateFormat.format(practice.getStartDate())).toString());
         doc = instance.replaceText(doc, "endDate", (dateFormat.format(practice.getEndDate())).toString());

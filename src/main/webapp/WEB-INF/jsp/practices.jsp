@@ -28,6 +28,8 @@
                 <th scope="col"><spring:message
                         code="pract.nameDirection"/></th>
                 <th scope="col"><spring:message
+                        code="pract.nameRod"/></th>
+                <th scope="col"><spring:message
                         code="pract.startDate"/></th>
                 <th scope="col"><spring:message
                         code="pract.endDate"/></th>
@@ -68,6 +70,15 @@
                         <div class="col-xs-9 ">
                             <textarea type="text" class="form-control" id="nameDirection" name="nameDirection"
                                       placeholder="<spring:message code="pract.nameDirection"/>"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nameRod" class="control-label col-xs-3"><spring:message
+                                code="pract.nameRod"/></label>
+
+                        <div class="col-xs-9 ">
+                            <textarea type="text" class="form-control" id="nameRod" name="nameRod"
+                                      placeholder="<spring:message code="pract.nameRod"/>"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
