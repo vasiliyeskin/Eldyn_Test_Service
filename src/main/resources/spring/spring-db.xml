@@ -26,15 +26,22 @@
         <context:component-scan base-package="ru.web.**.repository.datajpa"/>
         <jpa:repositories base-package="ru.web.**.repository.datajpa"/>
 
-        <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
+        <!--<jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
             <jdbc:script location="classpath:db/${jdbc.initLocation}"/>
             <jdbc:script encoding="utf-8" location="classpath:db/populateDB.sql"/>
-        </jdbc:initialize-database>
+        </jdbc:initialize-database>-->
+
+        <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate">
+            <property name="dataSource" ref="dataSource"/>
+            <property name="locations" value="classpath:db/migration"/>
+        </bean>
+        <!-- Ставим фабрику менеджеров сущностей в зависимость от Flyway, чтобы убедиться, что она будет выполнена после внесения изменений в базу -->
 
 
         <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
               p:dataSource-ref="dataSource"
-              p:packagesToScan="ru.web.**.model">
+              p:packagesToScan="ru.web.**.model"
+              depends-on="flyway">
             <!--p:persistenceUnitName="persistenceUnit">-->
 
             <property name="jpaPropertyMap">
