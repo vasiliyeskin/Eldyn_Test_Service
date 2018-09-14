@@ -57,5 +57,11 @@ public class RootController {
         return "practices";
     }
 
+    @GetMapping("/positions")
+    public String positions()
+    {
+        return "positions";
+    }
+
 
 }

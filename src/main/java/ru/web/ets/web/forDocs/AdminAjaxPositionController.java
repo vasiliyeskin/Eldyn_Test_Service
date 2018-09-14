@@ -40,7 +40,7 @@ public class AdminAjaxPositionController {
 
     @PostMapping
     public void createOrUpdate(@RequestParam("id") Integer id,
-                               @RequestParam("position") String positionIO) {
+                               @RequestParam("positionIO") String positionIO) {
 
         PositionInTheOrganization position = new PositionInTheOrganization(id, positionIO);
 

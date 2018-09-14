@@ -29,6 +29,8 @@
                             code="docs.orgs"/></a></li>
                     <li><a class="dropdown-item" href="practices"><spring:message
                             code="docs.practs"/></a></li>
+                    <li><a class="dropdown-item" href="positions"><spring:message
+                            code="position.positions"/></a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
