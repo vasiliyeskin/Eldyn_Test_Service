@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -46,9 +47,10 @@ public class WordHandlerReplaceText {
         doc = instance.replaceText(doc, "practice", practice.getNameDirection());
         doc = instance.replaceText(doc, "PRACTICENAME", practice.getName().toLowerCase());
         doc = instance.replaceText(doc, "PRACTICEROD", practice.getNameRod().toLowerCase());
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd.MM.YYYY");
-        doc = instance.replaceText(doc, "startDate", (dateFormat.format(practice.getStartDate())).toString());
-        doc = instance.replaceText(doc, "endDate", (dateFormat.format(practice.getEndDate())).toString());
+
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        doc = instance.replaceText(doc, "startDate", (dateFormat.format(practice.getStartDate().toLocalDate())));
+        doc = instance.replaceText(doc, "endDate", (dateFormat.format(practice.getEndDate().toLocalDate())));
 
         instance.saveDocument(doc);
     }
@@ -98,15 +100,15 @@ public class WordHandlerReplaceText {
 
             builder.setLength(0);
             builder.append(s.getCurator().getLastname()).append(" ")
-                    .append(s.getCurator().getFirstname()).append(".")
-                    .append(s.getCurator().getMiddlename()).append(".");
+                    .append(s.getCurator().getFirstname()).append(" ")
+                    .append(s.getCurator().getMiddlename()).append(" ");
             doc = instance.replaceText(doc, "curatorfio", builder.toString());
             doc = instance.replaceText(doc, "curatorPosition ", s.getCurator().getPosition().getPositionIO());
 
             builder.setLength(0);
             builder.append(s.getAdviser().getLastname()).append(" ")
-                    .append(s.getAdviser().getFirstname()).append(".")
-                    .append(s.getAdviser().getMiddlename()).append(".");
+                    .append(s.getAdviser().getFirstname()).append(" ")
+                    .append(s.getAdviser().getMiddlename()).append(" ");
             doc = instance.replaceText(doc, "adviserfio", builder.toString());
             doc = instance.replaceText(doc, "adviserPosition ", s.getAdviser().getPosition().getPositionIO());
 

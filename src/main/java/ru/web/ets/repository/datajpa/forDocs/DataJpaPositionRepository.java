@@ -12,6 +12,7 @@ import java.util.List;
 public class DataJpaPositionRepository implements PositionRepository {
 
     private static final Sort SORT_ID = new Sort("id");
+    private static final Sort SORT_positionIO = new Sort("positionIO");
 
     @Autowired
     private CrudPositionRepository crudPositionRepository;
@@ -33,7 +34,7 @@ public class DataJpaPositionRepository implements PositionRepository {
 
     @Override
     public List<PositionInTheOrganization> getAll() {
-        return crudPositionRepository.findAll(SORT_ID);
+        return crudPositionRepository.findAll(SORT_positionIO);
     }
 
 }

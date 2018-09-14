@@ -1,11 +1,7 @@
 package ru.web.ets.web.forDocs;
 
-import org.apache.poi.util.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,12 +15,7 @@ import ru.web.ets.service.forDocs.PracticeService;
 import ru.web.ets.service.forDocs.StudentService;
 import ru.web.ets.service.forDocs.WordHandlerReplaceText;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -42,7 +33,7 @@ public class AdminAjaxCuratorController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ScientificAdviser> getAll() {
-        return service.getCurator();
+        return service.getCurators();
     }
 
 

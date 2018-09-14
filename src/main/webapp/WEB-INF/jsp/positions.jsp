@@ -51,8 +51,8 @@
                                 code="position.positionIO"/></label>
 
                         <div class="col-xs-9">
-                            <textarea type="text" class="form-control" id="positionIO" name="positionIO"
-                                      placeholder="<spring:message code="position.positionIO"/>"></textarea>
+                            <input type="text" class="form-control" id="positionIO" name="positionIO"
+                                   placeholder="<spring:message code="position.positionIO"/>">
                         </div>
                     </div>
                     <div class="form-group">

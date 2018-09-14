@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public class DataJpaPracticeRepository implements PracticeRepository {
     private static final Sort SORT_ID = new Sort("id");
+    private static final Sort SORT_name = new Sort("name");
 
     @Autowired
     CrudPracticeRepository repository;
@@ -32,6 +33,6 @@ public class DataJpaPracticeRepository implements PracticeRepository {
 
     @Override
     public List<Practice> getAll() {
-        return repository.findAll(SORT_ID);
+        return repository.findAll(SORT_name);
     }
 }

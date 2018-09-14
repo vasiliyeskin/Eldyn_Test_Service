@@ -24,7 +24,9 @@ $(function () {
         .append($('<option></option>')
             .attr('value', 4).text("4"))
         .append($('<option></option>')
-            .attr('value', 5).text("5"));
+            .attr('value', 5).text("5"))
+        .append($('<option></option>')
+            .attr('value', 6).text("6"));
     dropdown.selectedIndex = 0;
 
     // fill dropdown curator
